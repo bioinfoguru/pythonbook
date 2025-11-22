@@ -1,0 +1,3565 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>13&nbsp; Pandas – Python book</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<link href="./Functions.html" rel="next">
+<link href="./Matplotlib.html" rel="prev">
+<link href="./logo_final_transparent.png" rel="icon" type="image/png">
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c1f63da3e08f13bc72dc17e92cfd001d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-e25bb2ec88b96ab004d13ad1d1924df4.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c1f63da3e08f13bc72dc17e92cfd001d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-db5a06d822cc38b49178833586c4970b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-80479c5937f5fe26fd70b0b3d5cb28c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-db5a06d822cc38b49178833586c4970b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="custom_css.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Pandas.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pandas</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./logo_horizontal_transparent.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Python book</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Setup</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Variables_Operators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Numbers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Numbers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lists.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lists</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Conditional_statements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conditional Statements</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Loops</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tuples and Sets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dictionaries</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">File Handling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">NumPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Matplotlib.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Matplotlib</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Pandas.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pandas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Functions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./BioPython_Intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction to BioPython</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#indexing-and-selecting" id="toc-indexing-and-selecting" class="nav-link active" data-scroll-target="#indexing-and-selecting"><span class="header-section-number">13.1</span> Indexing and Selecting</a></li>
+  <li><a href="#dataframe-information" id="toc-dataframe-information" class="nav-link" data-scroll-target="#dataframe-information"><span class="header-section-number">13.2</span> Dataframe information</a></li>
+  <li><a href="#data-from-and-to-a-csv-file" id="toc-data-from-and-to-a-csv-file" class="nav-link" data-scroll-target="#data-from-and-to-a-csv-file"><span class="header-section-number">13.3</span> Data from (and to) a csv file</a></li>
+  <li><a href="#combining-dataframes" id="toc-combining-dataframes" class="nav-link" data-scroll-target="#combining-dataframes"><span class="header-section-number">13.4</span> Combining dataframes</a>
+  <ul class="collapse">
+  <li><a href="#concat" id="toc-concat" class="nav-link" data-scroll-target="#concat">Concat</a></li>
+  <li><a href="#merge" id="toc-merge" class="nav-link" data-scroll-target="#merge">Merge</a></li>
+  <li><a href="#join" id="toc-join" class="nav-link" data-scroll-target="#join">Join</a></li>
+  </ul></li>
+  <li><a href="#groupby" id="toc-groupby" class="nav-link" data-scroll-target="#groupby"><span class="header-section-number">13.5</span> Groupby</a></li>
+  <li><a href="#styling" id="toc-styling" class="nav-link" data-scroll-target="#styling"><span class="header-section-number">13.6</span> Styling</a>
+  <ul class="collapse">
+  <li><a href="#bar-charts-within-dataframe" id="toc-bar-charts-within-dataframe" class="nav-link" data-scroll-target="#bar-charts-within-dataframe">Bar charts within dataframe</a></li>
+  </ul></li>
+  <li><a href="#ploting" id="toc-ploting" class="nav-link" data-scroll-target="#ploting"><span class="header-section-number">13.7</span> Ploting</a>
+  <ul class="collapse">
+  <li><a href="#the-iris-dataset" id="toc-the-iris-dataset" class="nav-link" data-scroll-target="#the-iris-dataset">The iris dataset</a></li>
+  <li><a href="#seaborn-library" id="toc-seaborn-library" class="nav-link" data-scroll-target="#seaborn-library">Seaborn library</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pandas</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Pandas is a library that is useful for working with different types of datasets. A dataframe is a pandas object that has a variety of function to process, analyze, and visualize data. It arranges the data in rows and columns. There are multiple ways in which a dataframe can be created. For example, a dictionary with list as values can be converted to a dataframe such that the keys become headers and values (list) are entries in the dataframe. The orientation of the dataframe by default is <code>columns</code> ie keys are considered as column header and values are rows. This behaviour can be changed using the <code>orient</code> argument. When orientation is index, an addtional argument <code>columns</code> can be used to specify column headers.</p>
+<div id="95d930f8" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>input_dict <span class="op">=</span> {<span class="st">'Column1'</span>: [<span class="st">'A'</span>,<span class="st">'B'</span>,<span class="st">'C'</span>,<span class="st">'D'</span>,<span class="st">'E'</span>], <span class="op">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">'Column2'</span>:[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]}</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame.from_dict(input_dict)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.DataFrame.from_dict(input_dict, orient<span class="op">=</span><span class="st">'index'</span>, columns<span class="op">=</span>[<span class="st">'Val1'</span>,<span class="st">'Val2'</span>,<span class="st">'Val3'</span>,<span class="st">'Val4'</span>,<span class="st">'Val5'</span>,])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>display(df1)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>display(df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e63113cb" class="cell quarto-layout-panel" data-execution_count="3" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Column1</th>
+      <th>Column2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>C</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>D</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>E</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Val1</th>
+      <th>Val2</th>
+      <th>Val3</th>
+      <th>Val4</th>
+      <th>Val5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Column1</th>
+      <td>A</td>
+      <td>B</td>
+      <td>C</td>
+      <td>D</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>Column2</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="dc767265" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df2.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Index(['Val1', 'Val2', 'Val3', 'Val4', 'Val5'], dtype='object')</code></pre>
+</div>
+</div>
+<section id="indexing-and-selecting" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="indexing-and-selecting"><span class="header-section-number">13.1</span> Indexing and Selecting</h2>
+<p>The data in a dataframes are arranged in rows and columns both of which have labels. The get a slice of a dataframe, these labels can used with the <code>loc</code> attribute. The <code>columns</code> and <code>index</code> attributes for a dataframe return an iteratable collection of column labels and index labels. To select a subset of a dataframe using indcies for the rows and columns use <code>iloc</code>. Both <code>loc</code> and <code>iloc</code> takes a slice of row label/range and column label/range. Note that a one-dimensional slice of a dataframe returns a <code>Series</code> object i.e.&nbsp;if we select one column or one row, a <code>Series</code> object would be returned. To convert a series object to a dataframe use <code>to_frame</code> function.</p>
+<p>Multi-indexing is also possible i.e., a row or a column can have more than one label. In such cases, selections can be made by specifing labels as a tuple.</p>
+<div id="f20f2e27" class="cell quarto-layout-panel" data-execution_count="4" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<style type="text/css">
+#T_389ef_row0_col0, #T_389ef_row0_col1, #T_389ef_row1_col0, #T_389ef_row1_col1, #T_389ef_row2_col0, #T_389ef_row2_col1, #T_389ef_row3_col0, #T_389ef_row3_col1, #T_389ef_row4_col0, #T_389ef_row4_col1 {
+  text-align: center;
+}
+</style>
+<table id="T_389ef">
+  <thead>
+    <tr>
+      <th class="blank level0">&nbsp;</th>
+      <th id="T_389ef_level0_col0" class="col_heading level0 col0">Column1</th>
+      <th id="T_389ef_level0_col1" class="col_heading level0 col1">Column2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_389ef_level0_row0" class="row_heading level0 row0">0</th>
+      <td id="T_389ef_row0_col0" class="data row0 col0">A</td>
+      <td id="T_389ef_row0_col1" class="data row0 col1">1</td>
+    </tr>
+    <tr>
+      <th id="T_389ef_level0_row1" class="row_heading level0 row1">1</th>
+      <td id="T_389ef_row1_col0" class="data row1 col0">B</td>
+      <td id="T_389ef_row1_col1" class="data row1 col1">2</td>
+    </tr>
+    <tr>
+      <th id="T_389ef_level0_row2" class="row_heading level0 row2">2</th>
+      <td id="T_389ef_row2_col0" class="data row2 col0">C</td>
+      <td id="T_389ef_row2_col1" class="data row2 col1">3</td>
+    </tr>
+    <tr>
+      <th id="T_389ef_level0_row3" class="row_heading level0 row3">3</th>
+      <td id="T_389ef_row3_col0" class="data row3 col0">D</td>
+      <td id="T_389ef_row3_col1" class="data row3 col1">4</td>
+    </tr>
+    <tr>
+      <th id="T_389ef_level0_row4" class="row_heading level0 row4">4</th>
+      <td id="T_389ef_row4_col0" class="data row4 col0">E</td>
+      <td id="T_389ef_row4_col1" class="data row4 col1">5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>df1.columns: 
+ Index(['Column1', 'Column2'], dtype='object') 
+ df1.index: 
+ RangeIndex(start=0, stop=5, step=1)</code></pre>
+</div>
+</div>
+</div>
+<div id="3979aa05" class="cell quarto-layout-panel" data-execution_count="4" data-layout-ncol="2" data-layout-nrows="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Column1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>D</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>E</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Column1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>D</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>E</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Column1</th>
+      <th>Column2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>C</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>D</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>E</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Column1</th>
+      <th>Column2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>C</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>D</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>E</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="dataframe-information" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="dataframe-information"><span class="header-section-number">13.2</span> Dataframe information</h2>
+<p>Pandas offers set of commands to get some basic information about the content of dataframes. Below are some of these command along with their corresponding output.</p>
+<div id="9995d0d2" class="cell quarto-layout-panel" data-execution_count="6" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Column1</th>
+      <th>Column2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>C</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>D</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>E</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>Information about this dataframe 
+df1.shape      (5, 2)
+df1.size       10
+df1.ndim       2
+df1.values     [['A' 1]
+ ['B' 2]
+ ['C' 3]
+ ['D' 4]
+ ['E' 5]]
+</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="data-from-and-to-a-csv-file" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="data-from-and-to-a-csv-file"><span class="header-section-number">13.3</span> Data from (and to) a csv file</h2>
+<p>The <code>read_csv()</code> function can be used to create a dataframe from a csv file. To use one of the columns as indices for the dataframe add the <code>index_col</code> keyword attribute.</p>
+<div id="834c0d96" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %load test.csv</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Name,Age,Country</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Sohan,<span class="dv">22</span>,India</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>Sam,<span class="dv">21</span>,USA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="op">=</span> pd.read_csv(<span class="st">"test.csv"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df4 <span class="op">=</span> pd.read_csv(<span class="st">"test.csv"</span>, index_col<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>display(df3)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>display(df4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="1b19d8ab" class="cell quarto-layout-panel" data-execution_count="8" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sohan</td>
+      <td>22</td>
+      <td>India</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Sam</td>
+      <td>21</td>
+      <td>USA</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+    <tr>
+      <th>Country</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>India</th>
+      <td>Sohan</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>USA</th>
+      <td>Sam</td>
+      <td>21</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>To write a dataframe to a csv file use <code>to_csv</code> function. The default delimiter is <code>,</code> and can be changed with the <code>sep</code> argument.</p>
+<div id="0aacb57d" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df4.to_csv(<span class="st">"output.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="7ad88305" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %load output.csv</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Country,Name,Age</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>India,Sohan,<span class="dv">22</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>USA,Sam,<span class="dv">21</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="combining-dataframes" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="combining-dataframes"><span class="header-section-number">13.4</span> Combining dataframes</h2>
+<p>Pandas offers a variety of way to combine dataframes. These methods differ in the options in which the data from two or more dataframes can be combined. Having a good understanding of these functions is vital of effectively working with diverse datasets.</p>
+<section id="concat" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="concat">Concat</h3>
+<p>Pandas has a <code>concat</code> function that takes a list of dataframes and returns a combined dataframe. The <code>axis</code> argument indicates whether the dataframes would be combined across rows or columns. The default is <code>axis=0</code> i.e.&nbsp;the dataframes are concatenated row-wise. The <code>key</code> argument can be used to add an additional index refering to each of the dataframe that is concatenated.</p>
+<div id="c156581a" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame(np.random.uniform(<span class="dv">1</span>,<span class="dv">2</span>,size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>)), columns<span class="op">=</span><span class="bu">list</span>(<span class="st">'ABCD'</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df_2 <span class="op">=</span> pd.DataFrame(np.random.uniform(<span class="dv">2</span>,<span class="dv">3</span>,size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>)), columns<span class="op">=</span><span class="bu">list</span>(<span class="st">'ABCD'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fbe2af55" class="cell quarto-layout-panel" data-execution_count="7" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.710289</td>
+      <td>1.260774</td>
+      <td>1.047939</td>
+      <td>1.342935</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.539253</td>
+      <td>1.610440</td>
+      <td>1.608759</td>
+      <td>1.518317</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.471803</td>
+      <td>1.817016</td>
+      <td>1.757089</td>
+      <td>1.957877</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.621033</td>
+      <td>1.152500</td>
+      <td>1.237414</td>
+      <td>1.457109</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.671551</td>
+      <td>1.689427</td>
+      <td>1.698675</td>
+      <td>1.270451</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.511460</td>
+      <td>2.394432</td>
+      <td>2.979061</td>
+      <td>2.699233</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.431831</td>
+      <td>2.324515</td>
+      <td>2.433901</td>
+      <td>2.839483</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.507918</td>
+      <td>2.410554</td>
+      <td>2.192603</td>
+      <td>2.818681</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.969286</td>
+      <td>2.182390</td>
+      <td>2.412281</td>
+      <td>2.181399</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.605576</td>
+      <td>2.750244</td>
+      <td>2.238079</td>
+      <td>2.926454</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="15d26bb3" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_new <span class="op">=</span> pd.concat([df_1,df_2],ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>display(df_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.710289</td>
+      <td>1.260774</td>
+      <td>1.047939</td>
+      <td>1.342935</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.539253</td>
+      <td>1.610440</td>
+      <td>1.608759</td>
+      <td>1.518317</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.471803</td>
+      <td>1.817016</td>
+      <td>1.757089</td>
+      <td>1.957877</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.621033</td>
+      <td>1.152500</td>
+      <td>1.237414</td>
+      <td>1.457109</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.671551</td>
+      <td>1.689427</td>
+      <td>1.698675</td>
+      <td>1.270451</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2.511460</td>
+      <td>2.394432</td>
+      <td>2.979061</td>
+      <td>2.699233</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2.431831</td>
+      <td>2.324515</td>
+      <td>2.433901</td>
+      <td>2.839483</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2.507918</td>
+      <td>2.410554</td>
+      <td>2.192603</td>
+      <td>2.818681</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2.969286</td>
+      <td>2.182390</td>
+      <td>2.412281</td>
+      <td>2.181399</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2.605576</td>
+      <td>2.750244</td>
+      <td>2.238079</td>
+      <td>2.926454</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="a0c1e000" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_new <span class="op">=</span> pd.concat([df_1,df_2],axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>display(df_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.710289</td>
+      <td>1.260774</td>
+      <td>1.047939</td>
+      <td>1.342935</td>
+      <td>2.511460</td>
+      <td>2.394432</td>
+      <td>2.979061</td>
+      <td>2.699233</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.539253</td>
+      <td>1.610440</td>
+      <td>1.608759</td>
+      <td>1.518317</td>
+      <td>2.431831</td>
+      <td>2.324515</td>
+      <td>2.433901</td>
+      <td>2.839483</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.471803</td>
+      <td>1.817016</td>
+      <td>1.757089</td>
+      <td>1.957877</td>
+      <td>2.507918</td>
+      <td>2.410554</td>
+      <td>2.192603</td>
+      <td>2.818681</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.621033</td>
+      <td>1.152500</td>
+      <td>1.237414</td>
+      <td>1.457109</td>
+      <td>2.969286</td>
+      <td>2.182390</td>
+      <td>2.412281</td>
+      <td>2.181399</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.671551</td>
+      <td>1.689427</td>
+      <td>1.698675</td>
+      <td>1.270451</td>
+      <td>2.605576</td>
+      <td>2.750244</td>
+      <td>2.238079</td>
+      <td>2.926454</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="9e54a1b5" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_new <span class="op">=</span> pd.concat([df_1,df_2],keys<span class="op">=</span>[<span class="st">"First"</span>,<span class="st">"Second"</span>])</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>display(df_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">First</th>
+      <th>0</th>
+      <td>1.710289</td>
+      <td>1.260774</td>
+      <td>1.047939</td>
+      <td>1.342935</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.539253</td>
+      <td>1.610440</td>
+      <td>1.608759</td>
+      <td>1.518317</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.471803</td>
+      <td>1.817016</td>
+      <td>1.757089</td>
+      <td>1.957877</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.621033</td>
+      <td>1.152500</td>
+      <td>1.237414</td>
+      <td>1.457109</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.671551</td>
+      <td>1.689427</td>
+      <td>1.698675</td>
+      <td>1.270451</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">Second</th>
+      <th>0</th>
+      <td>2.511460</td>
+      <td>2.394432</td>
+      <td>2.979061</td>
+      <td>2.699233</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.431831</td>
+      <td>2.324515</td>
+      <td>2.433901</td>
+      <td>2.839483</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.507918</td>
+      <td>2.410554</td>
+      <td>2.192603</td>
+      <td>2.818681</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.969286</td>
+      <td>2.182390</td>
+      <td>2.412281</td>
+      <td>2.181399</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.605576</td>
+      <td>2.750244</td>
+      <td>2.238079</td>
+      <td>2.926454</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="c4f7c7b5" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>display(df_new.loc[<span class="st">"First"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.710289</td>
+      <td>1.260774</td>
+      <td>1.047939</td>
+      <td>1.342935</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.539253</td>
+      <td>1.610440</td>
+      <td>1.608759</td>
+      <td>1.518317</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.471803</td>
+      <td>1.817016</td>
+      <td>1.757089</td>
+      <td>1.957877</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.621033</td>
+      <td>1.152500</td>
+      <td>1.237414</td>
+      <td>1.457109</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.671551</td>
+      <td>1.689427</td>
+      <td>1.698675</td>
+      <td>1.270451</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="merge" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="merge">Merge</h3>
+<p>The <code>merge</code> function in pandas is used combine two dataframes on one or more columns. The <code>on</code> argument takes name(s) of column or index levels to be merged. If <code>on</code> is None (default) then all the columns are considred and in case of identical columns, an intersection is performed. When <code>on</code> is specified and the merged dataframe results in duplicate column names then <code>suffixes</code> argument can be used to indicate the original datafames.</p>
+<div id="18ae8609" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read a csv file having following data</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Name,Age,Country</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sohan,22,India</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sam,21,USA</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>df3 <span class="op">=</span> pd.read_csv(<span class="st">"test.csv"</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>display(df3)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># make a copy of df3</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>df4 <span class="op">=</span> df3.copy(deep<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># add rows to df4</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>df4.loc[<span class="dv">2</span>]<span class="op">=</span>[<span class="st">"Peter"</span>, <span class="dv">20</span>, <span class="st">"UK"</span>] </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>df4.loc[<span class="bu">len</span>(df4.index)] <span class="op">=</span> [<span class="st">"Mohan"</span>, <span class="dv">25</span>, <span class="st">"India"</span>]</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>display(df4)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># merge dataframes</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>df_merged1 <span class="op">=</span> pd.merge(df3,df4)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>display(df_merged1)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>df_merged2 <span class="op">=</span> pd.merge(df3,df4,on<span class="op">=</span>[<span class="st">"Country"</span>,<span class="st">"Name"</span>],<span class="op">\</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                      suffixes<span class="op">=</span>(<span class="st">'_df3'</span>, <span class="st">'_df4'</span>))</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>display(df_merged2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f969c25d" class="cell quarto-layout-panel" data-execution_count="18" data-layout-ncol="2" data-layout-nrow="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3" halign="left">df3</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sohan</td>
+      <td>22</td>
+      <td>India</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Sam</td>
+      <td>21</td>
+      <td>USA</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3" halign="left">df4</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sohan</td>
+      <td>22</td>
+      <td>India</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Sam</td>
+      <td>21</td>
+      <td>USA</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Peter</td>
+      <td>20</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mohan</td>
+      <td>25</td>
+      <td>India</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3" halign="left">df_merged1</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sohan</td>
+      <td>22</td>
+      <td>India</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Sam</td>
+      <td>21</td>
+      <td>USA</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="4" halign="left">df_merged2</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Age_df3</th>
+      <th>Country</th>
+      <th>Age_df4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sohan</td>
+      <td>22</td>
+      <td>India</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Sam</td>
+      <td>21</td>
+      <td>USA</td>
+      <td>21</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="join" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="join">Join</h3>
+<p>The <code>join</code> function for a dataframe oject is used to combine one or more dataframes. By default the joining is performed along the indcies and the <code>lsuffix</code> and <code>rsuffix</code> arguments can be used to modify column names. In this case, new columns from one of the dataframes are added to the other. The <code>on</code> keyword specifies the index label on which to join the dataframes.</p>
+<p>The joining of dataframe can be performed with different logics in terms of how to handle the overlapping columns. The diagram below shows the pictorial representation of four options that we have. In these Venn diagrams the darker shade shows the subset that will be selected. Here <code>left</code> refers to the dataframe on which the join function is called and <code>right</code> is the dataframe which goes as the argument for the <code>join</code> function.</p>
+<div id="c829b1e8" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="8111d2f8" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>display(df3.join(df4,lsuffix<span class="op">=</span><span class="st">'_df3'</span>, rsuffix<span class="op">=</span><span class="st">'_df4'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name_df3</th>
+      <th>Age_df3</th>
+      <th>Country_df3</th>
+      <th>Name_df4</th>
+      <th>Age_df4</th>
+      <th>Country_df4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sohan</td>
+      <td>22</td>
+      <td>India</td>
+      <td>Sohan</td>
+      <td>22</td>
+      <td>India</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Sam</td>
+      <td>21</td>
+      <td>USA</td>
+      <td>Sam</td>
+      <td>21</td>
+      <td>USA</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="ee516e5e" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>display(df3.set_index(<span class="st">"Country"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+    <tr>
+      <th>Country</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>India</th>
+      <td>Sohan</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>USA</th>
+      <td>Sam</td>
+      <td>21</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>To join <code>df4</code> to <code>df3</code> on <code>Country</code>, we need to set the index of <code>df4</code> to <code>Country</code>. Note that there are two rows with index <code>0</code> because there is one row with India in <code>df3</code> and two such rows in <code>df_4</code>. Also, in the joined dataframe there is no data for UK since there was no row in <code>df3</code> with UK in <code>Country</code> column. This behaviour can be changed by adding the <code>how</code> argument to <code>join</code> function (see below).</p>
+<div id="b011d009" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>display(df3.join(df4.set_index(<span class="st">"Country"</span>),on<span class="op">=</span><span class="st">"Country"</span>, lsuffix<span class="op">=</span><span class="st">'_df3'</span>, rsuffix<span class="op">=</span><span class="st">'_df4'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name_df3</th>
+      <th>Age_df3</th>
+      <th>Country</th>
+      <th>Name_df4</th>
+      <th>Age_df4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sohan</td>
+      <td>22</td>
+      <td>India</td>
+      <td>Sohan</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Sohan</td>
+      <td>22</td>
+      <td>India</td>
+      <td>Mohan</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Sam</td>
+      <td>21</td>
+      <td>USA</td>
+      <td>Sam</td>
+      <td>21</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>To get the joined dataframe with <code>Country</code> as index, set indcies for both the dataframes to <code>Country</code>.</p>
+<div id="a707aa51" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>display(df3.join(df4.set_index(<span class="st">"Country"</span>),on<span class="op">=</span><span class="st">"Country"</span>, lsuffix<span class="op">=</span><span class="st">'_df3'</span>, rsuffix<span class="op">=</span><span class="st">'_df4'</span>, how<span class="op">=</span><span class="st">'outer'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name_df3</th>
+      <th>Age_df3</th>
+      <th>Country</th>
+      <th>Name_df4</th>
+      <th>Age_df4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.0</th>
+      <td>Sohan</td>
+      <td>22.0</td>
+      <td>India</td>
+      <td>Sohan</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>0.0</th>
+      <td>Sohan</td>
+      <td>22.0</td>
+      <td>India</td>
+      <td>Mohan</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>1.0</th>
+      <td>Sam</td>
+      <td>21.0</td>
+      <td>USA</td>
+      <td>Sam</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>NaN</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>UK</td>
+      <td>Peter</td>
+      <td>20</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="852ef58b" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>display(df3.set_index(<span class="st">"Country"</span>).join(df4.set_index(<span class="st">"Country"</span>),on<span class="op">=</span><span class="st">"Country"</span>, lsuffix<span class="op">=</span><span class="st">'_df3'</span>, rsuffix<span class="op">=</span><span class="st">'_df4'</span>, how<span class="op">=</span><span class="st">"outer"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Country</th>
+      <th>Name_df3</th>
+      <th>Age_df3</th>
+      <th>Name_df4</th>
+      <th>Age_df4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>India</th>
+      <td>India</td>
+      <td>Sohan</td>
+      <td>22.0</td>
+      <td>Sohan</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>India</th>
+      <td>India</td>
+      <td>Sohan</td>
+      <td>22.0</td>
+      <td>Mohan</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>USA</th>
+      <td>USA</td>
+      <td>Sam</td>
+      <td>21.0</td>
+      <td>Sam</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>NaN</th>
+      <td>UK</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Peter</td>
+      <td>20</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="groupby" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="groupby"><span class="header-section-number">13.5</span> Groupby</h2>
+<p>We can create groups for same values in a column to apply a function to all rows having a particular value.</p>
+<div id="1ca234bd" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>students <span class="op">=</span> [[<span class="st">"Sam"</span>,<span class="st">"Peter"</span>,<span class="st">"Mohan"</span>, <span class="st">"Mike"</span>], [<span class="st">"UG"</span>,<span class="st">"PG"</span>,<span class="st">"UG"</span>,<span class="st">"PG"</span>], [<span class="dv">70</span>,<span class="dv">80</span>,<span class="dv">90</span>,<span class="dv">70</span>]]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df_students <span class="op">=</span> pd.DataFrame(students).T</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>df_students.columns<span class="op">=</span>[<span class="st">"Name"</span>,<span class="st">"Program"</span>,<span class="st">"Marks"</span>]</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>display(df_students)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Program</th>
+      <th>Marks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sam</td>
+      <td>UG</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Peter</td>
+      <td>PG</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Mohan</td>
+      <td>UG</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mike</td>
+      <td>PG</td>
+      <td>70</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="ef4be2e4" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_students.set_index(<span class="st">"Program"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>display(df_students)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Marks</th>
+    </tr>
+    <tr>
+      <th>Program</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>UG</th>
+      <td>Sam</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>PG</th>
+      <td>Peter</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>UG</th>
+      <td>Mohan</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>PG</th>
+      <td>Mike</td>
+      <td>70</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="714c18b4" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_students.groupby(level<span class="op">=</span><span class="st">"Program"</span>)[<span class="st">"Marks"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>Program
+PG    75.0
+UG    80.0
+Name: Marks, dtype: float64</code></pre>
+</div>
+</div>
+</section>
+<section id="styling" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="styling"><span class="header-section-number">13.6</span> Styling</h2>
+<p>The pandas dataframe has a <code>style</code> attribute that return a styler object which has different functions to customize dataframe display. E.g., to highlight minimun and maximum values in a dataframe, the <code>hightlight_min</code> and <code>highlight_max</code> functions for the styler object can be used. The min and max values can be selected column-wise or row-wise by setting the axis argument to 0 or 1, respectively. To highlight min or max value for the entire dataframe use <code>axis = None</code>. The <code>props</code> argument is used to set the highlight properties and takes a valid CSS (Cascading Style Sheet) property.</p>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame(np.random.uniform(<span class="dv">1</span>,<span class="dv">2</span>,size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>)), columns<span class="op">=</span><span class="bu">list</span>(<span class="st">'ABCD'</span>))</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>display(df_1.style.highlight_max()<span class="op">\</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Column-wise highlighting of maximum value"</span>))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>display(df_1.style.highlight_min(axis<span class="op">=</span><span class="dv">1</span>,props<span class="op">=</span><span class="st">"font-weight:bold;background-color:pink;"</span>)<span class="op">\</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Row-wise highlighting of minimum value"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c184706e" class="cell quarto-layout-panel" data-execution_count="26" data-layout-ncol="2" data-scrolled="true">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<style type="text/css">
+#T_0bf34_row2_col1, #T_0bf34_row3_col0, #T_0bf34_row3_col2, #T_0bf34_row4_col3 {
+  background-color: yellow;
+}
+</style>
+<table id="T_0bf34">
+  <caption>Column-wise highlighting of maximum value</caption>
+  <thead>
+    <tr>
+      <th class="blank level0">&nbsp;</th>
+      <th id="T_0bf34_level0_col0" class="col_heading level0 col0">A</th>
+      <th id="T_0bf34_level0_col1" class="col_heading level0 col1">B</th>
+      <th id="T_0bf34_level0_col2" class="col_heading level0 col2">C</th>
+      <th id="T_0bf34_level0_col3" class="col_heading level0 col3">D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_0bf34_level0_row0" class="row_heading level0 row0">0</th>
+      <td id="T_0bf34_row0_col0" class="data row0 col0">1.036642</td>
+      <td id="T_0bf34_row0_col1" class="data row0 col1">1.265409</td>
+      <td id="T_0bf34_row0_col2" class="data row0 col2">1.593481</td>
+      <td id="T_0bf34_row0_col3" class="data row0 col3">1.470786</td>
+    </tr>
+    <tr>
+      <th id="T_0bf34_level0_row1" class="row_heading level0 row1">1</th>
+      <td id="T_0bf34_row1_col0" class="data row1 col0">1.169744</td>
+      <td id="T_0bf34_row1_col1" class="data row1 col1">1.747707</td>
+      <td id="T_0bf34_row1_col2" class="data row1 col2">1.411616</td>
+      <td id="T_0bf34_row1_col3" class="data row1 col3">1.924018</td>
+    </tr>
+    <tr>
+      <th id="T_0bf34_level0_row2" class="row_heading level0 row2">2</th>
+      <td id="T_0bf34_row2_col0" class="data row2 col0">1.620145</td>
+      <td id="T_0bf34_row2_col1" class="data row2 col1">1.927595</td>
+      <td id="T_0bf34_row2_col2" class="data row2 col2">1.532973</td>
+      <td id="T_0bf34_row2_col3" class="data row2 col3">1.063995</td>
+    </tr>
+    <tr>
+      <th id="T_0bf34_level0_row3" class="row_heading level0 row3">3</th>
+      <td id="T_0bf34_row3_col0" class="data row3 col0">1.895642</td>
+      <td id="T_0bf34_row3_col1" class="data row3 col1">1.669849</td>
+      <td id="T_0bf34_row3_col2" class="data row3 col2">1.834086</td>
+      <td id="T_0bf34_row3_col3" class="data row3 col3">1.254635</td>
+    </tr>
+    <tr>
+      <th id="T_0bf34_level0_row4" class="row_heading level0 row4">4</th>
+      <td id="T_0bf34_row4_col0" class="data row4 col0">1.831751</td>
+      <td id="T_0bf34_row4_col1" class="data row4 col1">1.220100</td>
+      <td id="T_0bf34_row4_col2" class="data row4 col2">1.203569</td>
+      <td id="T_0bf34_row4_col3" class="data row4 col3">1.954389</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<style type="text/css">
+#T_305d2_row0_col0, #T_305d2_row1_col0, #T_305d2_row2_col3, #T_305d2_row3_col3, #T_305d2_row4_col2 {
+  font-weight: bold;
+  background-color: pink;
+}
+</style>
+<table id="T_305d2">
+  <caption>Row-wise highlighting of minimum value</caption>
+  <thead>
+    <tr>
+      <th class="blank level0">&nbsp;</th>
+      <th id="T_305d2_level0_col0" class="col_heading level0 col0">A</th>
+      <th id="T_305d2_level0_col1" class="col_heading level0 col1">B</th>
+      <th id="T_305d2_level0_col2" class="col_heading level0 col2">C</th>
+      <th id="T_305d2_level0_col3" class="col_heading level0 col3">D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_305d2_level0_row0" class="row_heading level0 row0">0</th>
+      <td id="T_305d2_row0_col0" class="data row0 col0">1.036642</td>
+      <td id="T_305d2_row0_col1" class="data row0 col1">1.265409</td>
+      <td id="T_305d2_row0_col2" class="data row0 col2">1.593481</td>
+      <td id="T_305d2_row0_col3" class="data row0 col3">1.470786</td>
+    </tr>
+    <tr>
+      <th id="T_305d2_level0_row1" class="row_heading level0 row1">1</th>
+      <td id="T_305d2_row1_col0" class="data row1 col0">1.169744</td>
+      <td id="T_305d2_row1_col1" class="data row1 col1">1.747707</td>
+      <td id="T_305d2_row1_col2" class="data row1 col2">1.411616</td>
+      <td id="T_305d2_row1_col3" class="data row1 col3">1.924018</td>
+    </tr>
+    <tr>
+      <th id="T_305d2_level0_row2" class="row_heading level0 row2">2</th>
+      <td id="T_305d2_row2_col0" class="data row2 col0">1.620145</td>
+      <td id="T_305d2_row2_col1" class="data row2 col1">1.927595</td>
+      <td id="T_305d2_row2_col2" class="data row2 col2">1.532973</td>
+      <td id="T_305d2_row2_col3" class="data row2 col3">1.063995</td>
+    </tr>
+    <tr>
+      <th id="T_305d2_level0_row3" class="row_heading level0 row3">3</th>
+      <td id="T_305d2_row3_col0" class="data row3 col0">1.895642</td>
+      <td id="T_305d2_row3_col1" class="data row3 col1">1.669849</td>
+      <td id="T_305d2_row3_col2" class="data row3 col2">1.834086</td>
+      <td id="T_305d2_row3_col3" class="data row3 col3">1.254635</td>
+    </tr>
+    <tr>
+      <th id="T_305d2_level0_row4" class="row_heading level0 row4">4</th>
+      <td id="T_305d2_row4_col0" class="data row4 col0">1.831751</td>
+      <td id="T_305d2_row4_col1" class="data row4 col1">1.220100</td>
+      <td id="T_305d2_row4_col2" class="data row4 col2">1.203569</td>
+      <td id="T_305d2_row4_col3" class="data row4 col3">1.954389</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>We can also highlight all the values in a dataframe with color gradient. The coloring can be applied to the text or background. The <code>cmap</code> argument for <code>background_gradient</code> and <code>text_gradient</code> functions can be used to customize the coloring based on a colormap.</p>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>display(df_1.style.background_gradient()<span class="op">\</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Column-wise background gradient"</span>)<span class="op">\</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        .set_properties(<span class="op">**</span>{<span class="st">"font-weight"</span>:<span class="st">"bold"</span>, <span class="st">"padding"</span>:<span class="st">"1em"</span>})<span class="op">\</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.2f}</span><span class="st">"</span>))</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>display(df_1.style.text_gradient(axis<span class="op">=</span><span class="dv">1</span>, cmap<span class="op">=</span><span class="st">"winter"</span>)<span class="op">\</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Row-wise text gradient"</span>)<span class="op">\</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        .set_properties(<span class="op">**</span>{<span class="st">"font-weight"</span>:<span class="st">"bold"</span>, <span class="st">"padding"</span>:<span class="st">"1em"</span>})<span class="op">\</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.2f}</span><span class="st">"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0c4362ac" class="cell quarto-layout-panel" data-execution_count="27" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<style type="text/css">
+#T_93ca9_row0_col0, #T_93ca9_row2_col3, #T_93ca9_row4_col1, #T_93ca9_row4_col2 {
+  background-color: #fff7fb;
+  color: #000000;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row0_col1 {
+  background-color: #f5eff6;
+  color: #000000;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row0_col2 {
+  background-color: #3991c1;
+  color: #f1f1f1;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row0_col3 {
+  background-color: #86b0d3;
+  color: #000000;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row1_col0 {
+  background-color: #e6e2ef;
+  color: #000000;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row1_col1 {
+  background-color: #0771b1;
+  color: #f1f1f1;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row1_col2 {
+  background-color: #b5c4df;
+  color: #000000;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row1_col3 {
+  background-color: #034165;
+  color: #f1f1f1;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row2_col0 {
+  background-color: #2182b9;
+  color: #f1f1f1;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row2_col1, #T_93ca9_row3_col0, #T_93ca9_row3_col2, #T_93ca9_row4_col3 {
+  background-color: #023858;
+  color: #f1f1f1;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row2_col2 {
+  background-color: #69a5cc;
+  color: #f1f1f1;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row3_col1 {
+  background-color: #328dbf;
+  color: #f1f1f1;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row3_col3 {
+  background-color: #d9d8ea;
+  color: #000000;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_93ca9_row4_col0 {
+  background-color: #034c78;
+  color: #f1f1f1;
+  font-weight: bold;
+  padding: 1em;
+}
+</style>
+<table id="T_93ca9">
+  <caption>Column-wise background gradient</caption>
+  <thead>
+    <tr>
+      <th class="blank level0">&nbsp;</th>
+      <th id="T_93ca9_level0_col0" class="col_heading level0 col0">A</th>
+      <th id="T_93ca9_level0_col1" class="col_heading level0 col1">B</th>
+      <th id="T_93ca9_level0_col2" class="col_heading level0 col2">C</th>
+      <th id="T_93ca9_level0_col3" class="col_heading level0 col3">D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_93ca9_level0_row0" class="row_heading level0 row0">0</th>
+      <td id="T_93ca9_row0_col0" class="data row0 col0">1.04</td>
+      <td id="T_93ca9_row0_col1" class="data row0 col1">1.27</td>
+      <td id="T_93ca9_row0_col2" class="data row0 col2">1.59</td>
+      <td id="T_93ca9_row0_col3" class="data row0 col3">1.47</td>
+    </tr>
+    <tr>
+      <th id="T_93ca9_level0_row1" class="row_heading level0 row1">1</th>
+      <td id="T_93ca9_row1_col0" class="data row1 col0">1.17</td>
+      <td id="T_93ca9_row1_col1" class="data row1 col1">1.75</td>
+      <td id="T_93ca9_row1_col2" class="data row1 col2">1.41</td>
+      <td id="T_93ca9_row1_col3" class="data row1 col3">1.92</td>
+    </tr>
+    <tr>
+      <th id="T_93ca9_level0_row2" class="row_heading level0 row2">2</th>
+      <td id="T_93ca9_row2_col0" class="data row2 col0">1.62</td>
+      <td id="T_93ca9_row2_col1" class="data row2 col1">1.93</td>
+      <td id="T_93ca9_row2_col2" class="data row2 col2">1.53</td>
+      <td id="T_93ca9_row2_col3" class="data row2 col3">1.06</td>
+    </tr>
+    <tr>
+      <th id="T_93ca9_level0_row3" class="row_heading level0 row3">3</th>
+      <td id="T_93ca9_row3_col0" class="data row3 col0">1.90</td>
+      <td id="T_93ca9_row3_col1" class="data row3 col1">1.67</td>
+      <td id="T_93ca9_row3_col2" class="data row3 col2">1.83</td>
+      <td id="T_93ca9_row3_col3" class="data row3 col3">1.25</td>
+    </tr>
+    <tr>
+      <th id="T_93ca9_level0_row4" class="row_heading level0 row4">4</th>
+      <td id="T_93ca9_row4_col0" class="data row4 col0">1.83</td>
+      <td id="T_93ca9_row4_col1" class="data row4 col1">1.22</td>
+      <td id="T_93ca9_row4_col2" class="data row4 col2">1.20</td>
+      <td id="T_93ca9_row4_col3" class="data row4 col3">1.95</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<style type="text/css">
+#T_e977d_row0_col0, #T_e977d_row1_col0, #T_e977d_row2_col3, #T_e977d_row3_col3, #T_e977d_row4_col2 {
+  color: #0000ff;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_e977d_row0_col1 {
+  color: #0069cb;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_e977d_row0_col2, #T_e977d_row1_col3, #T_e977d_row2_col1, #T_e977d_row3_col0, #T_e977d_row4_col3 {
+  color: #00ff80;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_e977d_row0_col3 {
+  color: #00c79c;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_e977d_row1_col1 {
+  color: #00c49d;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_e977d_row1_col2 {
+  color: #0052d6;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_e977d_row2_col0 {
+  color: #00a4ad;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_e977d_row2_col2 {
+  color: #008bba;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_e977d_row3_col1 {
+  color: #00a5ac;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_e977d_row3_col2 {
+  color: #00e78c;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_e977d_row4_col0 {
+  color: #00d694;
+  font-weight: bold;
+  padding: 1em;
+}
+#T_e977d_row4_col1 {
+  color: #0005fc;
+  font-weight: bold;
+  padding: 1em;
+}
+</style>
+<table id="T_e977d">
+  <caption>Row-wise text gradient</caption>
+  <thead>
+    <tr>
+      <th class="blank level0">&nbsp;</th>
+      <th id="T_e977d_level0_col0" class="col_heading level0 col0">A</th>
+      <th id="T_e977d_level0_col1" class="col_heading level0 col1">B</th>
+      <th id="T_e977d_level0_col2" class="col_heading level0 col2">C</th>
+      <th id="T_e977d_level0_col3" class="col_heading level0 col3">D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_e977d_level0_row0" class="row_heading level0 row0">0</th>
+      <td id="T_e977d_row0_col0" class="data row0 col0">1.04</td>
+      <td id="T_e977d_row0_col1" class="data row0 col1">1.27</td>
+      <td id="T_e977d_row0_col2" class="data row0 col2">1.59</td>
+      <td id="T_e977d_row0_col3" class="data row0 col3">1.47</td>
+    </tr>
+    <tr>
+      <th id="T_e977d_level0_row1" class="row_heading level0 row1">1</th>
+      <td id="T_e977d_row1_col0" class="data row1 col0">1.17</td>
+      <td id="T_e977d_row1_col1" class="data row1 col1">1.75</td>
+      <td id="T_e977d_row1_col2" class="data row1 col2">1.41</td>
+      <td id="T_e977d_row1_col3" class="data row1 col3">1.92</td>
+    </tr>
+    <tr>
+      <th id="T_e977d_level0_row2" class="row_heading level0 row2">2</th>
+      <td id="T_e977d_row2_col0" class="data row2 col0">1.62</td>
+      <td id="T_e977d_row2_col1" class="data row2 col1">1.93</td>
+      <td id="T_e977d_row2_col2" class="data row2 col2">1.53</td>
+      <td id="T_e977d_row2_col3" class="data row2 col3">1.06</td>
+    </tr>
+    <tr>
+      <th id="T_e977d_level0_row3" class="row_heading level0 row3">3</th>
+      <td id="T_e977d_row3_col0" class="data row3 col0">1.90</td>
+      <td id="T_e977d_row3_col1" class="data row3 col1">1.67</td>
+      <td id="T_e977d_row3_col2" class="data row3 col2">1.83</td>
+      <td id="T_e977d_row3_col3" class="data row3 col3">1.25</td>
+    </tr>
+    <tr>
+      <th id="T_e977d_level0_row4" class="row_heading level0 row4">4</th>
+      <td id="T_e977d_row4_col0" class="data row4 col0">1.83</td>
+      <td id="T_e977d_row4_col1" class="data row4 col1">1.22</td>
+      <td id="T_e977d_row4_col2" class="data row4 col2">1.20</td>
+      <td id="T_e977d_row4_col3" class="data row4 col3">1.95</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<section id="bar-charts-within-dataframe" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="bar-charts-within-dataframe">Bar charts within dataframe</h3>
+<p>The values in a dataframe can be decorated with bar plots using the <code>bar</code> function for the styler object. In this example, we’ll display the dataframe after applying the following customizations:<br>
+- bar plots with custom color map.<br>
+- format the floats to display upto two decimal places.<br>
+- make the text bold.<br>
+- center align the text in the dataframe.<br>
+- hide the indcies.<br>
+</p>
+<div id="6ef02681" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_bar <span class="op">=</span> pd.DataFrame(np.random.uniform(<span class="op">-</span><span class="dv">10</span>,<span class="dv">10</span>,size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>)), columns<span class="op">=</span><span class="bu">list</span>(<span class="st">'ABCD'</span>))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> ListedColormap</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cmp</span> <span class="op">=</span> ListedColormap([<span class="st">"pink"</span>,<span class="st">"lightblue"</span>])</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>display(df_bar.style</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>        .bar(vmin<span class="op">=-</span><span class="dv">10</span>, vmax<span class="op">=</span><span class="dv">10</span>, align<span class="op">=</span><span class="dv">0</span>, cmap<span class="op">=</span><span class="bu">cmp</span>)<span class="op">\</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.2f}</span><span class="st">"</span>)<span class="op">\</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>        .set_properties(<span class="op">**</span>{<span class="st">"font-weight"</span>:<span class="st">"bold"</span>, <span class="st">"text-align"</span>:<span class="st">"center"</span>})<span class="op">\</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>        .set_table_styles([<span class="bu">dict</span>(selector<span class="op">=</span><span class="st">'th'</span>, props<span class="op">=</span>[(<span class="st">'text-align'</span>, <span class="st">'center'</span>)])])<span class="op">\</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>        .hide(axis<span class="op">=</span><span class="st">"index"</span>)<span class="op">\</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Dataframe with bar charts"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<style type="text/css">
+#T_1a109 th {
+  text-align: center;
+}
+#T_1a109_row0_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 27.2%, #ffc0cb 27.2%, #ffc0cb 50.0%, transparent 50.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row0_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 14.4%, #ffc0cb 14.4%, #ffc0cb 50.0%, transparent 50.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row0_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 0.4%, #ffc0cb 0.4%, #ffc0cb 50.0%, transparent 50.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row0_col3 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 38.9%, #ffc0cb 38.9%, #ffc0cb 50.0%, transparent 50.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row1_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 18.0%, #ffc0cb 18.0%, #ffc0cb 50.0%, transparent 50.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row1_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 50.0%, #add8e6 50.0%, #add8e6 79.0%, transparent 79.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row1_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 29.3%, #ffc0cb 29.3%, #ffc0cb 50.0%, transparent 50.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row1_col3 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 50.0%, #add8e6 50.0%, #add8e6 65.6%, transparent 65.6%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row2_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 26.3%, #ffc0cb 26.3%, #ffc0cb 50.0%, transparent 50.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row2_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 50.0%, #add8e6 50.0%, #add8e6 90.1%, transparent 90.1%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row2_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 50.0%, #ffc0cb 50.0%, #ffc0cb 50.0%, transparent 50.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row2_col3 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 50.0%, #add8e6 50.0%, #add8e6 68.3%, transparent 68.3%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row3_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 18.5%, #ffc0cb 18.5%, #ffc0cb 50.0%, transparent 50.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row3_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 10.0%, #ffc0cb 10.0%, #ffc0cb 50.0%, transparent 50.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row3_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 50.0%, #add8e6 50.0%, #add8e6 61.6%, transparent 61.6%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row3_col3 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 49.9%, #ffc0cb 49.9%, #ffc0cb 50.0%, transparent 50.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row4_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 0.3%, #ffc0cb 0.3%, #ffc0cb 50.0%, transparent 50.0%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row4_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 50.0%, #add8e6 50.0%, #add8e6 78.6%, transparent 78.6%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row4_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 50.0%, #add8e6 50.0%, #add8e6 82.4%, transparent 82.4%);
+  font-weight: bold;
+  text-align: center;
+}
+#T_1a109_row4_col3 {
+  width: 10em;
+  background: linear-gradient(90deg, transparent 50.0%, #add8e6 50.0%, #add8e6 81.5%, transparent 81.5%);
+  font-weight: bold;
+  text-align: center;
+}
+</style>
+<table id="T_1a109">
+  <caption>Dataframe with bar charts</caption>
+  <thead>
+    <tr>
+      <th id="T_1a109_level0_col0" class="col_heading level0 col0">A</th>
+      <th id="T_1a109_level0_col1" class="col_heading level0 col1">B</th>
+      <th id="T_1a109_level0_col2" class="col_heading level0 col2">C</th>
+      <th id="T_1a109_level0_col3" class="col_heading level0 col3">D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_1a109_row0_col0" class="data row0 col0">-4.55</td>
+      <td id="T_1a109_row0_col1" class="data row0 col1">-7.13</td>
+      <td id="T_1a109_row0_col2" class="data row0 col2">-9.91</td>
+      <td id="T_1a109_row0_col3" class="data row0 col3">-2.22</td>
+    </tr>
+    <tr>
+      <td id="T_1a109_row1_col0" class="data row1 col0">-6.40</td>
+      <td id="T_1a109_row1_col1" class="data row1 col1">5.80</td>
+      <td id="T_1a109_row1_col2" class="data row1 col2">-4.14</td>
+      <td id="T_1a109_row1_col3" class="data row1 col3">3.11</td>
+    </tr>
+    <tr>
+      <td id="T_1a109_row2_col0" class="data row2 col0">-4.75</td>
+      <td id="T_1a109_row2_col1" class="data row2 col1">8.02</td>
+      <td id="T_1a109_row2_col2" class="data row2 col2">-0.00</td>
+      <td id="T_1a109_row2_col3" class="data row2 col3">3.65</td>
+    </tr>
+    <tr>
+      <td id="T_1a109_row3_col0" class="data row3 col0">-6.30</td>
+      <td id="T_1a109_row3_col1" class="data row3 col1">-8.01</td>
+      <td id="T_1a109_row3_col2" class="data row3 col2">2.33</td>
+      <td id="T_1a109_row3_col3" class="data row3 col3">-0.02</td>
+    </tr>
+    <tr>
+      <td id="T_1a109_row4_col0" class="data row4 col0">-9.94</td>
+      <td id="T_1a109_row4_col1" class="data row4 col1">5.72</td>
+      <td id="T_1a109_row4_col2" class="data row4 col2">6.49</td>
+      <td id="T_1a109_row4_col3" class="data row4 col3">6.30</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="ploting" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="ploting"><span class="header-section-number">13.7</span> Ploting</h2>
+<p>Dataframe has a <code>plot()</code> function to do basic visualization. The <code>kind</code> attribute for this function can be used to change the plot type.</p>
+<div id="a5a06eda" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df_col1 <span class="op">=</span> pd.DataFrame(np.array(<span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">6</span>))<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df_col2 <span class="op">=</span> pd.DataFrame(np.array(<span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">6</span>))<span class="op">**</span><span class="dv">3</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>df_comb <span class="op">=</span> pd.concat([df_col1,df_col2], axis<span class="op">=</span><span class="dv">1</span>, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>df_comb.columns <span class="op">=</span> [<span class="st">"Squares"</span>, <span class="st">"Cubes"</span>]</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>df_comb.index <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">6</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>display(df_comb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Squares</th>
+      <th>Cubes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>16</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>25</td>
+      <td>125</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="op">=</span> df_comb.plot(title<span class="op">=</span><span class="st">"Line Plot"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>plot2 <span class="op">=</span> df_comb.plot(kind<span class="op">=</span><span class="st">"bar"</span>, title<span class="op">=</span><span class="st">"Bar Plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="547d5215" class="cell quarto-layout-panel" data-execution_count="11" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Pandas_files/figure-html/cell-33-output-1.png" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Pandas_files/figure-html/cell-33-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<section id="the-iris-dataset" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="the-iris-dataset">The iris dataset</h3>
+<p>One of the popular datasets for learning data analysis is the iris dataset which has data for four iris flower features (sepal length, sepal width, petal length, and petal width). These data are there for the three species namely <em>Iris setosa</em>, <em>Iris versicolour</em>, and <em>Iris virginica</em>. Let’s import this data create a dataframe and practice data visualization.</p>
+<div id="0a5516bf" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>csv_url <span class="op">=</span> <span class="st">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># using the attribute information as the column names</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>col_names <span class="op">=</span> [<span class="st">'Sepal_Length'</span>,<span class="st">'Sepal_Width'</span>,<span class="st">'Petal_Length'</span>,<span class="st">'Petal_Width'</span>,<span class="st">'Class'</span>]</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span>  pd.read_csv(csv_url, names <span class="op">=</span> col_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f9485834" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>display(iris)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(iris.dtypes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Sepal_Length</th>
+      <th>Sepal_Width</th>
+      <th>Petal_Length</th>
+      <th>Petal_Width</th>
+      <th>Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>Iris-virginica</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>Iris-virginica</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>Iris-virginica</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>Iris-virginica</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>Iris-virginica</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 5 columns</p>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sepal_Length    float64
+Sepal_Width     float64
+Petal_Length    float64
+Petal_Width     float64
+Class            object
+dtype: object</code></pre>
+</div>
+</div>
+<p>To get the summary statistics for this dataset we’ll use the <code>describe</code> function for the iris dataframe. This function calculates different statistical parameters for all the columns with numeric data. Notice that this summary would be for the entire data and so might not be of much use. A better approach would be first aggreate the data by species so that we can get summary statistics for each species.</p>
+<div id="1ce359a7" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>iris.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Sepal_Length</th>
+      <th>Sepal_Width</th>
+      <th>Petal_Length</th>
+      <th>Petal_Width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>150.000000</td>
+      <td>150.000000</td>
+      <td>150.000000</td>
+      <td>150.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>5.843333</td>
+      <td>3.054000</td>
+      <td>3.758667</td>
+      <td>1.198667</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.828066</td>
+      <td>0.433594</td>
+      <td>1.764420</td>
+      <td>0.763161</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>4.300000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>0.100000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>5.100000</td>
+      <td>2.800000</td>
+      <td>1.600000</td>
+      <td>0.300000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>5.800000</td>
+      <td>3.000000</td>
+      <td>4.350000</td>
+      <td>1.300000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>6.400000</td>
+      <td>3.300000</td>
+      <td>5.100000</td>
+      <td>1.800000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>7.900000</td>
+      <td>4.400000</td>
+      <td>6.900000</td>
+      <td>2.500000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="192ca182" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>iris_grp <span class="op">=</span> iris.groupby(by<span class="op">=</span><span class="st">"Class"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>iris_grp.describe()[<span class="st">'Petal_Length'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>Class</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Iris-setosa</th>
+      <td>50.0</td>
+      <td>1.464</td>
+      <td>0.173511</td>
+      <td>1.0</td>
+      <td>1.4</td>
+      <td>1.50</td>
+      <td>1.575</td>
+      <td>1.9</td>
+    </tr>
+    <tr>
+      <th>Iris-versicolor</th>
+      <td>50.0</td>
+      <td>4.260</td>
+      <td>0.469911</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>4.35</td>
+      <td>4.600</td>
+      <td>5.1</td>
+    </tr>
+    <tr>
+      <th>Iris-virginica</th>
+      <td>50.0</td>
+      <td>5.552</td>
+      <td>0.551895</td>
+      <td>4.5</td>
+      <td>5.1</td>
+      <td>5.55</td>
+      <td>5.875</td>
+      <td>6.9</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="seaborn-library" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="seaborn-library">Seaborn library</h3>
+<p>The Seaborn library is data visualization library based on Matplotlib. This library is particularly suitable for ploting with dataframes. The libaray has been specifically designed and develop in way to focus on the data analysis rather than worrying about nuances of drawing plot.</p>
+<div id="61d9edce" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="d7e1ed89" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> sns.scatterplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Sepal_Length"</span>,y<span class="op">=</span><span class="st">"Petal_Length"</span>,hue<span class="op">=</span><span class="st">"Class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_files/figure-html/cell-39-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The seaborn library has dedicated functions to facilitate ploting informative visualizations. E.g., <code>jointplot</code> is used for rendering a scatter plot along with the corresponding data distributions. Similarly, <code>pairplot</code> can be used to render pairwise plots for all the numeric data in a dataframe.</p>
+<div id="3ef26a6c" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="op">=</span> sns.jointplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Sepal_Length"</span>,y<span class="op">=</span><span class="st">"Petal_Length"</span>,hue<span class="op">=</span><span class="st">"Class"</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>plot2 <span class="op">=</span> sns.pairplot(data<span class="op">=</span>iris,hue<span class="op">=</span><span class="st">"Class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_files/figure-html/cell-40-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_files/figure-html/cell-40-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can also visualize statistical information graphically, e.g.&nbsp;in the form of a boxplot. For instance, to see the distribution of the values for <code>Petal_Length</code> across the three iris species, we can make a boxplot as follows.</p>
+<div id="b08bb90b" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>,<span class="dv">3</span>))</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Petal_Length"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_files/figure-html/cell-41-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Similarly, we can have separate boxplots for all four features as a grid.</p>
+<div id="beb539f7" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Petal_Length"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">''</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Petal_Width"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">''</span>)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Sepal_Length"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">''</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Sepal_Width"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">''</span>)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_files/figure-html/cell-42-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, let’s say we want to have the boxplot plots for each of the feature grouped together i.e.&nbsp;a graph that shows four sets of boxplots with groups colored according to the species name.<br>
+For this kind of a plot, we first need to modify (or reformat) our dataframe so that its in the required format. Using the <code>melt</code> function in pandas, the original iris dataframe would be modified such that the values for all four flower features appear one per row. This would allow us to perform statistical calculations (required for boxplot) on all the feature and color the plot based on the species. Notice that the original iris dataframe’s shape is 150 X 5 (which implies a total of 600 datapoints since there are 4 data columns) while the <em>melted</em> dataframe’s shape is 600 X 3.</p>
+<div id="cffdb118" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>iris_melt <span class="op">=</span> pd.melt(iris, id_vars<span class="op">=</span>[<span class="st">'Class'</span>],<span class="op">\</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                    value_vars<span class="op">=</span>[<span class="st">"Sepal_Length"</span>,<span class="st">"Sepal_Width"</span>,<span class="st">"Petal_Length"</span>,<span class="st">"Petal_Width"</span>],<span class="op">\</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                    var_name<span class="op">=</span><span class="st">'Feature'</span>)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>iris_melt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Class</th>
+      <th>Feature</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Iris-setosa</td>
+      <td>Sepal_Length</td>
+      <td>5.1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Iris-setosa</td>
+      <td>Sepal_Length</td>
+      <td>4.9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Iris-setosa</td>
+      <td>Sepal_Length</td>
+      <td>4.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Iris-setosa</td>
+      <td>Sepal_Length</td>
+      <td>4.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Iris-setosa</td>
+      <td>Sepal_Length</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>595</th>
+      <td>Iris-virginica</td>
+      <td>Petal_Width</td>
+      <td>2.3</td>
+    </tr>
+    <tr>
+      <th>596</th>
+      <td>Iris-virginica</td>
+      <td>Petal_Width</td>
+      <td>1.9</td>
+    </tr>
+    <tr>
+      <th>597</th>
+      <td>Iris-virginica</td>
+      <td>Petal_Width</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>598</th>
+      <td>Iris-virginica</td>
+      <td>Petal_Width</td>
+      <td>2.3</td>
+    </tr>
+    <tr>
+      <th>599</th>
+      <td>Iris-virginica</td>
+      <td>Petal_Width</td>
+      <td>1.8</td>
+    </tr>
+  </tbody>
+</table>
+<p>600 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<div id="391eec8b" class="cell" data-scrolled="true" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>plot3 <span class="op">=</span> sns.boxplot(data<span class="op">=</span>iris_melt,x<span class="op">=</span><span class="st">"Feature"</span>, y<span class="op">=</span><span class="st">"value"</span>,hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_files/figure-html/cell-44-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The <code>catplot</code> function provides an intutive interface to visually analyze the relationship between numerical and categorical data. There are three different options for plot layout – scatter plot or distribution plot or estimate plot – each of which points to an axis-level plot function. The plot selection is made using the <code>kind</code> keyword argument. The table below shows the available options for the <code>kind</code> argument and their corresponding axis-level functions. The size of the plot can be adjusted using the <code>height</code> and <code>aspect</code> keyword arguments.</p>
+<table>
+<tbody><tr style="border-bottom: 1px solid;">
+<td>
+Categorical plot
+</td>
+<td>
+<code>kind</code>
+</td>
+<td>
+Axis-level function
+</td>
+</tr>
+<tr>
+<td rowspan="2" style="border-right: 1px solid;">
+Scatter plot
+</td>
+<td>
+strip (default)
+</td>
+<td>
+stripplot()
+</td>
+</tr>
+<tr style="border-bottom: 2px solid;">
+<td>
+swarm
+</td>
+<td>
+swarmplot()
+</td>
+</tr>
+<tr>
+<td rowspan="3" style="border-right: 1px solid;">
+Distribution plot
+</td>
+<td>
+box
+</td>
+<td>
+boxplot()
+</td>
+</tr>
+<tr>
+<td>
+violin
+</td>
+<td>
+violinplot()
+</td>
+</tr>
+<tr style="border-bottom: 2px solid;">
+<td>
+boxen
+</td>
+<td>
+boxenplot()
+</td>
+</tr>
+<tr>
+<td rowspan="3" style="border-right: 1px solid;">
+Estimate plot
+</td>
+<td>
+point
+</td>
+<td>
+pointplot()
+</td>
+</tr>
+<tr>
+<td>
+bar
+</td>
+<td>
+barplot()
+</td>
+</tr>
+<tr style="border-bottom: 2px solid;">
+<td>
+count
+</td>
+<td>
+countplot()
+</td>
+</tr>
+</tbody></table>
+<p>The code below creates a violin plot using the above data. The x-axis label is removed using the <code>set</code> function for the <code>FacetGrid</code> object and the font size for all the labels is increase using the <code>set_theme</code> function from sns.</p>
+<div id="67c91a70" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"white"</span>, font_scale<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> sns.catplot(data<span class="op">=</span>iris_melt, x<span class="op">=</span><span class="st">"Feature"</span>, y<span class="op">=</span><span class="st">"value"</span>, kind<span class="op">=</span><span class="st">"violin"</span>, </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                 hue<span class="op">=</span><span class="st">"Class"</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>p2.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_files/figure-html/cell-45-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Similarly, we can make a swarm plot for each feature and color it by species. A swarm plot is like a scatterplot such that the position of the points are to avoid overlap. The <code>catplot</code> function returns a <code>FacetGrid</code> which can be customized to render desired representation. For our data there will be four plots in the facet grid which will be arranged as one row and four columns by default. The code below, makes a feature-wise swarm plot with two columns (<code>col_warp=2</code>) in the Facetgrid. The final plot has has two enhancements — 1) the veritcal line for the y-axis is removed and 2) the tick marks removed from both the axis and major grid lines shown for y-axis.</p>
+<div id="6ee13918-100c-452f-bd55-561725f8fc0e" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"white"</span>, font_scale<span class="op">=</span><span class="fl">1.25</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> sns.catplot(data<span class="op">=</span>iris_melt, x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"value"</span>, kind<span class="op">=</span><span class="st">"swarm"</span>, size<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                 col<span class="op">=</span><span class="st">"Feature"</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="fl">1.5</span>, col_wrap<span class="op">=</span><span class="dv">2</span>, hue<span class="op">=</span><span class="st">"Class"</span>, errorbar<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>p2.despine(left<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> p2.axes.flat:</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'both'</span>, length<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    ax.yaxis.grid(<span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_files/figure-html/cell-46-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pythonbook\.bioinfo\.guru");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Matplotlib.html" class="pagination-link" aria-label="Matplotlib">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Matplotlib</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Functions.html" class="pagination-link" aria-label="Functions">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Functions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2026, bioinfo.guru</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://fa.bioinfo.guru">
+      <i class="bi bi-facebook" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="./bg_insta.html">
+      <i class="bi bi-instagram" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="./bg_in.html">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="./bg_tw.html">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

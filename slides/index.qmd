@@ -1,0 +1,188 @@
+---
+title: '<span class="mt-8 font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text">Introduction to Python</span>'
+author: "Manish Datt"
+date: today
+date-format: long
+slide-number: true
+show-slide-number: speaker
+logo: "python_images/logo_final_transparent.png"
+format:
+  revealjs:
+    footer: "<span style='font-family:Geo;color:#9c51e0;'><a href='https://bioinfo.guru' target='_blank' style='text-decoration:none; color:inherit;'>bioinfo.guru</a></span>"
+    logo: "python_images/logo_final_transparent.png"
+    css: "slides.css"
+    template-partials:
+      - title-slide.html
+title-slide-attributes:
+  data-background-color: "#dcf0fa"
+  data-background-size: 75px
+  data-background-position: 50% 90%
+  data-background-image: "python_images/logo_final_transparent.png"
+include-after-body: slides.js
+---
+
+## Python distributions
+```{=html}
+<head>
+<script src="https://cdn.tailwindcss.com"></script>
+```
+
+:::: {.columns}
+::: {.column width="40%"}
+![](python_images/python-logo.png){width="300"}
+:::
+
+::: {.column width="40%"}
+![](python_images/anaconda-logo.png){width="300"} 
+:::
+::::
+
+
+::: {.fragment style="font-size: 1em;"}
+Integrated Development Environments (IDEs)
+:::
+
+:::: {.columns}
+::: {.column width=25% .fragment .fade-up}
+![](python_images/spyder-logo.png){width="100"}
+:::
+::: {.column width=25% .fragment .fade-up}
+![](python_images/pycharm-logo.jpg){width="100"}
+:::
+::: {.column width=25% .fragment .fade-up }
+![](python_images/vs_code-logo.jpg){width="100"}
+:::
+
+::: {.column width=25% .fragment .fade-up}
+![](python_images/positron-logo.png){width="100"}
+:::
+::::
+
+::: {.fragment style="font-size: 1em;"}
+Notebooks
+:::
+:::: {.columns}
+::: {.column width=25% .fragment .fade-up}
+![](python_images/jupyter-logo.png){width="100"}
+:::
+::: {.column width=25% .fragment .fade-up}
+![](python_images/Google_Colaboratory.svg){width="150"}
+:::
+::: {.column width=25% .fragment .fade-up}
+![](python_images/marimo_logo.svg){width="125"}
+:::
+::: {.column width=25% .fragment .fade-up}
+![](python_images/deepnote-logo.svg){width="100"}
+:::
+::::
+---
+
+
+## Python advantages
+
+:::: {.columns}
+
+::: {.column .no_bullet width=45%}
+::: {.fragment .fade-in-then-semi-out data-fragment-index="1"}
+- Low entry barrier
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="2"}
+- Dynamically typed
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="3"}
+- Object-oriented
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="4"}
+- Extensive library support
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="5"}
+- Platform independent
+:::
+
+:::
+
+::: {.column width=55%}
+::: {.r-stack}
+
+::: {.fragment .fade-in-then-out data-fragment-index="1"}
+``` {python}
+#| echo: true
+print("Hello")
+```
+<br>
+``` {python}
+#| echo: true
+len("Hello")
+```
+<br>
+``` {python}
+#| echo: true
+for fruit in ["Apple","Banana","Mango"]:
+	print(fruit)
+```
+:::
+
+::: {.fragment .fade-in-then-out data-fragment-index="2"}
+``` {python}
+#| echo: true
+x = 5
+print(x)
+```
+<br>
+``` {cpp}
+#include <iostream>
+
+int main() {
+    int x = 5;
+    std::cout << x << std::endl;
+    return 0;
+}
+```
+:::
+
+::: {.fragment .fade-in-then-out data-fragment-index="3"}
+:::
+
+::: {.fragment .fade-in-then-out data-fragment-index="4"}
+![](https://pydsc.files.wordpress.com/2017/11/pythonenvironment.png)
+<span style="font-size: 0.4em;">
+[https://pydsc.files.wordpress.com/2017/11/pythonenvironment.png](https://pydsc.files.wordpress.com/2017/11/pythonenvironment.png)
+</span>
+:::
+
+::: {.fragment .fade-in-then-out data-fragment-index="5"}
+<span style="color: #9c51e0;">{{< fa brands linux size=2x >}}</span>
+<br><br>
+<span style="color: #9c51e0;">{{< fa brands apple size=2x >}}</span>
+<br><br>
+<span style="color: #9c51e0;">{{< fa brands windows size=2x >}}</span>
+:::
+
+:::
+:::
+:::: 
+
+---
+
+## Python Libraries {visibility="hidden"}
+![](python_images/python_libs.png)
+
+::: {style="font-size: 0.75em;"}
+[https://pydsc.files.wordpress.com/2017/11/pythonenvironment.png?w=663](https://pydsc.files.wordpress.com/2017/11/pythonenvironment.png?w=663)
+:::
+
+---
+
+## Let's code
+<br>
+pythonbook.[bioinfo.guru]{.bioinfoguru}
+
+---
+
+## Thanks!
+<br>
+manish@[bioinfo.guru]{.bioinfoguru}
