@@ -467,7 +467,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.DataFrame.from_dict(input_dict, orient<span class="op">=</span><span class="st">'index'</span>, columns<span class="op">=</span>[<span class="st">'Val1'</span>,<span class="st">'Val2'</span>,<span class="st">'Val3'</span>,<span class="st">'Val4'</span>,<span class="st">'Val5'</span>,])</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>display(df1)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>display(df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="e63113cb" class="cell quarto-layout-panel" data-execution_count="3" data-layout-ncol="2">
+<div id="e63113cb" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="3">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -557,7 +557,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="13.1" class="anchored" data-anchor-id="indexing-and-selecting"><span class="header-section-number">13.1</span> Indexing and Selecting</h2>
 <p>The data in a dataframes are arranged in rows and columns both of which have labels. The get a slice of a dataframe, these labels can used with the <code>loc</code> attribute. The <code>columns</code> and <code>index</code> attributes for a dataframe return an iteratable collection of column labels and index labels. To select a subset of a dataframe using indcies for the rows and columns use <code>iloc</code>. Both <code>loc</code> and <code>iloc</code> takes a slice of row label/range and column label/range. Note that a one-dimensional slice of a dataframe returns a <code>Series</code> object i.e.&nbsp;if we select one column or one row, a <code>Series</code> object would be returned. To convert a series object to a dataframe use <code>to_frame</code> function.</p>
 <p>Multi-indexing is also possible i.e., a row or a column can have more than one label. In such cases, selections can be made by specifing labels as a tuple.</p>
-<div id="f20f2e27" class="cell quarto-layout-panel" data-execution_count="4" data-layout-ncol="2">
+<div id="f20f2e27" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="4">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <style type="text/css">
@@ -610,7 +610,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="3979aa05" class="cell quarto-layout-panel" data-layout-ncol="2" data-layout-nrows="2" data-execution_count="4">
+<div id="3979aa05" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="4" data-layout-nrows="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -752,7 +752,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dataframe-information" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="dataframe-information"><span class="header-section-number">13.2</span> Dataframe information</h2>
 <p>Pandas offers set of commands to get some basic information about the content of dataframes. Below are some of these command along with their corresponding output.</p>
-<div id="9995d0d2" class="cell quarto-layout-panel" data-execution_count="6" data-layout-ncol="2">
+<div id="9995d0d2" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="6">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -823,7 +823,7 @@ df1.values     [['A' 1]
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df4 <span class="op">=</span> pd.read_csv(<span class="st">"test.csv"</span>, index_col<span class="op">=</span><span class="st">"Country"</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>display(df3)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>display(df4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="1b19d8ab" class="cell quarto-layout-panel" data-execution_count="8" data-layout-ncol="2">
+<div id="1b19d8ab" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="8">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -909,7 +909,7 @@ df1.values     [['A' 1]
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame(np.random.uniform(<span class="dv">1</span>,<span class="dv">2</span>,size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>)), columns<span class="op">=</span><span class="bu">list</span>(<span class="st">'ABCD'</span>))</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df_2 <span class="op">=</span> pd.DataFrame(np.random.uniform(<span class="dv">2</span>,<span class="dv">3</span>,size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>)), columns<span class="op">=</span><span class="bu">list</span>(<span class="st">'ABCD'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fbe2af55" class="cell quarto-layout-panel" data-execution_count="7" data-layout-ncol="2">
+<div id="fbe2af55" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="7">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -1371,7 +1371,7 @@ df1.values     [['A' 1]
 <span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                      suffixes<span class="op">=</span>(<span class="st">'_df3'</span>, <span class="st">'_df4'</span>))</span>
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>display(df_merged2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f969c25d" class="cell quarto-layout-panel" data-layout-nrow="2" data-layout-ncol="2" data-execution_count="18">
+<div id="f969c25d" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="18" data-layout-nrow="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -1885,7 +1885,7 @@ Name: Marks, dtype: float64</code></pre>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Column-wise highlighting of maximum value"</span>))</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>display(df_1.style.highlight_min(axis<span class="op">=</span><span class="dv">1</span>,props<span class="op">=</span><span class="st">"font-weight:bold;background-color:pink;"</span>)<span class="op">\</span></span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Row-wise highlighting of minimum value"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="c184706e" class="cell quarto-layout-panel" data-scrolled="true" data-layout-ncol="2" data-execution_count="26">
+<div id="c184706e" class="cell quarto-layout-panel" data-layout-ncol="2" data-scrolled="true" data-execution_count="26">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <style type="text/css">
@@ -2011,7 +2011,7 @@ Name: Marks, dtype: float64</code></pre>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Row-wise text gradient"</span>)<span class="op">\</span></span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        .set_properties(<span class="op">**</span>{<span class="st">"font-weight"</span>:<span class="st">"bold"</span>, <span class="st">"padding"</span>:<span class="st">"1em"</span>})<span class="op">\</span></span>
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.2f}</span><span class="st">"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="0c4362ac" class="cell quarto-layout-panel" data-execution_count="27" data-layout-ncol="2">
+<div id="0c4362ac" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="27">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <style type="text/css">
@@ -2513,7 +2513,7 @@ Name: Marks, dtype: float64</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="op">=</span> df_comb.plot(title<span class="op">=</span><span class="st">"Line Plot"</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>plot2 <span class="op">=</span> df_comb.plot(kind<span class="op">=</span><span class="st">"bar"</span>, title<span class="op">=</span><span class="st">"Bar Plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="547d5215" class="cell quarto-layout-panel" data-execution_count="11" data-layout-ncol="2">
+<div id="547d5215" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="11">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="Pandas_files/figure-html/cell-33-output-1.png" class="img-fluid"></p>

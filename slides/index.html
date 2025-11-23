@@ -191,6 +191,10 @@
       margin-right: 0; 
     }
   </style>
+  <script src="index_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="index_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="index_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -222,8 +226,6 @@
 </section>
 <section id="python-distributions" class="slide level2">
 <h2>Python distributions</h2>
-
-<script src="https://cdn.tailwindcss.com"></script>
 <div class="columns">
 <div class="column" style="width:40%;">
 <p><img data-src="python_images/python-logo.png" width="300"></p>
@@ -273,7 +275,7 @@
 </div>
 <div class="fragment fade-in-then-semi-out" data-fragment-index="3">
 <ul>
-<li>Object-oriented</li>
+<li>Versatile and Flexible</li>
 </ul>
 </div>
 <div class="fragment fade-in-then-semi-out" data-fragment-index="4">
@@ -289,21 +291,21 @@
 </div><div class="column" style="width:55%;">
 <div class="r-stack">
 <div class="fragment fade-in-then-out" data-fragment-index="1">
-<div id="b75cbcda" class="cell" data-execution_count="1">
+<div id="3e0cd7a7" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="bu">print</span>(<span class="st">"Hello"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Hello</code></pre>
 </div>
 </div>
 <p><br></p>
-<div id="1f2d1823" class="cell" data-execution_count="2">
+<div id="5ddc9d7f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="bu">len</span>(<span class="st">"Hello"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>5</code></pre>
 </div>
 </div>
 <p><br></p>
-<div id="d779b006" class="cell" data-execution_count="3">
+<div id="4228583d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="cf">for</span> fruit <span class="kw">in</span> [<span class="st">"Apple"</span>,<span class="st">"Banana"</span>,<span class="st">"Mango"</span>]:</span>
 <span id="cb5-2"><a href=""></a>    <span class="bu">print</span>(fruit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -314,7 +316,7 @@ Mango</code></pre>
 </div>
 </div>
 <div class="fragment fade-in-then-out" data-fragment-index="2">
-<div id="e12faba3" class="cell" data-execution_count="4">
+<div id="b572d908" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>x <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb7-2"><a href=""></a><span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -330,8 +332,29 @@ Mango</code></pre>
 <span id="cb9-6"><a href=""></a>    return 0;</span>
 <span id="cb9-7"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="fragment fade-in-then-out" data-fragment-index="3">
-
+<div class="fragment fade-in-then-out" data-fragment-index="3" style="transform: scale(2);">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">mindmap
+root((Python))
+    Paradigms
+      Obejct-oriented
+      Functional
+      Imperative
+    Applications
+      Data Science
+      Web development
+      Automation
+      Apps and games
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </div>
 <div class="fragment fade-in-then-out" data-fragment-index="4">
 <p><img data-src="https://pydsc.files.wordpress.com/2017/11/pythonenvironment.png"> <span style="font-size: 0.4em;"> <a href="https://pydsc.files.wordpress.com/2017/11/pythonenvironment.png">https://pydsc.files.wordpress.com/2017/11/pythonenvironment.png</a> </span></p>

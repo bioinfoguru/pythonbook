@@ -18,14 +18,13 @@ title-slide-attributes:
   data-background-size: 75px
   data-background-position: 50% 90%
   data-background-image: "python_images/logo_final_transparent.png"
+include-in-header:
+  - text: |
+      <script src="https://cdn.tailwindcss.com"></script>
 include-after-body: slides.js
 ---
 
 ## Python distributions
-```{=html}
-<head>
-<script src="https://cdn.tailwindcss.com"></script>
-```
 
 :::: {.columns}
 ::: {.column width="40%"}
@@ -75,6 +74,7 @@ Notebooks
 ![](python_images/deepnote-logo.svg){width="100"}
 :::
 ::::
+
 ---
 
 
@@ -92,7 +92,7 @@ Notebooks
 :::
 
 ::: {.fragment .fade-in-then-semi-out data-fragment-index="3"}
-- Object-oriented
+- Versatile and Flexible
 :::
 
 ::: {.fragment .fade-in-then-semi-out data-fragment-index="4"}
@@ -144,7 +144,22 @@ int main() {
 ```
 :::
 
-::: {.fragment .fade-in-then-out data-fragment-index="3"}
+::: {.fragment .fade-in-then-out data-fragment-index="3" style="transform: scale(2);"}
+
+```{mermaid}
+mindmap
+root((Python))
+    Paradigms
+      Obejct-oriented
+      Functional
+	  Imperative
+	Applications
+	  Data Science
+	  Web development
+	  Automation
+	  Apps and games
+```
+
 :::
 
 ::: {.fragment .fade-in-then-out data-fragment-index="4"}
