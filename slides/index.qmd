@@ -37,23 +37,35 @@ include-after-body: slides.js
 ::::
 
 
-::: {.fragment style="font-size: 1em;"}
+::: {.fragment style="font-size: 1em;" data-fragment-index="1"}
 Integrated Development Environments (IDEs)
 :::
 
 :::: {.columns}
-::: {.column width=25% .fragment .fade-up}
-![](python_images/spyder-logo.png){width="100"}
+::: {.column width=25%}
+::: {style="position: relative; width:150px; height:150px; text-align:center;"} 
+![](python_images/spyder-logo.png){width="150" .fragment .fade-in-then-out data-fragment-index="2"}
+![](python_images/spyder-logo.png){width="100" style="position: absolute; bottom: 50%; left:50%;transform:translate( -50%, 50%);" .fragment .fade-in data-fragment-index="3"}
 :::
-::: {.column width=25% .fragment .fade-up}
-![](python_images/pycharm-logo.jpg){width="100"}
 :::
-::: {.column width=25% .fragment .fade-up }
-![](python_images/vs_code-logo.jpg){width="100"}
+::: {.column width=25%}
+::: {style="position: relative; width:150px; height:150px; text-align:center;"} 
+![](python_images/pycharm-logo.jpg){width="150" .fragment .fade-in-then-out data-fragment-index="3"}
+![](python_images/pycharm-logo.jpg){width="100" style="position: absolute; bottom: 50%; left:50%;transform:translate( -50%, 50%);" .fragment .fade-in data-fragment-index="4"}
+:::
+:::
+::: {.column width=25%}
+::: {style="position: relative; width:150px; height:150px; text-align:center;"} 
+![](python_images/vs_code-logo.jpg){width="150" .fragment .fade-in-then-out data-fragment-index="4"}
+![](python_images/vs_code-logo.jpg){width="100" style="position: absolute; bottom: 50%; left:50%;transform:translate( -50%, 50%);" .fragment .fade-in data-fragment-index="5"}
+:::
 :::
 
-::: {.column width=25% .fragment .fade-up}
-![](python_images/positron-logo.png){width="100"}
+::: {.column width=25%}
+::: {style="position: relative; width:150px; height:150px; text-align:center;"} 
+![](python_images/positron-logo.png){width="150" .fragment .fade-in-then-out data-fragment-index="5"}
+![](python_images/positron-logo.png){width="100" style="position: absolute; bottom: 50%; left:50%;transform:translate( -50%, 50%);" .fragment .fade-in data-fragment-index="6"}
+:::
 :::
 ::::
 
