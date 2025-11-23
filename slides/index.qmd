@@ -179,7 +179,8 @@ int main() {
 
 ## Let's code
 <br>
-pythonbook.[bioinfo.guru]{.bioinfoguru}
+<a href='https://pythonbook.bioinfo.guru' target='_blank' style='text-decoration:none; color:inherit;'>pythonbook.[bioinfo.guru]{.bioinfoguru}</a>
+
 
 ---
 
