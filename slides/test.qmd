@@ -10,7 +10,7 @@ format:
   revealjs:
     footer: "<span style='font-family:Geo;color:#9c51e0;'><a href='https://bioinfo.guru' target='_blank' style='text-decoration:none; color:inherit;'>bioinfo.guru</a></span>"
     logo: "python_images/logo_final_transparent.png"
-    css: "slides.css"
+    css: "slides2.css"
     template-partials:
       - title-slide.html
 title-slide-attributes:
@@ -21,6 +21,7 @@ title-slide-attributes:
 include-in-header:
   - text: |
       <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 include-after-body: slides.js
 ---
 
@@ -41,30 +42,30 @@ include-after-body: slides.js
 Integrated Development Environments (IDEs)
 :::
 
-:::: {.columns}
+:::: {.columns .image-pairs}
 ::: {.column width=25%}
 ::: {style="position: relative; width:150px; height:150px; text-align:center;"} 
-![](python_images/spyder-logo.png){width="150" .fragment .fade-in-then-out data-fragment-index="2"}
-![](python_images/spyder-logo.png){width="100" style="position: absolute; bottom: 50%; left:50%;transform:translate( -50%, 50%);" .fragment .fade-in data-fragment-index="3"}
-:::
-:::
-::: {.column width=25%}
-::: {style="position: relative; width:150px; height:150px; text-align:center;"} 
-![](python_images/pycharm-logo.jpg){width="150" .fragment .fade-in-then-out data-fragment-index="3"}
-![](python_images/pycharm-logo.jpg){width="100" style="position: absolute; bottom: 50%; left:50%;transform:translate( -50%, 50%);" .fragment .fade-in data-fragment-index="4"}
+![](python_images/spyder-logo.png){width="150" .fragment .fade-in-then-out .big-img data-fragment-index="2"}
+![](python_images/spyder-logo.png){width="100" style="position: absolute; bottom: 50%; left:50%;transform:translate( -50%, 50%);" .fragment .fade-in .small-img data-fragment-index="3"}
 :::
 :::
 ::: {.column width=25%}
 ::: {style="position: relative; width:150px; height:150px; text-align:center;"} 
-![](python_images/vs_code-logo.jpg){width="150" .fragment .fade-in-then-out data-fragment-index="4"}
-![](python_images/vs_code-logo.jpg){width="100" style="position: absolute; bottom: 50%; left:50%;transform:translate( -50%, 50%);" .fragment .fade-in data-fragment-index="5"}
+![](python_images/pycharm-logo.jpg){width="150" .fragment .fade-in-then-out .big-img data-fragment-index="3"}
+![](python_images/pycharm-logo.jpg){width="100" style="position: absolute; bottom: 50%; left:50%;transform:translate( -50%, 50%);" .fragment .fade-in .small-img data-fragment-index="4"}
+:::
+:::
+::: {.column width=25%}
+::: {style="position: relative; width:150px; height:150px; text-align:center;"} 
+![](python_images/vs_code-logo.jpg){width="150" .fragment .fade-in-then-out .big-img data-fragment-index="4"}
+![](python_images/vs_code-logo.jpg){width="100" style="position: absolute; bottom: 50%; left:50%;transform:translate( -50%, 50%);" .fragment .fade-in .small-img data-fragment-index="5"}
 :::
 :::
 
 ::: {.column width=25%}
 ::: {style="position: relative; width:150px; height:150px; text-align:center;"} 
-![](python_images/positron-logo.png){width="150" .fragment .fade-in-then-out data-fragment-index="5"}
-![](python_images/positron-logo.png){width="100" style="position: absolute; bottom: 50%; left:50%;transform:translate( -50%, 50%);" .fragment .fade-in data-fragment-index="6"}
+![](python_images/positron-logo.png){width="150" .fragment .fade-in-then-out .big-img data-fragment-index="5"}
+![](python_images/positron-logo.png){width="100" style="position: absolute; bottom: 50%; left:50%;transform:translate( -50%, 50%);" .fragment .fade-in .small-img data-fragment-index="6"}
 :::
 :::
 ::::
@@ -161,11 +162,11 @@ int main() {
 ```{mermaid}
 mindmap
 root((Python))
-    Versatility
+    Paradigms
       Obejct-oriented
       Functional
 	  Imperative
-	Flexibility
+	Applications
 	  Data Science
 	  Web development
 	  Automation
@@ -214,3 +215,20 @@ root((Python))
 ## Thanks!
 <br>
 manish@[bioinfo.guru]{.bioinfoguru}
+<br><br><br><br>
+<div class="qr-container flex flex-col items-center">
+<p class="m-0 p-0 text-lg font-mono tracking-widest">CAN FOR</p>
+<div class="flex items-end -mt-9 ml-0">
+<div class="vertical-text text-lg font-mono">SLIDES</div>
+<div id="qrcode"></div>
+</div>
+</div>
+<script type="text/javascript">
+new QRCode(document.getElementById("qrcode"), {
+  text: "http://pythonbook.bioinfo.guru/slides",
+  width: 100,
+  height: 100,
+  colorDark: '#9c51e0',
+  colorLight: '#FFFFFF',
+});
+</script>
