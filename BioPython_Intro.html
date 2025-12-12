@@ -451,8 +451,8 @@ window.Quarto = {
   <li><a href="#accessing-databases-without-api" id="toc-accessing-databases-without-api" class="nav-link" data-scroll-target="#accessing-databases-without-api"><span class="header-section-number">15.6</span> Accessing databases without API</a></li>
   <li><a href="#running-blast-over-the-internet" id="toc-running-blast-over-the-internet" class="nav-link" data-scroll-target="#running-blast-over-the-internet"><span class="header-section-number">15.7</span> Running BLAST over the internet</a></li>
   <li><a href="#creating-a-dataframe-of-blast-results" id="toc-creating-a-dataframe-of-blast-results" class="nav-link" data-scroll-target="#creating-a-dataframe-of-blast-results"><span class="header-section-number">15.8</span> Creating a dataframe of BLAST results</a></li>
-  <li><a href="#plotting-blast-result" id="toc-plotting-blast-result" class="nav-link" data-scroll-target="#plotting-blast-result"><span class="header-section-number">15.9</span> Plotting BLAST result</a></li>
-  <li><a href="#blast-search-using-sequence-file" id="toc-blast-search-using-sequence-file" class="nav-link" data-scroll-target="#blast-search-using-sequence-file"><span class="header-section-number">15.10</span> BLAST search using sequence file</a></li>
+  <li><a href="#blast-search-using-sequence-file" id="toc-blast-search-using-sequence-file" class="nav-link" data-scroll-target="#blast-search-using-sequence-file"><span class="header-section-number">15.9</span> BLAST search using sequence file</a></li>
+  <li><a href="#genome-diagrams" id="toc-genome-diagrams" class="nav-link" data-scroll-target="#genome-diagrams"><span class="header-section-number">15.10</span> Genome Diagrams</a></li>
   </ul>
 </nav>
     </div>
@@ -486,64 +486,51 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> Bio </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Bio.__version__)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1.84</code></pre>
+<pre><code>1.86</code></pre>
 </div>
 </div>
 <section id="sequence-object" class="level2" data-number="15.1">
 <h2 data-number="15.1" class="anchored" data-anchor-id="sequence-object"><span class="header-section-number">15.1</span> Sequence Object</h2>
 <p>To work with sequences, we’ll need the <code>Bio.Seq</code> class which has the required functions for reading and writing sequence data. Once we have imported this class we can create objects having required data. The example below shows constructing a sequence object with a DNA sequence and then using the <code>complement</code> and <code>translate</code> functions to find the sequence of the complementary strand and the translated protein sequence, respectively.</p>
-<div id="cell-4" class="cell" data-execution_count="3">
+<div id="cell-4" class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio.Seq <span class="im">import</span> Seq</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>new_sequence <span class="op">=</span> Seq(<span class="st">'AATTGGAACCTT'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(new_sequence)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(new_sequence.complement())</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(new_sequence.translate())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>AATTGGAACCTT
-TTAACCTTGGAA
-NWNL</code></pre>
-</div>
 </div>
 <p>Looking at the sequence object, one might wonder how is this different from a string object. Because we can easily initialize a string variable with the required sequence as the value. The difference here is that the two are the objects of different classes i.e.&nbsp;the <code>Seq</code> object belongs to the <code>Bio.Seq.Seq</code> class whereas the string object belongs to <code>Str</code>. These differences in turn indicate the differences in the kind of functionality associated with these objects (think object-oriented programming). For example, the <code>complement</code> and <code>translate</code> functions make sense only in the case of sequences and not in the case of any generic text.</p>
 </section>
 <section id="the-sequtils-package" class="level2" data-number="15.2">
 <h2 data-number="15.2" class="anchored" data-anchor-id="the-sequtils-package"><span class="header-section-number">15.2</span> The SeqUtils package</h2>
 <p>The <a href="https://biopython.org/docs/1.75/api/Bio.SeqUtils.html"><code>Bio.SeqUtils</code> package</a> offers a set of utility functions for getting some basic information about the sequences. These include, e.g., calculating the GC content or the melting temperature for the DNA sequences.</p>
-<div id="cell-7" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio.SeqUtils <span class="im">import</span> gc_fraction</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio.SeqUtils <span class="im">import</span> MeltingTemp <span class="im">as</span> mt</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gc_fraction(new_sequence))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mt.Tm_Wallace(new_sequence)) <span class="co"># Tm_GC can also be used.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>0.3333333333333333
-32.0</code></pre>
-</div>
+<div id="cell-7" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio.SeqUtils <span class="im">import</span> gc_fraction</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio.SeqUtils <span class="im">import</span> MeltingTemp <span class="im">as</span> mt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gc_fraction(new_sequence))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mt.Tm_Wallace(new_sequence)) <span class="co"># Tm_GC can also be used.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Similarly, there are functions to get information about the protein sequences. The <code>ProtParam</code> module has utility functions for performing basic analysis of protein sequences. For example, the <code>molecular_weight</code> function returns the molecular weight of the protein and the <code>count_amino_acids</code> function returns a dictionary having the count for all the amino acids.</p>
-<div id="cell-9" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio.SeqUtils.ProtParam <span class="im">import</span> ProteinAnalysis</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>P1 <span class="op">=</span> ProteinAnalysis(<span class="st">"MFAEGRNREST"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(P1.molecular_weight())</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(P1.count_amino_acids()) <span class="co"># get_amino_acid_percent can also be used.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1297.3975
-{'A': 1, 'C': 0, 'D': 0, 'E': 2, 'F': 1, 'G': 1, 'H': 0, 'I': 0, 'K': 0, 'L': 0, 'M': 1, 'N': 1, 'P': 0, 'Q': 0, 'R': 2, 'S': 1, 'T': 1, 'V': 0, 'W': 0, 'Y': 0}</code></pre>
-</div>
+<div id="cell-9" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio.SeqUtils.ProtParam <span class="im">import</span> ProteinAnalysis</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>P1 <span class="op">=</span> ProteinAnalysis(<span class="st">"MFAEGRNREST"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(P1.molecular_weight())</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(P1.count_amino_acids()) <span class="co"># get_amino_acid_percent can also be used.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="reading-and-writing-sequences" class="level2" data-number="15.3">
 <h2 data-number="15.3" class="anchored" data-anchor-id="reading-and-writing-sequences"><span class="header-section-number">15.3</span> Reading and writing sequences</h2>
 <p>When we are working with the sequence data, we generally do not type sequences instead we read (and write) sequences from a file. We’ll now see how to read and write sequences using BioPython.</p>
 <p>To create a sequence object by reading sequence from a file, we can use the <code>SeqIO</code> class. The <code>parse</code> function in this class can read and write sequences in different formats. This function take two arguments - file name and format, and return an iterator having all the sequences. The code below shows reading a file having multiple sequences and printing the sequences using the seq attribute. Note that this would print sequnces without any annotations. The <code>description</code> attribute of SeqIO object can used to print the description of a sequence as given in the input file. In the code below, the output would be restricted to first three sequences. If you need to print the data for all sequences then remove the <code>if</code> block. The sequence file used in the example below is available <a href="Human_MAPK.fasta">here</a></p>
-<div id="cell-12" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio <span class="im">import</span> SeqIO</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>count<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> all_seqs <span class="kw">in</span> SeqIO.parse(<span class="st">"Human_MAPK.fasta"</span>, <span class="st">"fasta"</span>):</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(all_seqs.description)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(all_seqs.seq)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    count <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(count <span class="op">==</span> <span class="dv">3</span>):</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-12" class="cell" data-execution_count="78">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio <span class="im">import</span> SeqIO</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>count<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> all_seqs <span class="kw">in</span> SeqIO.parse(<span class="st">"Human_MAPK.fasta"</span>, <span class="st">"fasta"</span>):</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(all_seqs.description)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(all_seqs.seq)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(count <span class="op">==</span> <span class="dv">3</span>):</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>sp|O15264|MK13_HUMAN Mitogen-activated protein kinase 13 OS=Homo sapiens OX=9606 GN=MAPK13 PE=1 SV=1
 MSLIRKKGFYKQDVNKTAWELPKTYVSPTHVGSGAYGSVCSAIDKRSGEKVAIKKLSRPFQSEIFAKRAYRELLLLKHMQHENVIGLLDVFTPASSLRNFYDFYLVMPFMQTDLQKIMGMEFSEEKIQYLVYQMLKGLKYIHSAGVVHRDLKPGNLAVNEDCELKILDFGLARHADAEMTGYVVTRWYRAPEVILSWMHYNQTVDIWSVGCIMAEMLTGKTLFKGKDYLDQLTQILKVTGVPGTEFVQKLNDKAAKSYIQSLPQTPRKDFTQLFPRASPQAADLLEKMLELDVDKRLTAAQALTHPFFEPFRDPEEETEAQQPFDDSLEHEKLTVDEWKQHIYKEIVNFSPIARKDSRRRSGMKL
@@ -556,227 +543,280 @@ MAVEGSTITSRIKNLLRSPSIKLRRSKAGNRREDLSSKVTLEKVLGITVSGGRGLACDPRSGLVAYPAGCVVVLFNPRKH
 <section id="writing-sequences" class="level3" data-number="15.3.1">
 <h3 data-number="15.3.1" class="anchored" data-anchor-id="writing-sequences"><span class="header-section-number">15.3.1</span> Writing sequences</h3>
 <p>The <code>write</code> function takes three arguments — 1) a sequence object, 2) filename, and 3) file format. The code below reads a fasta file with multiple sequences and then save the first 10 sequences in a new file.</p>
-<div id="cell-14" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>all_seqs <span class="op">=</span> []</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> seq_record <span class="kw">in</span> SeqIO.parse(<span class="st">"Human_MAPK.fasta"</span>, <span class="st">"fasta"</span>):</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    all_seqs.append(seq_record)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(all_seqs))</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>SeqIO.write(all_seqs[<span class="dv">0</span>:<span class="dv">5</span>],<span class="st">"first_5.fasta"</span>,<span class="st">"fasta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>27</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>5</code></pre>
-</div>
+<div id="cell-14" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>all_seqs <span class="op">=</span> []</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> seq_record <span class="kw">in</span> SeqIO.parse(<span class="st">"Human_MAPK.fasta"</span>, <span class="st">"fasta"</span>):</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    all_seqs.append(seq_record)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(all_seqs))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>SeqIO.write(all_seqs[<span class="dv">0</span>:<span class="dv">5</span>],<span class="st">"first_5.fasta"</span>,<span class="st">"fasta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="multiple-sequence-alignment" class="level2" data-number="15.4">
 <h2 data-number="15.4" class="anchored" data-anchor-id="multiple-sequence-alignment"><span class="header-section-number">15.4</span> Multiple Sequence Alignment</h2>
 <p>The <code>AlignIO</code> class has functions to parse alignment files. The <code>read</code> and <code>write</code> functions have a similar syntax to the corresponding functions in the <code>SeqIO</code> class. The alignment object stores sequences in 2D array format such that the rows are number of sequences and columns represent alignment length. To extract a sub-set of an alignment, slicing feature can be used. The code below shows reading an alignment file in fasta format followed by selecting a portion of this alignment and save it in a new file in clustal format. The subset is extracted by giving the range for the rows and columns within square brackets. The numbering for both rows and columns starts from zero. In the example below first ten sequences in the alignment are selected since range of rows is <code>:10</code> and the colums range is <code>3:12</code>. The sequence file used in the code below is available <a href="https://doi.org/10.1371/journal.pcbi.1005975.s002">here</a>.</p>
-<div id="cell-17" class="cell" data-scrolled="true" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio <span class="im">import</span> AlignIO</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>align1 <span class="op">=</span> AlignIO.read(<span class="st">"kinases.txt"</span>, <span class="st">"fasta"</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># slicing - [row range, col range]</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> align1[:<span class="dv">10</span>,<span class="dv">3</span>:<span class="dv">12</span>]</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>AlignIO.write(x,<span class="st">"msa1.aln"</span>,<span class="st">"clustal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Alignment with 10 rows and 9 columns
-LKVL-GKGA consensus
-IKEL-GRGN sp|Q22RR1||agc:agc-sar|Tetrahymena
-IKKL-GFGQ sp|Q234E6||agc:agc-sar|Tetrahymena
-VKKL-GNGQ sp|Q23KG5||agc:agc-sar|Tetrahymena
-IKTL-AFGQ sp|Q23DN8||agc:agc-sar|Tetrahymena
-IKKL-GVGQ sp|I7MFS4||agc:agc-sar|Tetrahymena
-IKKL-GFGQ sp|I7M3B5||agc:agc-sar|Tetrahymena
-IKKL-GFGQ sp|I7MD55||agc:agc-sar|Tetrahymena
-IKKL-GEGQ sp|Q869J9|pkg-2|agc:pkg|Paramecium
-IRVL-GKGC sp|A8N3F0||agc:agc-unique|Coprinopsis</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="32">
-<pre><code>1</code></pre>
-</div>
+<div id="cell-17" class="cell" data-scrolled="true">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio <span class="im">import</span> AlignIO</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>align1 <span class="op">=</span> AlignIO.read(<span class="st">"kinases.txt"</span>, <span class="st">"fasta"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># slicing - [row range, col range]</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> align1[:<span class="dv">10</span>,<span class="dv">3</span>:<span class="dv">12</span>]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>AlignIO.write(x,<span class="st">"msa1.aln"</span>,<span class="st">"clustal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-18" class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %load msa1.aln</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>CLUSTAL X (<span class="fl">1.81</span>) multiple sequence alignment</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>consensus                           LKVL<span class="op">-</span>GKGA</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>sp<span class="op">|</span>Q22RR1<span class="op">||</span>agc:agc<span class="op">-</span>sar<span class="op">|</span>Tetrahy      IKEL<span class="op">-</span>GRGN</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>sp<span class="op">|</span>Q234E6<span class="op">||</span>agc:agc<span class="op">-</span>sar<span class="op">|</span>Tetrahy      IKKL<span class="op">-</span>GFGQ</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>sp<span class="op">|</span>Q23KG5<span class="op">||</span>agc:agc<span class="op">-</span>sar<span class="op">|</span>Tetrahy      VKKL<span class="op">-</span>GNGQ</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>sp<span class="op">|</span>Q23DN8<span class="op">||</span>agc:agc<span class="op">-</span>sar<span class="op">|</span>Tetrahy      IKTL<span class="op">-</span>AFGQ</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>sp<span class="op">|</span>I7MFS4<span class="op">||</span>agc:agc<span class="op">-</span>sar<span class="op">|</span>Tetrahy      IKKL<span class="op">-</span>GVGQ</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>sp<span class="op">|</span>I7M3B5<span class="op">||</span>agc:agc<span class="op">-</span>sar<span class="op">|</span>Tetrahy      IKKL<span class="op">-</span>GFGQ</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>sp<span class="op">|</span>I7MD55<span class="op">||</span>agc:agc<span class="op">-</span>sar<span class="op">|</span>Tetrahy      IKKL<span class="op">-</span>GFGQ</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>sp<span class="op">|</span>Q869J9<span class="op">|</span>pkg<span class="op">-</span><span class="dv">2</span><span class="op">|</span>agc:pkg<span class="op">|</span>Parame      IKKL<span class="op">-</span>GEGQ</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>sp<span class="op">|</span>A8N3F0<span class="op">||</span>agc:agc<span class="op">-</span>unique<span class="op">|</span>Copr      IRVL<span class="op">-</span>GKGC</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load msa1.aln</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="accessing-databases-using-api" class="level2" data-number="15.5">
 <h2 data-number="15.5" class="anchored" data-anchor-id="accessing-databases-using-api"><span class="header-section-number">15.5</span> Accessing databases using API</h2>
-<div id="cell-20" class="cell" data-execution_count="66">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio <span class="im">import</span> Entrez, SeqIO</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Entrez.email <span class="op">=</span> <span class="st">"you@example.com"</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>handle1 <span class="op">=</span> Entrez.efetch(db<span class="op">=</span><span class="st">"nucleotide"</span>, <span class="bu">id</span><span class="op">=</span><span class="st">"NM_001301717"</span>, rettype<span class="op">=</span><span class="st">"gb"</span>, retmode<span class="op">=</span><span class="st">"text"</span>)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>record1 <span class="op">=</span> SeqIO.read(handle1, <span class="st">"genbank"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-20" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio <span class="im">import</span> Entrez, SeqIO</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>Entrez.email <span class="op">=</span> <span class="st">"you@example.com"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>handle1 <span class="op">=</span> Entrez.efetch(db<span class="op">=</span><span class="st">"nucleotide"</span>, <span class="bu">id</span><span class="op">=</span><span class="st">"NM_001301717"</span>, rettype<span class="op">=</span><span class="st">"gb"</span>, retmode<span class="op">=</span><span class="st">"text"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>record1 <span class="op">=</span> SeqIO.read(handle1, <span class="st">"genbank"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-21" class="cell" data-execution_count="67">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(record1.description)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(record1.seq))</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(record1.seq[:<span class="dv">50</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Homo sapiens C-C motif chemokine receptor 7 (CCR7), transcript variant 4, mRNA
-2191
-CTCTAGATGAGTCAGTGGAGGGCGGGTGGAGCGTTGAACCGTGAAGAGTG</code></pre>
-</div>
+<div id="cell-21" class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(record1.description)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(record1.seq))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(record1.seq[:<span class="dv">50</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To retrieve multiple sequence, pass a comma-separated ids to the <code>id</code> keyword parameter. This time we’ll need to use the <code>parse</code> function to get the sequences from the <code>efetch</code> output.</p>
-<div id="cell-23" class="cell" data-execution_count="70">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>all_ids <span class="op">=</span> [<span class="st">"NP_000240.1"</span>, <span class="st">"NP_000549.1"</span>, <span class="st">"NP_001289656.1"</span>]</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>handle2 <span class="op">=</span> Entrez.efetch(db<span class="op">=</span><span class="st">"protein"</span>, <span class="bu">id</span><span class="op">=</span><span class="st">","</span>.join(all_ids), rettype<span class="op">=</span><span class="st">"gb"</span>, retmode<span class="op">=</span><span class="st">"text"</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>record2 <span class="op">=</span> <span class="bu">list</span>(SeqIO.parse(handle2, <span class="st">"genbank"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-23" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>all_ids <span class="op">=</span> [<span class="st">"NP_000240.1"</span>, <span class="st">"NP_000549.1"</span>, <span class="st">"NP_001289656.1"</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>handle2 <span class="op">=</span> Entrez.efetch(db<span class="op">=</span><span class="st">"protein"</span>, <span class="bu">id</span><span class="op">=</span><span class="st">","</span>.join(all_ids), rettype<span class="op">=</span><span class="st">"gb"</span>, retmode<span class="op">=</span><span class="st">"text"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>record2 <span class="op">=</span> <span class="bu">list</span>(SeqIO.parse(handle2, <span class="st">"genbank"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-24" class="cell" data-execution_count="74">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"There are </span><span class="sc">{</span><span class="bu">len</span>(record2)<span class="sc">}</span><span class="ss"> sequences"</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> record <span class="kw">in</span> record2:</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(record.description)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">len</span>(record.seq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>There are 3 sequences
-DNA mismatch repair protein Mlh1 isoform 1 [Homo sapiens]
-756
-hemoglobin subunit alpha [Homo sapiens]
-142
-floral homeotic protein GLOBOSA-like [Eucalyptus grandis]
-208</code></pre>
-</div>
+<div id="cell-24" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"There are </span><span class="sc">{</span><span class="bu">len</span>(record2)<span class="sc">}</span><span class="ss"> sequences"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> record <span class="kw">in</span> record2:</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(record.description)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">len</span>(record.seq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="accessing-databases-without-api" class="level2" data-number="15.6">
 <h2 data-number="15.6" class="anchored" data-anchor-id="accessing-databases-without-api"><span class="header-section-number">15.6</span> Accessing databases without API</h2>
-<div id="cell-26" class="cell" data-execution_count="93">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>uniprot_id <span class="op">=</span> <span class="st">"P12345"</span>  <span class="co"># Replace with the protein UniProt ID</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f"https://www.uniprot.org/uniprot/</span><span class="sc">{</span>uniprot_id<span class="sc">}</span><span class="ss">.fasta"</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&gt;sp|P12345|AATM_RABIT Aspartate aminotransferase, mitochondrial OS=Oryctolagus cuniculus OX=9986 GN=GOT2 PE=1 SV=2
-MALLHSARVLSGVASAFHPGLAAAASARASSWWAHVEMGPPDPILGVTEAYKRDTNSKKM
-NLGVGAYRDDNGKPYVLPSVRKAEAQIAAKGLDKEYLPIGGLAEFCRASAELALGENSEV
-VKSGRFVTVQTISGTGALRIGASFLQRFFKFSRDVFLPKPSWGNHTPIFRDAGMQLQSYR
-YYDPKTCGFDFTGALEDISKIPEQSVLLLHACAHNPTGVDPRPEQWKEIATVVKKRNLFA
-FFDMAYQGFASGDGDKDAWAVRHFIEQGINVCLCQSYAKNMGLYGERVGAFTVICKDADE
-AKRVESQLKILIRPMYSNPPIHGARIASTILTSPDLRKQWLQEVKGMADRIIGMRTQLVS
-NLKKEGSTHSWQHITDQIGMFCFTGLKPEQVERLTKEFSIYMTKDGRISVAGVTSGNVGY
-LAHAIHQVTK
-</code></pre>
-</div>
+<div id="cell-26" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>uniprot_id <span class="op">=</span> <span class="st">"P12345"</span>  <span class="co"># Replace with the protein UniProt ID</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f"https://www.uniprot.org/uniprot/</span><span class="sc">{</span>uniprot_id<span class="sc">}</span><span class="ss">.fasta"</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To get multiple sequences from Uniprot use the bulk query format</p>
-<div id="cell-28" class="cell" data-execution_count="90">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>uniprot_ids <span class="op">=</span> [<span class="st">"P69905"</span>, <span class="st">"P68871"</span>] </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">" OR "</span>.join([<span class="ss">f"accession:</span><span class="sc">{</span>uid<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> uid <span class="kw">in</span> uniprot_ids])</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f"https://rest.uniprot.org/uniprotkb/stream?format=fasta&amp;query=</span><span class="sc">{</span>query<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>response.raise_for_status()  <span class="co"># Raise an error for failed requests</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-28" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>uniprot_ids <span class="op">=</span> [<span class="st">"P69905"</span>, <span class="st">"P68871"</span>] </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">" OR "</span>.join([<span class="ss">f"accession:</span><span class="sc">{</span>uid<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> uid <span class="kw">in</span> uniprot_ids])</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f"https://rest.uniprot.org/uniprotkb/stream?format=fasta&amp;query=</span><span class="sc">{</span>query<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>response.raise_for_status()  <span class="co"># Raise an error for failed requests</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-29" class="cell" data-execution_count="91">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fasta_io <span class="op">=</span> StringIO(response.text)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>records <span class="op">=</span> <span class="bu">list</span>(SeqIO.parse(fasta_io, <span class="st">"fasta"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-29" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>fasta_io <span class="op">=</span> StringIO(response.text)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>records <span class="op">=</span> <span class="bu">list</span>(SeqIO.parse(fasta_io, <span class="st">"fasta"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-30" class="cell" data-execution_count="92">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> record <span class="kw">in</span> records:</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(record.description)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">len</span>(record.seq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>sp|P68871|HBB_HUMAN Hemoglobin subunit beta OS=Homo sapiens OX=9606 GN=HBB PE=1 SV=2
-147
-sp|P69905|HBA_HUMAN Hemoglobin subunit alpha OS=Homo sapiens OX=9606 GN=HBA1 PE=1 SV=2
-142</code></pre>
-</div>
+<div id="cell-30" class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> record <span class="kw">in</span> records:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(record.description)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">len</span>(record.seq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="running-blast-over-the-internet" class="level2" data-number="15.7">
 <h2 data-number="15.7" class="anchored" data-anchor-id="running-blast-over-the-internet"><span class="header-section-number">15.7</span> Running BLAST over the internet</h2>
-<p>Biopython offers a functionality to programmatically run BLAST on the NCBI servers using the <code>Bio.Blast</code> class. To run blast online at NCBI servers, <code>Bio.Blast</code> can be used which has different function to run Blast and also to parse the output. The <code>NCBIWWW</code> library has <code>qblast</code> function that takes three arguments &amp;emdash; 1) blast program (blastp, blastn, etc.), 2) database (any of the databases available at NCBI, and 3) sequence. Once the blast serach is over the output can be saved in a file. This output would be in XML format. We can use the <code>read</code> function within the NCBIXML class to parse this output. The code below shows running a blast search using <code>qblast</code> against the non-redundant database available at in NCBI. The output file saved in the previous step has all the hits identified in the Blast search. These hits follow a hierarchical manner such that each result would have multiple alignments and within each alignment would be multiple high scoring pairs (hsps) i.e.&nbsp;Blast object <span class="math inline">\(\longrightarrow\)</span> Alignment <span class="math inline">\(\longrightarrow\)</span> hsps. For more details on this you may refer to the Blast documentation available at NCBI.</p>
-<div id="cell-32" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio.Blast <span class="im">import</span> NCBIWWW</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio.Blast <span class="im">import</span> NCBIXML</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>result_ncbi <span class="op">=</span> NCBIWWW.qblast(<span class="st">"blastn"</span>, <span class="st">"nt"</span>, <span class="st">"8332116"</span>)</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"my_blast.xml"</span>, <span class="st">"w"</span>) <span class="im">as</span> file_handle:</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    file_handle.write(result_ncbi.read())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-33" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>result_handle <span class="op">=</span> <span class="bu">open</span>(<span class="st">"my_blast.xml"</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>blast_record <span class="op">=</span> NCBIXML.read(result_handle)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> alignment <span class="kw">in</span> blast_record.alignments:</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> hsp <span class="kw">in</span> alignment.hsps:</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(hsp)</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    count <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(count<span class="op">==</span><span class="dv">5</span>):</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Biopython offers a functionality to programmatically run BLAST on the NCBI servers using the <code>Bio.Blast</code> class. To run blast online at NCBI servers, <code>Bio.Blast</code> can be used which has different function to run Blast and also to parse the output. The <code>qblast</code> function takes atleast three arguments &amp;emdash; 1) blast program (blastp, blastn, etc.), 2) database (any of the databases available at NCBI, and 3) sequence. Once the blast serach is over the output can be saved in a file. This output would be in the XML format. We can use the <code>read</code> or <code>parse</code> functions to process this output. The code below shows running a blast search using <code>qblast</code> against the non-redundant database available at NCBI. The output file has all the hits identified in the Blast search. These hits follow a hierarchical manner such that each result will have multiple alignments and within each alignment there will be multiple high scoring pairs (hsps) i.e.&nbsp;Blast object <span class="math inline">\(\longrightarrow\)</span> hits <span class="math inline">\(\longrightarrow\)</span> aligments. For more details on this you may refer to the Blast documentation available at NCBI.</p>
+<div id="cell-32" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio <span class="im">import</span> Blast</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>Blast.email <span class="op">=</span> <span class="st">"test@example.com"</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Blast.email)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Score 482 (435 bits), expectation 5.6e-117, alignment length 624
-Query:      59 ACAGAAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGA...GTA 678
-               || ||||||||| |||| | |||| ||  |||| |||| | ||||... ||
-Sbjct:     278 ACCGAAAATGGGCAGAGGAGTGAATTATATGGCAATGACACCTGA...TTA 901
-Score 463 (418 bits), expectation 1.5e-111, alignment length 590
-Query:      63 AAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAA...CCC 649
-               |||||||| |||  |||| | || ||||| |||||||| || |||...|||
-Sbjct:      42 AAAATGGGTAGACGAATGGATTATTTGGCGATGAAAACCGAGCAA...CCC 631
-Score 443 (400 bits), expectation 4.0e-106, alignment length 597
-Query:      87 TTGGCCATGAAAACTGATCAATTGGCCGTGGCTAATATGATCGAT...TAG 679
-               ||||||||||||||||| ||| ||||  |||||||| |||| |||...|||
-Sbjct:      25 TTGGCCATGAAAACTGAGCAAATGGCGTTGGCTAATTTGATAGAT...TAG 621
-Score 441 (398 bits), expectation 1.4e-105, alignment length 593
-Query:      65 AATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAATT...CTG 655
-               ||||||||| |||  | |  | |||||||||||||||||||    ... ||
-Sbjct:     254 AATGGGGAG-GAA--GGATAATTTGGCCATGAAAACTGATCC---...ATG 838
-Score 439 (397 bits), expectation 4.9e-105, alignment length 596
-Query:      63 AAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAA...CTG 655
-               |||||||||||    ||| |||  ||||| |||| |||||||| |...|||
-Sbjct:     169 AAAATGGGGAGG---ATGGAGTTTTTGGCTATGAGAACTGATCCA...CTG 755</code></pre>
+<pre><code>test@example.com</code></pre>
+</div>
+</div>
+<div id="cell-33" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>results_blast <span class="op">=</span> Blast.qblast(<span class="st">"blastn"</span>, <span class="st">"nt"</span>, <span class="st">"8332116"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"my_blast.xml"</span>, <span class="st">"wb"</span>) <span class="im">as</span> file_handle:</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    file_handle.write(results_blast.read())</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>results_blast.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-34" class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>blast_record <span class="op">=</span> Blast.read(<span class="st">"my_blast.xml"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Number of hits:"</span>, <span class="bu">len</span>(blast_record))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(blast_record[:<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of hits: 50
+Program: BLASTN 2.17.0+
+     db: core_nt
+  Query: BE037100.1 (length=1111)
+         MP14H09 MP Mesembryanthemum crystallinum cDNA 5' similar to cold
+         acclimation protein, mRNA sequence
+   Hits: ----  -----  ----------------------------------------------------------
+            #  # HSP  ID + description
+         ----  -----  ----------------------------------------------------------
+            0      1  gi|1219041180|ref|XM_021875076.1|  PREDICTED: Chenopodi...
+            1      1  gi|2514617377|ref|XM_021992092.2|  PREDICTED: Spinacia ...
+            2      1  gi|2518612504|ref|XM_010682658.3|  PREDICTED: Beta vulg...</code></pre>
+</div>
+</div>
+<div id="cell-35" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(blast_record.keys())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['gi|1219041180|ref|XM_021875076.1|', 'gi|2514617377|ref|XM_021992092.2|', 'gi|2518612504|ref|XM_010682658.3|', 'gi|2031543140|ref|XM_041168865.1|', 'gi|2618480339|ref|XM_048479995.2|', 'gi|2082357253|ref|XM_043119041.1|', 'gi|2082357255|ref|XM_043119049.1|', 'gi|1882610310|ref|XM_035691634.1|', 'gi|1882610309|ref|XM_018970776.2|', 'gi|1350315636|ref|XM_006425716.2|', 'gi|2395983799|ref|XM_006466625.3|', 'gi|2395983797|ref|XM_006466624.4|', 'gi|1204884098|ref|XM_021445554.1|', 'gi|2395983798|ref|XM_006466623.4|', 'gi|1350315638|ref|XM_006425719.2|', 'gi|2395983800|ref|XM_006466626.4|', 'gi|1350315641|ref|XM_024180293.1|', 'gi|1350315634|ref|XM_006425717.2|', 'gi|2395983796|ref|XM_025094967.2|', 'gi|1227938481|ref|XM_022049453.1|', 'gi|1063463253|ref|XM_007047033.2|', 'gi|1063463252|ref|XM_007047032.2|', 'gi|1269881403|ref|XM_022895603.1|', 'gi|1269881407|ref|XM_022895605.1|', 'gi|1269881405|ref|XM_022895604.1|', 'gi|2082386146|ref|XM_043113302.1|', 'gi|2082386143|ref|XM_043113301.1|', 'gi|1954740698|ref|XM_038867092.1|', 'gi|1882636119|ref|XM_018974650.2|', 'gi|2526866810|ref|XM_057645500.1|', 'gi|1187397285|gb|KX009413.1|', 'gi|2550782781|ref|XM_058372567.1|', 'gi|2806124758|ref|XM_068481225.1|', 'gi|2532162279|ref|XM_058104265.1|', 'gi|2250518185|ref|XM_009343631.3|', 'gi|1350280614|ref|XM_024170292.1|', 'gi|743838297|ref|XM_011027373.1|', 'gi|743838293|ref|XM_011027372.1|', 'gi|1768569081|ref|XM_031406607.1|', 'gi|2396494060|ref|XM_052454347.1|', 'gi|2396494064|ref|XM_024605027.2|', 'gi|1585724761|ref|XM_028202722.1|', 'gi|2537663858|ref|XM_021815584.2|', 'gi|2960782598|ref|XM_035077206.2|', 'gi|2645357626|ref|XM_062094449.1|', 'gi|1162571919|ref|XM_020568695.1|', 'gi|1162571918|ref|XM_007202530.2|', 'gi|2583747300|ref|XM_059787294.1|', 'gi|1229761331|ref|XM_022277554.1|', 'gi|2118882425|ref|XM_044613294.1|']</code></pre>
+</div>
+</div>
+<div id="cell-36" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gi|2514617377|ref|XM_021992092.2|'</span> <span class="kw">in</span> blast_record)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+</div>
+<div id="cell-37" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(blast_record[<span class="dv">0</span>]))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(blast_record[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'Bio.Blast.Hit'&gt;
+Query: BE037100.1
+       MP14H09 MP Mesembryanthemum crystallinum cDNA 5' similar to cold
+       acclimation protein, mRNA sequence
+  Hit: gi|1219041180|ref|XM_021875076.1| (length=1173)
+       PREDICTED: Chenopodium quinoa cold-regulated 413 plasma membrane protein
+       2-like (LOC110697660), mRNA
+ HSPs: ----  --------  ---------  ------  ---------------  ---------------------
+          #   E-value  Bit score    Span      Query range              Hit range
+       ----  --------  ---------  ------  ---------------  ---------------------
+          0  6.4e-117     435.90     624         [58:678]              [277:901]</code></pre>
+</div>
+</div>
+<div id="cell-38" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>hit1 <span class="op">=</span> blast_record[<span class="dv">0</span>]</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(hit1[<span class="dv">0</span>]))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hit1[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'Bio.Blast.HSP'&gt;
+Query : BE037100.1 Length: 1111 Strand: Plus
+        MP14H09 MP Mesembryanthemum crystallinum cDNA 5' similar to cold
+        acclimation protein, mRNA sequence
+Target: gi|1219041180|ref|XM_021875076.1| Length: 1173 Strand: Plus
+        PREDICTED: Chenopodium quinoa cold-regulated 413 plasma membrane protein
+        2-like (LOC110697660), mRNA
+
+Score:435 bits(482), Expect:6e-117,
+Identities:473/624(76%),  Positives:473/624(76%),  Gaps:4.624(1%)
+
+gi|121904       277 ACCGAAAATGGGCAGAGGAGTGAATTATATGGCAATGACACCTGAGCAACTAGCCGCGGC
+                  0 ||.|||||||||.||||.|.||||.||..||||.||||.|.||||.|||.|.||||.|||
+BE037100.        58 ACAGAAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAATTGGCCGTGGC
+
+gi|121904       337 CAATTTGATCAACTCCGACATCAATGAGCTCAAGATCGTTGTGATGACACTCATTCATGA
+                 60 .|||.|||||.|.|||||.|||||||||||.||.||.|.....||||..|||||..||||
+BE037100.       118 TAATATGATCGATTCCGATATCAATGAGCTTAAAATGGCAACAATGAGGCTCATCAATGA
+
+gi|121904       397 TGCTTCTAGACTCGGCGGCACCTCAGGATTTGGAACTCATTTTCTTAGATGGCTAGCCTC
+                120 ||||..||..|||||.--||...|.||-|||||.||||||||.||.|.||||||.||||.
+BE037100.       178 TGCTAGTATGCTCGGT--CATTACGGG-TTTGGCACTCATTTCCTCAAATGGCTCGCCTG
+
+gi|121904       457 TCTTGCTGCTATTTACTTGTTGATCCTGGATCGCACAAATTGGAGAACCAACATGCTCAC
+                180 .|||||.|||||||||||||||||..|||||||.|||||.||||||||||||||||||||
+BE037100.       235 CCTTGCGGCTATTTACTTGTTGATATTGGATCGAACAAACTGGAGAACCAACATGCTCAC
+
+gi|121904       517 ATCACTCTTAGTACCATACATATTCCTCAGTCTTCCTTCTGGCCCTTTTTACCTTCTTAG
+                240 .|||||.|||||.||.||||||||||||||||||||.||.||.||.|||.|.||..|.||
+BE037100.       295 GTCACTTTTAGTCCCTTACATATTCCTCAGTCTTCCATCCGGGCCATTTCATCTGTTCAG
+
+gi|121904       577 GGGTGAGGTTGGGAAATGGATTGCTTTTGTCGCGGTTGTGCTAAGGCTATTCTTCCACCG
+                300 .||.|||||.||||||||||||||..|..|.||.||.|||.|||||||.||||||.||||
+BE037100.       355 AGGCGAGGTCGGGAAATGGATTGCCATCATTGCAGTCGTGTTAAGGCTGTTCTTCAACCG
+
+gi|121904       637 CCGCTTCCCAGAATGGTTAGAGATGCCAGGATCACTGATACTATTGTTGGTGGTAGCTCC
+                360 .|..|||||||..|||.|.||.|||||.|||||..|||||||..|..|||||||.||.||
+BE037100.       415 GCATTTCCCAGTTTGGCTGGAAATGCCTGGATCGTTGATACTCCTCCTGGTGGTGGCACC
+
+gi|121904       697 AGAATTGCTAGCACACAAATTAAAGGATAGTTGGATGGGAGTTGTAATTCTGTTAATCAT
+                420 |||.||..|..||||||||.|.|||||.||.|||||.|||.|||.||||.||.||...||
+BE037100.       475 AGACTTCTTTACACACAAAGTGAAGGAGAGCTGGATCGGAATTGCAATTATGATAGCGAT
+
+gi|121904       757 AGGGTGTTATTTGCTGCAAGAACATATCAGGGCAACTGGTGGTTTAAGAAATTCGTTTAC
+                480 |||||||.|..||.||||||||||||||||.||.||||||||.||..|.|||||.||.||
+BE037100.       535 AGGGTGTCACCTGATGCAAGAACATATCAGAGCCACTGGTGGCTTTTGGAATTCCTTCAC
+
+gi|121904       817 TCAAAGCCATGGAATTTCCTATACGATTGGGCTGCTTCTCTTATTGGCTTACCCAATTTG
+                540 .||.|||||.||||.||...|.||.||||||||..|.||..||.||||||||||..|.|-
+BE037100.       595 ACAGAGCCACGGAACTTTTAACACAATTGGGCTTATCCTTCTACTGGCTTACCCTGTCT-
+
+gi|121904       877 GTCCATGGTTATTTTCATGATTTA 901
+                600 ||..|||||.||.||||||||.|| 624
+BE037100.       654 GTTTATGGTCATCTTCATGATGTA 678
+
+</code></pre>
+</div>
+</div>
+<div id="cell-39" class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> hit <span class="kw">in</span> blast_record:</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> alignment <span class="kw">in</span> hit:</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(alignment.target.<span class="bu">id</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(alignment.annotations[<span class="st">'evalue'</span>])</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(count<span class="op">==</span><span class="dv">5</span>):</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>gi|1219041180|ref|XM_021875076.1|
+6.36186e-117
+gi|2514617377|ref|XM_021992092.2|
+1.70712e-111
+gi|2518612504|ref|XM_010682658.3|
+4.58085e-106
+gi|2031543140|ref|XM_041168865.1|
+1.59887e-105
+gi|2618480339|ref|XM_048479995.2|
+5.58062e-105</code></pre>
+</div>
+</div>
+<div id="cell-40" class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> hit <span class="kw">in</span> blast_record:</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> alignment <span class="kw">in</span> hit:</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> alignment.annotations[<span class="st">'evalue'</span>] <span class="op">&lt;</span> <span class="fl">1e-105</span>:</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(alignment.target.description)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(alignment[:,:<span class="dv">50</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>PREDICTED: Chenopodium quinoa cold-regulated 413 plasma membrane protein 2-like (LOC110697660), mRNA
+gi|121904       277 ACCGAAAATGGGCAGAGGAGTGAATTATATGGCAATGACACCTGAGCAAC 327
+                  0 ||.|||||||||.||||.|.||||.||..||||.||||.|.||||.|||.  50
+BE037100.        58 ACAGAAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAAT 108
+
+PREDICTED: Spinacia oleracea cold-regulated 413 plasma membrane protein 2-like (LOC110787470), mRNA
+gi|251461        41 AAAATGGGTAGACGAATGGATTATTTGGCGATGAAAACCGAGCAATTAGC  91
+                  0 ||||||||.|||..||||.|.||.|||||.||||||||.||.|||||.||  50
+BE037100.        62 AAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAATTGGC 112
+
+PREDICTED: Beta vulgaris subsp. vulgaris cold-regulated 413 plasma membrane protein 2 (LOC104895996), mRNA
+gi|251861        24 TTGGCCATGAAAACTGAGCAAATGGCGTTGGCTAATTTGATAGATTATGA  74
+                  0 |||||||||||||||||.|||.||||..||||||||.||||.||||..||  50
+BE037100.        86 TTGGCCATGAAAACTGATCAATTGGCCGTGGCTAATATGATCGATTCCGA 136
+</code></pre>
 </div>
 </div>
 <p>The hsps object has several attributes including the BLAST statistics such as evalue, score, positives, etc. These can be used to extract hits based on certain conditions. E.g., the code below shows saving hits from the previous Blast search with evalue greater than 1e-105 to a new file.</p>
-<div id="cell-35" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"new_file.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> file_handle:</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> alignment <span class="kw">in</span> blast_record.alignments:</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> hsp <span class="kw">in</span> alignment.hsps:</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> (hsp.expect <span class="op">&lt;</span> <span class="fl">1e-105</span>):</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(hsp)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>                file_handle.write(<span class="bu">str</span>(hsp)<span class="op">+</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                file_handle.write(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"DONE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-42" class="cell" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"new_file.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> file_handle:</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> hit <span class="kw">in</span> blast_record:</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> alignment <span class="kw">in</span> hit:</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> alignment.annotations[<span class="st">'evalue'</span>] <span class="op">&lt;</span> <span class="fl">1e-105</span>:</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(alignment.target.<span class="bu">id</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>                file_handle.write(<span class="bu">str</span>(alignment)<span class="op">+</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                file_handle.write(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"DONE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Score 482 (435 bits), expectation 5.6e-117, alignment length 624
-Query:      59 ACAGAAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGA...GTA 678
-               || ||||||||| |||| | |||| ||  |||| |||| | ||||... ||
-Sbjct:     278 ACCGAAAATGGGCAGAGGAGTGAATTATATGGCAATGACACCTGA...TTA 901
-Score 463 (418 bits), expectation 1.5e-111, alignment length 590
-Query:      63 AAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAA...CCC 649
-               |||||||| |||  |||| | || ||||| |||||||| || |||...|||
-Sbjct:      42 AAAATGGGTAGACGAATGGATTATTTGGCGATGAAAACCGAGCAA...CCC 631
-Score 443 (400 bits), expectation 4.0e-106, alignment length 597
-Query:      87 TTGGCCATGAAAACTGATCAATTGGCCGTGGCTAATATGATCGAT...TAG 679
-               ||||||||||||||||| ||| ||||  |||||||| |||| |||...|||
-Sbjct:      25 TTGGCCATGAAAACTGAGCAAATGGCGTTGGCTAATTTGATAGAT...TAG 621
+<pre><code>gi|1219041180|ref|XM_021875076.1|
+gi|2514617377|ref|XM_021992092.2|
+gi|2518612504|ref|XM_010682658.3|
 DONE</code></pre>
 </div>
 </div>
@@ -784,304 +824,108 @@ DONE</code></pre>
 <section id="creating-a-dataframe-of-blast-results" class="level2" data-number="15.8">
 <h2 data-number="15.8" class="anchored" data-anchor-id="creating-a-dataframe-of-blast-results"><span class="header-section-number">15.8</span> Creating a dataframe of BLAST results</h2>
 <p>The better approach to work with BLAST results is to create a dataframe having all the attributes for all the hits. The following code iterates through the BLAST output and creates a <code>pandas</code> dataframe having all the results.</p>
-<div id="cell-37" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>result_handle <span class="op">=</span> <span class="bu">open</span>(<span class="st">"my_blast.xml"</span>)</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>blast_record <span class="op">=</span> NCBIXML.read(result_handle)</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>blast_data <span class="op">=</span> []</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> alignment <span class="kw">in</span> blast_record.alignments:</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> hsp <span class="kw">in</span> alignment.hsps:</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># append a dictionary of attributes for each hit</span></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>        blast_data.append({</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"query_id"</span>: blast_record.query_id,</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"hit_id"</span>: alignment.hit_id,</span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">"hit_def"</span>: alignment.hit_def,</span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"accession"</span>: alignment.accession,</span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"hit_length"</span>: alignment.length,</span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">"e_value"</span>: hsp.expect,</span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"bit_score"</span>: hsp.bits,</span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"score"</span>: hsp.score,</span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"alignment_length"</span>: hsp.align_length,</span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">"identity"</span>: hsp.identities,</span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">"positives"</span>: hsp.positives,</span>
-<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>            <span class="st">"gaps"</span>: hsp.gaps,</span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>            <span class="st">"percent_identity"</span>: <span class="dv">100</span> <span class="op">*</span> hsp.identities <span class="op">/</span> hsp.align_length,</span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>            <span class="st">"percent_positives"</span>: <span class="dv">100</span> <span class="op">*</span> hsp.positives <span class="op">/</span> hsp.align_length,</span>
-<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">"query_start"</span>: hsp.query_start,</span>
-<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"query_end"</span>: hsp.query_end,</span>
-<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"subject_start"</span>: hsp.sbjct_start,</span>
-<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>            <span class="st">"subject_end"</span>: hsp.sbjct_end,</span>
-<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>            <span class="st">"query_sequence"</span>: hsp.query,</span>
-<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>            <span class="st">"match_sequence"</span>: hsp.match,</span>
-<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a>            <span class="st">"subject_sequence"</span>: hsp.sbjct,</span>
-<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame</span></span>
-<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(blast_data)</span>
-<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.shape)</span>
-<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-44" class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>blast_data <span class="op">=</span> []</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> hit <span class="kw">in</span> blast_record:</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> alignment <span class="kw">in</span> hit:</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>        blast_data.append({</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Score'</span>: alignment.score,</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Target ID'</span>: alignment.target.<span class="bu">id</span>,</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Target description'</span>: alignment.target.description,</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Bit score'</span>: alignment.annotations[<span class="st">'bit score'</span>],</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">'E-value'</span>: alignment.annotations[<span class="st">'evalue'</span>],</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">'identity'</span>: alignment.annotations[<span class="st">'identity'</span>],</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">'positives'</span>: alignment.annotations[<span class="st">'positive'</span>],</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">'gaps'</span>: alignment.annotations[<span class="st">'gaps'</span>],</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>            })</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(blast_data)</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(50, 23)</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<div>
+<pre><code>   Score                          Target ID  \
+0  482.0  gi|1219041180|ref|XM_021875076.1|   
+1  463.0  gi|2514617377|ref|XM_021992092.2|   
+2  443.0  gi|2518612504|ref|XM_010682658.3|   
+3  441.0  gi|2031543140|ref|XM_041168865.1|   
+4  439.0  gi|2618480339|ref|XM_048479995.2|   
 
-<table class="dataframe table table-sm table-striped small">
-  <thead>
-    <tr>
-      <th></th>
-      <th>query_id</th>
-      <th>hit_id</th>
-      <th>hit_def</th>
-      <th>accession</th>
-      <th>hit_length</th>
-      <th>e_value</th>
-      <th>bit_score</th>
-      <th>score</th>
-      <th>alignment_length</th>
-      <th>identity</th>
-      <th>...</th>
-      <th>percent_positives</th>
-      <th>query_start</th>
-      <th>query_end</th>
-      <th>subject_start</th>
-      <th>subject_end</th>
-      <th>query_frame</th>
-      <th>strand</th>
-      <th>query_sequence</th>
-      <th>match_sequence</th>
-      <th>subject_sequence</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>BE037100.1</td>
-      <td>gi|1219041180|ref|XM_021875076.1|</td>
-      <td>PREDICTED: Chenopodium quinoa cold-regulated 4...</td>
-      <td>XM_021875076</td>
-      <td>1173</td>
-      <td>5.569490e-117</td>
-      <td>435.898</td>
-      <td>482.0</td>
-      <td>624</td>
-      <td>473</td>
-      <td>...</td>
-      <td>75.801282</td>
-      <td>59</td>
-      <td>678</td>
-      <td>278</td>
-      <td>901</td>
-      <td>None</td>
-      <td>(Plus, Plus)</td>
-      <td>ACAGAAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGAT...</td>
-      <td>|| ||||||||| |||| | |||| ||  |||| |||| | |||| ...</td>
-      <td>ACCGAAAATGGGCAGAGGAGTGAATTATATGGCAATGACACCTGAG...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>BE037100.1</td>
-      <td>gi|2514617377|ref|XM_021992092.2|</td>
-      <td>PREDICTED: Spinacia oleracea cold-regulated 41...</td>
-      <td>XM_021992092</td>
-      <td>752</td>
-      <td>1.494500e-111</td>
-      <td>418.766</td>
-      <td>463.0</td>
-      <td>590</td>
-      <td>447</td>
-      <td>...</td>
-      <td>75.762712</td>
-      <td>63</td>
-      <td>649</td>
-      <td>42</td>
-      <td>631</td>
-      <td>None</td>
-      <td>(Plus, Plus)</td>
-      <td>AAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAAT...</td>
-      <td>|||||||| |||  |||| | || ||||| |||||||| || ||||...</td>
-      <td>AAAATGGGTAGACGAATGGATTATTTGGCGATGAAAACCGAGCAAT...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>BE037100.1</td>
-      <td>gi|2518612504|ref|XM_010682658.3|</td>
-      <td>PREDICTED: Beta vulgaris subsp. vulgaris cold-...</td>
-      <td>XM_010682658</td>
-      <td>621</td>
-      <td>4.010310e-106</td>
-      <td>400.732</td>
-      <td>443.0</td>
-      <td>597</td>
-      <td>448</td>
-      <td>...</td>
-      <td>75.041876</td>
-      <td>87</td>
-      <td>679</td>
-      <td>25</td>
-      <td>621</td>
-      <td>None</td>
-      <td>(Plus, Plus)</td>
-      <td>TTGGCCATGAAAACTGATCAATTGGCCGTGGCTAATATGATCGATT...</td>
-      <td>||||||||||||||||| ||| ||||  |||||||| |||| ||||...</td>
-      <td>TTGGCCATGAAAACTGAGCAAATGGCGTTGGCTAATTTGATAGATT...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>BE037100.1</td>
-      <td>gi|2031543140|ref|XM_041168865.1|</td>
-      <td>PREDICTED: Juglans microcarpa x Juglans regia ...</td>
-      <td>XM_041168865</td>
-      <td>1020</td>
-      <td>1.399730e-105</td>
-      <td>398.929</td>
-      <td>441.0</td>
-      <td>593</td>
-      <td>448</td>
-      <td>...</td>
-      <td>75.548061</td>
-      <td>65</td>
-      <td>655</td>
-      <td>254</td>
-      <td>838</td>
-      <td>None</td>
-      <td>(Plus, Plus)</td>
-      <td>AATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAATTG...</td>
-      <td>||||||||| |||  | |  | |||||||||||||||||||    |...</td>
-      <td>AATGGGGAG-GAA--GGATAATTTGGCCATGAAAACTGATCC---G...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>BE037100.1</td>
-      <td>gi|2618480339|ref|XM_048479995.2|</td>
-      <td>PREDICTED: Ziziphus jujuba cold-regulated 413 ...</td>
-      <td>XM_048479995</td>
-      <td>1028</td>
-      <td>4.885550e-105</td>
-      <td>397.126</td>
-      <td>439.0</td>
-      <td>596</td>
-      <td>448</td>
-      <td>...</td>
-      <td>75.167785</td>
-      <td>63</td>
-      <td>655</td>
-      <td>169</td>
-      <td>755</td>
-      <td>None</td>
-      <td>(Plus, Plus)</td>
-      <td>AAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAAT...</td>
-      <td>|||||||||||    ||| |||  ||||| |||| |||||||| | ...</td>
-      <td>AAAATGGGGAGG---ATGGAGTTTTTGGCTATGAGAACTGATCCA-...</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 23 columns</p>
+                                  Target description  Bit score  \
+0  PREDICTED: Chenopodium quinoa cold-regulated 4...    435.898   
+1  PREDICTED: Spinacia oleracea cold-regulated 41...    418.766   
+2  PREDICTED: Beta vulgaris subsp. vulgaris cold-...    400.732   
+3  PREDICTED: Juglans microcarpa x Juglans regia ...    398.929   
+4  PREDICTED: Ziziphus jujuba cold-regulated 413 ...    397.126   
+
+         E-value  identity  positives  gaps  
+0  6.361860e-117       473        473     4  
+1  1.707120e-111       447        447     3  
+2  4.580850e-106       448        448     4  
+3  1.598870e-105       448        448    10  
+4  5.580620e-105       448        448    12  </code></pre>
 </div>
 </div>
-</div>
-<div id="cell-38" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>Index(['query_id', 'hit_id', 'hit_def', 'accession', 'hit_length', 'e_value',
-       'bit_score', 'score', 'alignment_length', 'identity', 'positives',
-       'gaps', 'percent_identity', 'percent_positives', 'query_start',
-       'query_end', 'subject_start', 'subject_end', 'query_frame', 'strand',
-       'query_sequence', 'match_sequence', 'subject_sequence'],
+<div id="cell-45" class="cell" data-execution_count="75">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="75">
+<pre><code>Index(['Score', 'Target ID', 'Target description', 'Bit score', 'E-value',
+       'identity', 'positives', 'gaps'],
       dtype='object')</code></pre>
 </div>
 </div>
 <p>Now that we have a dataframe, we can easily select hits based on desired thresholds. For instance, the code below selects all the hits with evalue less than 1e-105.</p>
-<div id="cell-40" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">"e_value"</span>] <span class="op">&lt;</span> <span class="fl">1e-105</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div id="cell-47" class="cell" data-execution_count="76">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">"E-value"</span>] <span class="op">&lt;</span> <span class="fl">1e-105</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="76">
 <div>
 
 <table class="dataframe table table-sm table-striped small">
   <thead>
     <tr>
       <th></th>
-      <th>query_id</th>
-      <th>hit_id</th>
-      <th>hit_def</th>
-      <th>e_value</th>
-      <th>bit_score</th>
-      <th>score</th>
-      <th>query_start</th>
-      <th>query_end</th>
-      <th>subject_start</th>
-      <th>subject_end</th>
-      <th>alignment_length</th>
+      <th>Score</th>
+      <th>Target ID</th>
+      <th>Target description</th>
+      <th>Bit score</th>
+      <th>E-value</th>
       <th>identity</th>
+      <th>positives</th>
       <th>gaps</th>
-      <th>query_sequence</th>
-      <th>match_sequence</th>
-      <th>subject_sequence</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>BE037100.1</td>
+      <td>482.0</td>
       <td>gi|1219041180|ref|XM_021875076.1|</td>
       <td>PREDICTED: Chenopodium quinoa cold-regulated 4...</td>
-      <td>5.569490e-117</td>
       <td>435.898</td>
-      <td>482.0</td>
-      <td>59</td>
-      <td>678</td>
-      <td>278</td>
-      <td>901</td>
-      <td>624</td>
+      <td>6.361860e-117</td>
+      <td>473</td>
       <td>473</td>
       <td>4</td>
-      <td>ACAGAAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGAT...</td>
-      <td>|| ||||||||| |||| | |||| ||  |||| |||| | |||| ...</td>
-      <td>ACCGAAAATGGGCAGAGGAGTGAATTATATGGCAATGACACCTGAG...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>BE037100.1</td>
+      <td>463.0</td>
       <td>gi|2514617377|ref|XM_021992092.2|</td>
       <td>PREDICTED: Spinacia oleracea cold-regulated 41...</td>
-      <td>1.494500e-111</td>
       <td>418.766</td>
-      <td>463.0</td>
-      <td>63</td>
-      <td>649</td>
-      <td>42</td>
-      <td>631</td>
-      <td>590</td>
+      <td>1.707120e-111</td>
+      <td>447</td>
       <td>447</td>
       <td>3</td>
-      <td>AAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAAT...</td>
-      <td>|||||||| |||  |||| | || ||||| |||||||| || ||||...</td>
-      <td>AAAATGGGTAGACGAATGGATTATTTGGCGATGAAAACCGAGCAAT...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>BE037100.1</td>
+      <td>443.0</td>
       <td>gi|2518612504|ref|XM_010682658.3|</td>
       <td>PREDICTED: Beta vulgaris subsp. vulgaris cold-...</td>
-      <td>4.010310e-106</td>
       <td>400.732</td>
-      <td>443.0</td>
-      <td>87</td>
-      <td>679</td>
-      <td>25</td>
-      <td>621</td>
-      <td>597</td>
+      <td>4.580850e-106</td>
+      <td>448</td>
       <td>448</td>
       <td>4</td>
-      <td>TTGGCCATGAAAACTGATCAATTGGCCGTGGCTAATATGATCGATT...</td>
-      <td>||||||||||||||||| ||| ||||  |||||||| |||| ||||...</td>
-      <td>TTGGCCATGAAAACTGAGCAAATGGCGTTGGCTAATTTGATAGATT...</td>
     </tr>
   </tbody>
 </table>
@@ -1089,96 +933,190 @@ DONE</code></pre>
 </div>
 </div>
 <p>To save the filtered set of hits (or the entire output) to a csv file, we can use the <code>to_csv</code> function.</p>
-<div id="cell-42" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df_top_hits <span class="op">=</span> df[df[<span class="st">"e_value"</span>] <span class="op">&lt;</span> <span class="fl">1e-105</span>]</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>df_top_hits.to_csv(<span class="st">"Blast_hits.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-49" class="cell" data-execution_count="77">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>df_top_hits <span class="op">=</span> df[df[<span class="st">"E-value"</span>] <span class="op">&lt;</span> <span class="fl">1e-105</span>]</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>df_top_hits.to_csv(<span class="st">"Blast_hits.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-43" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %load Blast_hits.csv</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>query_id,hit_id,hit_def,e_value,bit_score,score,query_start,query_end,subject_start,subject_end,alignment_length,identity,gaps,query_sequence,match_sequence,subject_sequence</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>BE037100<span class="fl">.1</span>,gi<span class="op">|</span><span class="dv">1219041180</span><span class="op">|</span>ref<span class="op">|</span>XM_021875076<span class="fl">.1</span><span class="op">|</span>,<span class="st">"PREDICTED: Chenopodium quinoa cold-regulated 413 plasma membrane protein 2-like (LOC110697660), mRNA"</span>,<span class="fl">5.56949e-117</span>,<span class="fl">435.898</span>,<span class="fl">482.0</span>,<span class="dv">59</span>,<span class="dv">678</span>,<span class="dv">278</span>,<span class="dv">901</span>,<span class="dv">624</span>,<span class="dv">473</span>,<span class="dv">4</span>,ACAGAAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAATTGGCCGTGGCTAATATGATCGATTCCGATATCAATGAGCTTAAAATGGCAACAATGAGGCTCATCAATGATGCTAGTATGCTCGGT<span class="op">--</span>CATTACGGG<span class="op">-</span>TTTGGCACTCATTTCCTCAAATGGCTCGCCTGCCTTGCGGCTATTTACTTGTTGATATTGGATCGAACAAACTGGAGAACCAACATGCTCACGTCACTTTTAGTCCCTTACATATTCCTCAGTCTTCCATCCGGGCCATTTCATCTGTTCAGAGGCGAGGTCGGGAAATGGATTGCCATCATTGCAGTCGTGTTAAGGCTGTTCTTCAACCGGCATTTCCCAGTTTGGCTGGAAATGCCTGGATCGTTGATACTCCTCCTGGTGGTGGCACCAGACTTCTTTACACACAAAGTGAAGGAGAGCTGGATCGGAATTGCAATTATGATAGCGATAGGGTGTCACCTGATGCAAGAACATATCAGAGCCACTGGTGGCTTTTGGAATTCCTTCACACAGAGCCACGGAACTTTTAACACAATTGGGCTTATCCTTCTACTGGCTTACCCTGTCT<span class="op">-</span>GTTTATGGTCATCTTCATGATGTA,<span class="op">||</span> <span class="op">|||||||||</span> <span class="op">||||</span> <span class="op">|</span> <span class="op">||||</span> <span class="op">||</span>  <span class="op">||||</span> <span class="op">||||</span> <span class="op">|</span> <span class="op">||||</span> <span class="op">|||</span> <span class="op">|</span> <span class="op">||||</span> <span class="op">|||</span> <span class="op">|||</span> <span class="op">|||||</span> <span class="op">|</span> <span class="op">|||||</span> <span class="op">|||||||||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|</span>     <span class="op">||||</span>  <span class="op">|||||</span>  <span class="op">||||||||</span>  <span class="op">||</span>  <span class="op">|||||</span>   <span class="op">||</span>   <span class="op">|</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||||||||</span> <span class="op">||</span> <span class="op">|</span> <span class="op">||||||</span> <span class="op">||||</span>  <span class="op">|||||</span> <span class="op">|||||||||||||||||</span>  <span class="op">|||||||</span> <span class="op">|||||</span> <span class="op">||||||||||||||||||||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||||||||||||||||||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">|</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||||||||||||||</span>  <span class="op">|</span>  <span class="op">|</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||</span> <span class="op">|||||||</span> <span class="op">||||||</span> <span class="op">||||</span> <span class="op">|</span>  <span class="op">|||||||</span>  <span class="op">|||</span> <span class="op">|</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">|||||</span>  <span class="op">|||||||</span>  <span class="op">|</span>  <span class="op">|||||||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||</span>  <span class="op">|</span>  <span class="op">||||||||</span> <span class="op">|</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">|||</span> <span class="op">|||</span> <span class="op">||||</span> <span class="op">||</span> <span class="op">||</span>   <span class="op">|||||||||</span> <span class="op">|</span>  <span class="op">||</span> <span class="op">||||||||||||||||</span> <span class="op">||</span> <span class="op">||||||||</span> <span class="op">||</span>  <span class="op">|</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||||</span> <span class="op">||</span>   <span class="op">|</span> <span class="op">||</span> <span class="op">||||||||</span>  <span class="op">|</span> <span class="op">||</span>  <span class="op">||</span> <span class="op">||||||||||</span>  <span class="op">|</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">|||||</span> <span class="op">||</span> <span class="op">||||||||</span> <span class="op">||</span>,ACCGAAAATGGGCAGAGGAGTGAATTATATGGCAATGACACCTGAGCAACTAGCCGCGGCCAATTTGATCAACTCCGACATCAATGAGCTCAAGATCGTTGTGATGACACTCATTCATGATGCTTCTAGACTCGGCGGCACCTCAGGATTTGGAACTCATTTTCTTAGATGGCTAGCCTCTCTTGCTGCTATTTACTTGTTGATCCTGGATCGCACAAATTGGAGAACCAACATGCTCACATCACTCTTAGTACCATACATATTCCTCAGTCTTCCTTCTGGCCCTTTTTACCTTCTTAGGGGTGAGGTTGGGAAATGGATTGCTTTTGTCGCGGTTGTGCTAAGGCTATTCTTCCACCGCCGCTTCCCAGAATGGTTAGAGATGCCAGGATCACTGATACTATTGTTGGTGGTAGCTCCAGAATTGCTAGCACACAAATTAAAGGATAGTTGGATGGGAGTTGTAATTCTGTTAATCATAGGGTGTTATTTGCTGCAAGAACATATCAGGGCAACTGGTGGTTTAAGAAATTCGTTTACTCAAAGCCATGGAATTTCCTATACGATTGGGCTGCTTCTCTTATTGGCTTACCCAATTTGGTCCATGGTTATTTTCATGATTTA</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>BE037100<span class="fl">.1</span>,gi<span class="op">|</span><span class="dv">2514617377</span><span class="op">|</span>ref<span class="op">|</span>XM_021992092<span class="fl">.2</span><span class="op">|</span>,<span class="st">"PREDICTED: Spinacia oleracea cold-regulated 413 plasma membrane protein 2-like (LOC110787470), mRNA"</span>,<span class="fl">1.4945e-111</span>,<span class="fl">418.766</span>,<span class="fl">463.0</span>,<span class="dv">63</span>,<span class="dv">649</span>,<span class="dv">42</span>,<span class="dv">631</span>,<span class="dv">590</span>,<span class="dv">447</span>,<span class="dv">3</span>,AAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAATTGGCCGTGGCTAATATGATCGATTCCGATATCAATGAGCTTAAAATGGCAACAATGAGGCTCATCAATGATGCTAGTATGCTCGG<span class="op">---</span>TCATTACGGGTTTGGCACTCATTTCCTCAAATGGCTCGCCTGCCTTGCGGCTATTTACTTGTTGATATTGGATCGAACAAACTGGAGAACCAACATGCTCACGTCACTTTTAGTCCCTTACATATTCCTCAGTCTTCCATCCGGGCCATTTCATCTGTTCAGAGGCGAGGTCGGGAAATGGATTGCCATCATTGCAGTCGTGTTAAGGCTGTTCTTCAACCGGCATTTCCCAGTTTGGCTGGAAATGCCTGGATCGTTGATACTCCTCCTGGTGGTGGCACCAGACTTCTTTACACACAAAGTGAAGGAGAGCTGGATCGGAATTGCAATTATGATAGCGATAGGGTGTCACCTGATGCAAGAACATATCAGAGCCACTGGTGGCTTTTGGAATTCCTTCACACAGAGCCACGGAACTTTTAACACAATTGGGCTTATCCTTCTACTGGCTTACCC,<span class="op">||||||||</span> <span class="op">|||</span>  <span class="op">||||</span> <span class="op">|</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||||||||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||||</span> <span class="op">|||</span> <span class="op">|||</span> <span class="op">|||||||||||||||||||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span>    <span class="op">|||</span>  <span class="op">||||</span> <span class="op">|</span>  <span class="op">|||||</span> <span class="op">|||</span> <span class="op">||</span> <span class="op">||||||</span>   <span class="op">|||</span> <span class="op">|</span>  <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||||||||</span> <span class="op">|||</span> <span class="op">||||||||||||</span>   <span class="op">||</span> <span class="op">|</span> <span class="op">||||||||||||||</span> <span class="op">||</span>  <span class="op">|</span> <span class="op">|||||||||</span> <span class="op">|</span> <span class="op">|||||||</span> <span class="op">|||||||||</span> <span class="op">||</span> <span class="op">|||||||||||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">||||||||||||||</span>  <span class="op">|</span>  <span class="op">|</span>  <span class="op">|</span> <span class="op">||</span> <span class="op">|||</span> <span class="op">|||||</span> <span class="op">|</span> <span class="op">||||||</span> <span class="op">||||</span>   <span class="op">||||||||</span>  <span class="op">|||</span> <span class="op">||||||||||</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">||||||||</span>  <span class="op">|</span>  <span class="op">|||||||</span> <span class="op">||</span> <span class="op">|||||</span>  <span class="op">|</span>  <span class="op">||</span> <span class="op">||</span>     <span class="op">|</span> <span class="op">||||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">|||</span> <span class="op">|||</span> <span class="op">|</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span>   <span class="op">|||||</span> <span class="op">|||</span> <span class="op">||||</span>  <span class="op">|</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||||||||</span> <span class="op">||</span>  <span class="op">|||||||</span> <span class="op">||||||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">|||||||||||||||</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">|</span>  <span class="op">||||||||||</span>,AAAATGGGTAGACGAATGGATTATTTGGCGATGAAAACCGAGCAATTAGCCGCGGCCAATTTGATCGATTCCGATATCAACGAGCTGAAGATCGCCGTGATGGCGCTCGTTCATGATACTACTACGCTCGGCGGTCAATCGGGATTCGGAACTCATTTTCTCCAATGGCTCGCCTCATTTTCTGCTATTTACTTGTTAATCCTTGATCGAACACATTGGAGAAGCAACATGCTTACTTCACTTTTAGTACCATACATTTTCCTAAGTCTCCCATCTGGCCCCTTTCACCTTTTAAGAGGTGAGGTTGGGAAATGGATTGCTTTTGTCTCGGTTGTGCTAAGGTTATTCTTCCACCGCAGTTTCCCAGAATGGTTGGAAATGCCAGTATGTTTGATACTATTATTGGTGGTAGCTCCAGAAATGCTTGCAATATCAATGAAAGAGAGTTGGATGGGAGTTGTAGTTGTGTTAATCATAGGATGTTACCTTCTACAAGAGCATATTAGGGCAACTGGTGGTTTAAGGAATTCTTTCACACAAAGACATGGGATTTCCAACACAATTGGGCTTCTTCTCTTGTTGGCTTACCC</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>BE037100<span class="fl">.1</span>,gi<span class="op">|</span><span class="dv">2518612504</span><span class="op">|</span>ref<span class="op">|</span>XM_010682658<span class="fl">.3</span><span class="op">|</span>,<span class="st">"PREDICTED: Beta vulgaris subsp. vulgaris cold-regulated 413 plasma membrane protein 2 (LOC104895996), mRNA"</span>,<span class="fl">4.01031e-106</span>,<span class="fl">400.732</span>,<span class="fl">443.0</span>,<span class="dv">87</span>,<span class="dv">679</span>,<span class="dv">25</span>,<span class="dv">621</span>,<span class="dv">597</span>,<span class="dv">448</span>,<span class="dv">4</span>,TTGGCCATGAAAACTGATCAATTGGCCGTGGCTAATATGATCGATTCCGATATCAATGAGCTTAAAATGGCAACAATGAGGCTCATCAATGATGCTAGTATGCTC<span class="op">---</span>GGTCATTACGGGTTTGGCACTCATTTCCTCAAATGGCTCGCCTGCCTTGCGGCTATTTACTTGTTGATATTGGATCGAACAAACTGGAGAACCAACATGCTCACGTCACTTTTAGTCCCTTACATATTCCTCAGTCTTCCATCCGGGCCATTTCATCTGTTCAGAGGCGAGGTCGGGAAATGGATTGCCATCATTGCAGTCGTGTTAAGGCTGTTCTTCAACCGGCATTTCCCAGTTTGGCTGGAAATGCCTGGATCGTTGATACTCCTCCTGGTGGTGGCACCAGACTTCTTTACACACAAAGTGAAGGAGAGCTGGATCGGAATTGCAATTATGATAGCGATAGGGTGTCACCTGATGCAAGAACATATCAGAGCCACTGGTGGCTTTTGGAATTCCTTCACACAGAGCCACGGAACTTTTAACACAATTGGGCTTATCCTTCTACTGGCTTACCCTGTCT<span class="op">-</span>GTTTATGGTCATCTTCATGATGTAG,<span class="op">|||||||||||||||||</span> <span class="op">|||</span> <span class="op">||||</span>  <span class="op">||||||||</span> <span class="op">||||</span> <span class="op">||||</span>  <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span>    <span class="op">|</span>    <span class="op">|||</span> <span class="op">||</span>  <span class="op">||||||||</span>  <span class="op">||</span>  <span class="op">|||</span>   <span class="op">|||||</span>    <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||||||||</span> <span class="op">|||||||||||</span> <span class="op">||</span> <span class="op">|</span>   <span class="op">||||</span> <span class="op">||||||||</span> <span class="op">|||</span> <span class="op">||||</span>  <span class="op">|||||||||||||</span> <span class="op">||||||||</span> <span class="op">||||||||</span> <span class="op">||</span> <span class="op">||||||||||||||||||||||||</span> <span class="op">||||</span> <span class="op">|||||</span>  <span class="op">|</span> <span class="op">||</span>    <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||||||||</span>  <span class="op">|</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||</span>  <span class="op">|</span> <span class="op">|||</span> <span class="op">|</span> <span class="op">||</span> <span class="op">|||</span> <span class="op">||||</span> <span class="op">||||||||||</span> <span class="op">||||</span> <span class="op">||||||||||</span> <span class="op">||||</span>  <span class="op">||||||||</span>  <span class="op">|</span>  <span class="op">|||||||</span> <span class="op">||</span> <span class="op">||</span>  <span class="op">|</span> <span class="op">||</span> <span class="op">|||</span> <span class="op">|</span>  <span class="op">|</span> <span class="op">|</span> <span class="op">|</span> <span class="op">|||||||</span>   <span class="op">||||</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">|||</span> <span class="op">|</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span>   <span class="op">|||||||||</span> <span class="op">|</span>  <span class="op">||</span> <span class="op">|</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">|||||</span>  <span class="op">|</span>  <span class="op">|||||||||||||</span> <span class="op">||</span> <span class="op">|</span> <span class="op">|||</span> <span class="op">||</span> <span class="op">|</span> <span class="op">||</span> <span class="op">|||</span> <span class="op">||||||||||||</span> <span class="op">||||||||</span> <span class="op">||||||||||</span>  <span class="op">|</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">||</span>  <span class="op">||||</span> <span class="op">||||||||||||</span>,TTGGCCATGAAAACTGAGCAAATGGCGTTGGCTAATTTGATAGATTATGATATGAATGAACTTAAGATCGCTTTGACATCGCTAATTCATGATGCTGCTAGACTCAATGGTCACGGAGGATTCGGAACTCATTTTCTCAAATGGCTTGCTTCATTTGCTGCTATTTATTTGCTGATCCTGGATCGAACAAATTGGAGAACAAACATGCTAACATCACTTTTAGTCCCTTACATATTCTTCAGCCTTCCCACAGGCATCTTTCACCTTTTAAGGGGCGAAGTTGGTAAGTGGATTGCTTTTATCGCAGTTGTACTGAGGTTATTTTTCCACCGCCATTTCCCAGATTGGTTGGAAATGCCAGGATGTTTGATACTGTTGTTGGTGGTCGCTCCCAATTTATTTGCTTATACAATGAAGGATGACTGGTTGGGGGTTGTAGTTTTGTTAATCATAGGGTGTTATTTGCTACAAGAGCATATAAGAGCGACGGGTGGTCTCAGGAATTCCTTCACTCAAACCCATGGTATTTCTAATACAATTGGGCTTCTCCTTCTATTGGCTTACCCCATTTGGTCGATATTCATATTCATGATGTAG</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="plotting-blast-result" class="level2" data-number="15.9">
-<h2 data-number="15.9" class="anchored" data-anchor-id="plotting-blast-result"><span class="header-section-number">15.9</span> Plotting BLAST result</h2>
-<div id="cell-45" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define bins and corresponding NCBI BLAST-style colors</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>bins <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>, <span class="bu">float</span>(<span class="st">'inf'</span>)]</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'blue'</span>, <span class="st">'cyan'</span>, <span class="st">'green'</span>, <span class="st">'darkorange'</span>, <span class="st">'magenta'</span>, <span class="st">'red'</span>]</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign color based on percent identity</span></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'color'</span>] <span class="op">=</span> pd.cut(df[<span class="st">'percent_identity'</span>], bins<span class="op">=</span>bins, labels<span class="op">=</span>colors, right<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot per query</span></span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> query <span class="kw">in</span> df[<span class="st">'query_id'</span>].unique():</span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>    sub_df <span class="op">=</span> df[df[<span class="st">'query_id'</span>] <span class="op">==</span> query]</span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">2</span> <span class="op">+</span> <span class="bu">len</span>(sub_df) <span class="op">*</span> <span class="fl">0.3</span>))</span>
-<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>    query_length <span class="op">=</span> sub_df[<span class="st">'query_end'</span>].<span class="bu">max</span>()</span>
-<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>    plt.hlines(y<span class="op">=</span><span class="dv">0</span>, xmin<span class="op">=</span><span class="dv">1</span>, xmax<span class="op">=</span>query_length, colors<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Query'</span>)</span>
-<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, row <span class="kw">in</span> <span class="bu">enumerate</span>(sub_df.itertuples(), start<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>        plt.hlines(y<span class="op">=-</span>i, xmin<span class="op">=</span>row.query_start, xmax<span class="op">=</span>row.query_end, colors<span class="op">=</span>row.color, linewidth<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>        plt.text(<span class="op">-</span><span class="dv">100</span>, <span class="op">-</span>i, <span class="ss">f"</span><span class="sc">{</span>row<span class="sc">.</span>hit_id<span class="sc">}</span><span class="ss">"</span>, va<span class="op">=</span><span class="st">'center'</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"Alignment Coverage for Query: </span><span class="sc">{</span>query<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Query Position"</span>)</span>
-<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a>    plt.yticks([<span class="dv">0</span>] <span class="op">+</span> [<span class="op">-</span>i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(sub_df)<span class="op">+</span><span class="dv">1</span>)], [<span class="st">'Query'</span>] <span class="op">+</span> [<span class="st">''</span>]<span class="op">*</span><span class="bu">len</span>(sub_df))</span>
-<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>    plt.grid(<span class="va">True</span>, axis<span class="op">=</span><span class="st">'x'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a>    plt.gca().spines[[<span class="st">'top'</span>, <span class="st">'right'</span>, <span class="st">'left'</span>]].set_visible(<span class="va">False</span>)</span>
-<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="BioPython_Intro_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
+<div id="cell-50" class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %load Blast_hits.csv</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>query_id,hit_id,hit_def,e_value,bit_score,score,query_start,query_end,subject_start,subject_end,alignment_length,identity,gaps,query_sequence,match_sequence,subject_sequence</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>BE037100<span class="fl">.1</span>,gi<span class="op">|</span><span class="dv">1219041180</span><span class="op">|</span>ref<span class="op">|</span>XM_021875076<span class="fl">.1</span><span class="op">|</span>,<span class="st">"PREDICTED: Chenopodium quinoa cold-regulated 413 plasma membrane protein 2-like (LOC110697660), mRNA"</span>,<span class="fl">5.56949e-117</span>,<span class="fl">435.898</span>,<span class="fl">482.0</span>,<span class="dv">59</span>,<span class="dv">678</span>,<span class="dv">278</span>,<span class="dv">901</span>,<span class="dv">624</span>,<span class="dv">473</span>,<span class="dv">4</span>,ACAGAAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAATTGGCCGTGGCTAATATGATCGATTCCGATATCAATGAGCTTAAAATGGCAACAATGAGGCTCATCAATGATGCTAGTATGCTCGGT<span class="op">--</span>CATTACGGG<span class="op">-</span>TTTGGCACTCATTTCCTCAAATGGCTCGCCTGCCTTGCGGCTATTTACTTGTTGATATTGGATCGAACAAACTGGAGAACCAACATGCTCACGTCACTTTTAGTCCCTTACATATTCCTCAGTCTTCCATCCGGGCCATTTCATCTGTTCAGAGGCGAGGTCGGGAAATGGATTGCCATCATTGCAGTCGTGTTAAGGCTGTTCTTCAACCGGCATTTCCCAGTTTGGCTGGAAATGCCTGGATCGTTGATACTCCTCCTGGTGGTGGCACCAGACTTCTTTACACACAAAGTGAAGGAGAGCTGGATCGGAATTGCAATTATGATAGCGATAGGGTGTCACCTGATGCAAGAACATATCAGAGCCACTGGTGGCTTTTGGAATTCCTTCACACAGAGCCACGGAACTTTTAACACAATTGGGCTTATCCTTCTACTGGCTTACCCTGTCT<span class="op">-</span>GTTTATGGTCATCTTCATGATGTA,<span class="op">||</span> <span class="op">|||||||||</span> <span class="op">||||</span> <span class="op">|</span> <span class="op">||||</span> <span class="op">||</span>  <span class="op">||||</span> <span class="op">||||</span> <span class="op">|</span> <span class="op">||||</span> <span class="op">|||</span> <span class="op">|</span> <span class="op">||||</span> <span class="op">|||</span> <span class="op">|||</span> <span class="op">|||||</span> <span class="op">|</span> <span class="op">|||||</span> <span class="op">|||||||||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|</span>     <span class="op">||||</span>  <span class="op">|||||</span>  <span class="op">||||||||</span>  <span class="op">||</span>  <span class="op">|||||</span>   <span class="op">||</span>   <span class="op">|</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||||||||</span> <span class="op">||</span> <span class="op">|</span> <span class="op">||||||</span> <span class="op">||||</span>  <span class="op">|||||</span> <span class="op">|||||||||||||||||</span>  <span class="op">|||||||</span> <span class="op">|||||</span> <span class="op">||||||||||||||||||||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||||||||||||||||||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">|</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||||||||||||||</span>  <span class="op">|</span>  <span class="op">|</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||</span> <span class="op">|||||||</span> <span class="op">||||||</span> <span class="op">||||</span> <span class="op">|</span>  <span class="op">|||||||</span>  <span class="op">|||</span> <span class="op">|</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">|||||</span>  <span class="op">|||||||</span>  <span class="op">|</span>  <span class="op">|||||||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||</span>  <span class="op">|</span>  <span class="op">||||||||</span> <span class="op">|</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">|||</span> <span class="op">|||</span> <span class="op">||||</span> <span class="op">||</span> <span class="op">||</span>   <span class="op">|||||||||</span> <span class="op">|</span>  <span class="op">||</span> <span class="op">||||||||||||||||</span> <span class="op">||</span> <span class="op">||||||||</span> <span class="op">||</span>  <span class="op">|</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||||</span> <span class="op">||</span>   <span class="op">|</span> <span class="op">||</span> <span class="op">||||||||</span>  <span class="op">|</span> <span class="op">||</span>  <span class="op">||</span> <span class="op">||||||||||</span>  <span class="op">|</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">|||||</span> <span class="op">||</span> <span class="op">||||||||</span> <span class="op">||</span>,ACCGAAAATGGGCAGAGGAGTGAATTATATGGCAATGACACCTGAGCAACTAGCCGCGGCCAATTTGATCAACTCCGACATCAATGAGCTCAAGATCGTTGTGATGACACTCATTCATGATGCTTCTAGACTCGGCGGCACCTCAGGATTTGGAACTCATTTTCTTAGATGGCTAGCCTCTCTTGCTGCTATTTACTTGTTGATCCTGGATCGCACAAATTGGAGAACCAACATGCTCACATCACTCTTAGTACCATACATATTCCTCAGTCTTCCTTCTGGCCCTTTTTACCTTCTTAGGGGTGAGGTTGGGAAATGGATTGCTTTTGTCGCGGTTGTGCTAAGGCTATTCTTCCACCGCCGCTTCCCAGAATGGTTAGAGATGCCAGGATCACTGATACTATTGTTGGTGGTAGCTCCAGAATTGCTAGCACACAAATTAAAGGATAGTTGGATGGGAGTTGTAATTCTGTTAATCATAGGGTGTTATTTGCTGCAAGAACATATCAGGGCAACTGGTGGTTTAAGAAATTCGTTTACTCAAAGCCATGGAATTTCCTATACGATTGGGCTGCTTCTCTTATTGGCTTACCCAATTTGGTCCATGGTTATTTTCATGATTTA</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>BE037100<span class="fl">.1</span>,gi<span class="op">|</span><span class="dv">2514617377</span><span class="op">|</span>ref<span class="op">|</span>XM_021992092<span class="fl">.2</span><span class="op">|</span>,<span class="st">"PREDICTED: Spinacia oleracea cold-regulated 413 plasma membrane protein 2-like (LOC110787470), mRNA"</span>,<span class="fl">1.4945e-111</span>,<span class="fl">418.766</span>,<span class="fl">463.0</span>,<span class="dv">63</span>,<span class="dv">649</span>,<span class="dv">42</span>,<span class="dv">631</span>,<span class="dv">590</span>,<span class="dv">447</span>,<span class="dv">3</span>,AAAATGGGGAGAGAAATGAAGTACTTGGCCATGAAAACTGATCAATTGGCCGTGGCTAATATGATCGATTCCGATATCAATGAGCTTAAAATGGCAACAATGAGGCTCATCAATGATGCTAGTATGCTCGG<span class="op">---</span>TCATTACGGGTTTGGCACTCATTTCCTCAAATGGCTCGCCTGCCTTGCGGCTATTTACTTGTTGATATTGGATCGAACAAACTGGAGAACCAACATGCTCACGTCACTTTTAGTCCCTTACATATTCCTCAGTCTTCCATCCGGGCCATTTCATCTGTTCAGAGGCGAGGTCGGGAAATGGATTGCCATCATTGCAGTCGTGTTAAGGCTGTTCTTCAACCGGCATTTCCCAGTTTGGCTGGAAATGCCTGGATCGTTGATACTCCTCCTGGTGGTGGCACCAGACTTCTTTACACACAAAGTGAAGGAGAGCTGGATCGGAATTGCAATTATGATAGCGATAGGGTGTCACCTGATGCAAGAACATATCAGAGCCACTGGTGGCTTTTGGAATTCCTTCACACAGAGCCACGGAACTTTTAACACAATTGGGCTTATCCTTCTACTGGCTTACCC,<span class="op">||||||||</span> <span class="op">|||</span>  <span class="op">||||</span> <span class="op">|</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||||||||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||||</span> <span class="op">|||</span> <span class="op">|||</span> <span class="op">|||||||||||||||||||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span>    <span class="op">|||</span>  <span class="op">||||</span> <span class="op">|</span>  <span class="op">|||||</span> <span class="op">|||</span> <span class="op">||</span> <span class="op">||||||</span>   <span class="op">|||</span> <span class="op">|</span>  <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||||||||</span> <span class="op">|||</span> <span class="op">||||||||||||</span>   <span class="op">||</span> <span class="op">|</span> <span class="op">||||||||||||||</span> <span class="op">||</span>  <span class="op">|</span> <span class="op">|||||||||</span> <span class="op">|</span> <span class="op">|||||||</span> <span class="op">|||||||||</span> <span class="op">||</span> <span class="op">|||||||||||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">||||||||||||||</span>  <span class="op">|</span>  <span class="op">|</span>  <span class="op">|</span> <span class="op">||</span> <span class="op">|||</span> <span class="op">|||||</span> <span class="op">|</span> <span class="op">||||||</span> <span class="op">||||</span>   <span class="op">||||||||</span>  <span class="op">|||</span> <span class="op">||||||||||</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">||||||||</span>  <span class="op">|</span>  <span class="op">|||||||</span> <span class="op">||</span> <span class="op">|||||</span>  <span class="op">|</span>  <span class="op">||</span> <span class="op">||</span>     <span class="op">|</span> <span class="op">||||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">|||</span> <span class="op">|||</span> <span class="op">|</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span>   <span class="op">|||||</span> <span class="op">|||</span> <span class="op">||||</span>  <span class="op">|</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||||||||</span> <span class="op">||</span>  <span class="op">|||||||</span> <span class="op">||||||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">|||||||||||||||</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">|</span>  <span class="op">||||||||||</span>,AAAATGGGTAGACGAATGGATTATTTGGCGATGAAAACCGAGCAATTAGCCGCGGCCAATTTGATCGATTCCGATATCAACGAGCTGAAGATCGCCGTGATGGCGCTCGTTCATGATACTACTACGCTCGGCGGTCAATCGGGATTCGGAACTCATTTTCTCCAATGGCTCGCCTCATTTTCTGCTATTTACTTGTTAATCCTTGATCGAACACATTGGAGAAGCAACATGCTTACTTCACTTTTAGTACCATACATTTTCCTAAGTCTCCCATCTGGCCCCTTTCACCTTTTAAGAGGTGAGGTTGGGAAATGGATTGCTTTTGTCTCGGTTGTGCTAAGGTTATTCTTCCACCGCAGTTTCCCAGAATGGTTGGAAATGCCAGTATGTTTGATACTATTATTGGTGGTAGCTCCAGAAATGCTTGCAATATCAATGAAAGAGAGTTGGATGGGAGTTGTAGTTGTGTTAATCATAGGATGTTACCTTCTACAAGAGCATATTAGGGCAACTGGTGGTTTAAGGAATTCTTTCACACAAAGACATGGGATTTCCAACACAATTGGGCTTCTTCTCTTGTTGGCTTACCC</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>BE037100<span class="fl">.1</span>,gi<span class="op">|</span><span class="dv">2518612504</span><span class="op">|</span>ref<span class="op">|</span>XM_010682658<span class="fl">.3</span><span class="op">|</span>,<span class="st">"PREDICTED: Beta vulgaris subsp. vulgaris cold-regulated 413 plasma membrane protein 2 (LOC104895996), mRNA"</span>,<span class="fl">4.01031e-106</span>,<span class="fl">400.732</span>,<span class="fl">443.0</span>,<span class="dv">87</span>,<span class="dv">679</span>,<span class="dv">25</span>,<span class="dv">621</span>,<span class="dv">597</span>,<span class="dv">448</span>,<span class="dv">4</span>,TTGGCCATGAAAACTGATCAATTGGCCGTGGCTAATATGATCGATTCCGATATCAATGAGCTTAAAATGGCAACAATGAGGCTCATCAATGATGCTAGTATGCTC<span class="op">---</span>GGTCATTACGGGTTTGGCACTCATTTCCTCAAATGGCTCGCCTGCCTTGCGGCTATTTACTTGTTGATATTGGATCGAACAAACTGGAGAACCAACATGCTCACGTCACTTTTAGTCCCTTACATATTCCTCAGTCTTCCATCCGGGCCATTTCATCTGTTCAGAGGCGAGGTCGGGAAATGGATTGCCATCATTGCAGTCGTGTTAAGGCTGTTCTTCAACCGGCATTTCCCAGTTTGGCTGGAAATGCCTGGATCGTTGATACTCCTCCTGGTGGTGGCACCAGACTTCTTTACACACAAAGTGAAGGAGAGCTGGATCGGAATTGCAATTATGATAGCGATAGGGTGTCACCTGATGCAAGAACATATCAGAGCCACTGGTGGCTTTTGGAATTCCTTCACACAGAGCCACGGAACTTTTAACACAATTGGGCTTATCCTTCTACTGGCTTACCCTGTCT<span class="op">-</span>GTTTATGGTCATCTTCATGATGTAG,<span class="op">|||||||||||||||||</span> <span class="op">|||</span> <span class="op">||||</span>  <span class="op">||||||||</span> <span class="op">||||</span> <span class="op">||||</span>  <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span>    <span class="op">|</span>    <span class="op">|||</span> <span class="op">||</span>  <span class="op">||||||||</span>  <span class="op">||</span>  <span class="op">|||</span>   <span class="op">|||||</span>    <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||||||||</span> <span class="op">|||||||||||</span> <span class="op">||</span> <span class="op">|</span>   <span class="op">||||</span> <span class="op">||||||||</span> <span class="op">|||</span> <span class="op">||||</span>  <span class="op">|||||||||||||</span> <span class="op">||||||||</span> <span class="op">||||||||</span> <span class="op">||</span> <span class="op">||||||||||||||||||||||||</span> <span class="op">||||</span> <span class="op">|||||</span>  <span class="op">|</span> <span class="op">||</span>    <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||||||||</span>  <span class="op">|</span> <span class="op">||</span> <span class="op">|||||</span> <span class="op">||</span>  <span class="op">|</span> <span class="op">|||</span> <span class="op">|</span> <span class="op">||</span> <span class="op">|||</span> <span class="op">||||</span> <span class="op">||||||||||</span> <span class="op">||||</span> <span class="op">||||||||||</span> <span class="op">||||</span>  <span class="op">||||||||</span>  <span class="op">|</span>  <span class="op">|||||||</span> <span class="op">||</span> <span class="op">||</span>  <span class="op">|</span> <span class="op">||</span> <span class="op">|||</span> <span class="op">|</span>  <span class="op">|</span> <span class="op">|</span> <span class="op">|</span> <span class="op">|||||||</span>   <span class="op">||||</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">|||</span> <span class="op">|</span> <span class="op">||</span> <span class="op">||</span> <span class="op">||</span>   <span class="op">|||||||||</span> <span class="op">|</span>  <span class="op">||</span> <span class="op">|</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">|||||</span> <span class="op">||</span> <span class="op">|||||</span>  <span class="op">|</span>  <span class="op">|||||||||||||</span> <span class="op">||</span> <span class="op">|</span> <span class="op">|||</span> <span class="op">||</span> <span class="op">|</span> <span class="op">||</span> <span class="op">|||</span> <span class="op">||||||||||||</span> <span class="op">||||||||</span> <span class="op">||||||||||</span>  <span class="op">|</span> <span class="op">|</span> <span class="op">||</span>  <span class="op">||</span>  <span class="op">||||</span> <span class="op">||||||||||||</span>,TTGGCCATGAAAACTGAGCAAATGGCGTTGGCTAATTTGATAGATTATGATATGAATGAACTTAAGATCGCTTTGACATCGCTAATTCATGATGCTGCTAGACTCAATGGTCACGGAGGATTCGGAACTCATTTTCTCAAATGGCTTGCTTCATTTGCTGCTATTTATTTGCTGATCCTGGATCGAACAAATTGGAGAACAAACATGCTAACATCACTTTTAGTCCCTTACATATTCTTCAGCCTTCCCACAGGCATCTTTCACCTTTTAAGGGGCGAAGTTGGTAAGTGGATTGCTTTTATCGCAGTTGTACTGAGGTTATTTTTCCACCGCCATTTCCCAGATTGGTTGGAAATGCCAGGATGTTTGATACTGTTGTTGGTGGTCGCTCCCAATTTATTTGCTTATACAATGAAGGATGACTGGTTGGGGGTTGTAGTTTTGTTAATCATAGGGTGTTATTTGCTACAAGAGCATATAAGAGCGACGGGTGGTCTCAGGAATTCCTTCACTCAAACCCATGGTATTTCTAATACAATTGGGCTTCTCCTTCTATTGGCTTACCCCATTTGGTCGATATTCATATTCATGATGTAG</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="blast-search-using-sequence-file" class="level2" data-number="15.10">
-<h2 data-number="15.10" class="anchored" data-anchor-id="blast-search-using-sequence-file"><span class="header-section-number">15.10</span> BLAST search using sequence file</h2>
+<section id="blast-search-using-sequence-file" class="level2" data-number="15.9">
+<h2 data-number="15.9" class="anchored" data-anchor-id="blast-search-using-sequence-file"><span class="header-section-number">15.9</span> BLAST search using sequence file</h2>
 <p>To run the Blast search using a sequence file instead of gi number, we first need to create a seqeunce object and then pass it on to the <code>qblast</code> function as shown below. To run this code, save the protein sequence below in a new file example1.fasta.</p>
-<p>MFHPGMTSQPSTSNQMYYDPLYGAEQIVQCNPMDYHQANILCGMQYFNNSHNRYPLLPQMPPQFTNDHPY DFPNVPTISTLDEASSFNGFLIPSQPSSYNNNNISCVFTPTPCTSSQASSQPPPTPTVNPTPIPPNAGAV LTTAMDSCQQISHVLQCYQQGGEDSDFVRKAIESLVKKLKDKRIELDALITAVTSNGKQPTGCVTIQRSL DGRLQVAGRKGVPHVVYARIWRWPKVSKNELVKLVQCQTSSDHPDNICINPYHYERVVSNRITSADQSLH VENSPMKSEYLGDAGVIDSCSDWPNTPPDNNFNGGFAPDQPQLVTPIISDIPIDLNQIYVPTPPQLLDNW CSIIYYELDTPIGETFKVSARDHGKVIVDGGMDPHGENEGRLCLGALSNVHRTEASEKARIHIGRGVELT AHADGNISITSNCKIFVRSGYLDYTHGSEYSSKAHRFTPNESSFTVFDIRWAYMQMLRRSRSSNEAVRAQ AAAVAGYAPMSVMPAIMPDSGVDRMRRDFCTIAISFVKAWGDVYQRKTIKETPCWIEVTLHRPLQILDQL LKNSSQFGSS</p>
-<div id="cell-48" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>seq_file <span class="op">=</span> <span class="bu">open</span>(<span class="st">'example1.fasta'</span>)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>result_handle2 <span class="op">=</span> NCBIWWW.qblast(<span class="st">"blastp"</span>, <span class="st">"nr"</span>, seq_file.read())</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>seq_file.close()</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"test_blast.xml"</span>, <span class="st">"w"</span>) <span class="im">as</span> out_handle:</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    out_handle.write(result_handle2.read())</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>blast_output <span class="op">=</span> <span class="bu">open</span>(<span class="st">"test_blast.xml"</span>)    </span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>blast_record <span class="op">=</span> NCBIXML.read(blast_output)</span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(blast_record.alignments[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>%load example1.fasta</p>
+<div id="cell-53" class="cell" data-execution_count="80">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>seq_file <span class="op">=</span> SeqIO.read(<span class="st">'example1.fasta'</span>, <span class="st">'fasta'</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>result_handle2 <span class="op">=</span> Blast.qblast(<span class="st">"blastp"</span>, <span class="st">"nr"</span>, seq_file.seq)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"test_blast.xml"</span>, <span class="st">"wb"</span>) <span class="im">as</span> out_handle:</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    out_handle.write(result_handle2.read())</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>result_handle2.close()</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>blast_output <span class="op">=</span> <span class="bu">open</span>(<span class="st">"test_blast.xml"</span>, <span class="st">"rb"</span>)    </span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>blast_record <span class="op">=</span> Blast.read(blast_output)</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(blast_record[<span class="dv">0</span>][<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>sp|P45897.1| RecName: Full=Dwarfin sma-4; AltName: Full=MAD protein homolog 3 [Caenorhabditis elegans] &gt;gb|AAA97605.1| SMA-4 [Caenorhabditis elegans]
-           Length = 570
+<pre><code>Query : Query_4888877 Length: 570 Strand: Plus
+        unnamed protein product
+Target: sp|P45897.1| Length: 570 Strand: Plus
+        RecName: Full=Dwarfin sma-4; AltName: Full=MAD protein homolog 3
+        [Caenorhabditis elegans] &gt;gb|AAA97605.1| SMA-4 [Caenorhabditis elegans]
+
+Score:1192 bits(3084), Expect:0,
+Identities:570/570(100%),  Positives:570/570(100%),  Gaps:0.570(0%)
+
+sp|P45897         0 MFHPGMTSQPSTSNQMYYDPLYGAEQIVQCNPMDYHQANILCGMQYFNNSHNRYPLLPQM
+                  0 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Query_488         0 MFHPGMTSQPSTSNQMYYDPLYGAEQIVQCNPMDYHQANILCGMQYFNNSHNRYPLLPQM
+
+sp|P45897        60 PPQFTNDHPYDFPNVPTISTLDEASSFNGFLIPSQPSSYNNNNISCVFTPTPCTSSQASS
+                 60 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Query_488        60 PPQFTNDHPYDFPNVPTISTLDEASSFNGFLIPSQPSSYNNNNISCVFTPTPCTSSQASS
+
+sp|P45897       120 QPPPTPTVNPTPIPPNAGAVLTTAMDSCQQISHVLQCYQQGGEDSDFVRKAIESLVKKLK
+                120 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Query_488       120 QPPPTPTVNPTPIPPNAGAVLTTAMDSCQQISHVLQCYQQGGEDSDFVRKAIESLVKKLK
+
+sp|P45897       180 DKRIELDALITAVTSNGKQPTGCVTIQRSLDGRLQVAGRKGVPHVVYARIWRWPKVSKNE
+                180 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Query_488       180 DKRIELDALITAVTSNGKQPTGCVTIQRSLDGRLQVAGRKGVPHVVYARIWRWPKVSKNE
+
+sp|P45897       240 LVKLVQCQTSSDHPDNICINPYHYERVVSNRITSADQSLHVENSPMKSEYLGDAGVIDSC
+                240 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Query_488       240 LVKLVQCQTSSDHPDNICINPYHYERVVSNRITSADQSLHVENSPMKSEYLGDAGVIDSC
+
+sp|P45897       300 SDWPNTPPDNNFNGGFAPDQPQLVTPIISDIPIDLNQIYVPTPPQLLDNWCSIIYYELDT
+                300 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Query_488       300 SDWPNTPPDNNFNGGFAPDQPQLVTPIISDIPIDLNQIYVPTPPQLLDNWCSIIYYELDT
+
+sp|P45897       360 PIGETFKVSARDHGKVIVDGGMDPHGENEGRLCLGALSNVHRTEASEKARIHIGRGVELT
+                360 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Query_488       360 PIGETFKVSARDHGKVIVDGGMDPHGENEGRLCLGALSNVHRTEASEKARIHIGRGVELT
+
+sp|P45897       420 AHADGNISITSNCKIFVRSGYLDYTHGSEYSSKAHRFTPNESSFTVFDIRWAYMQMLRRS
+                420 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Query_488       420 AHADGNISITSNCKIFVRSGYLDYTHGSEYSSKAHRFTPNESSFTVFDIRWAYMQMLRRS
+
+sp|P45897       480 RSSNEAVRAQAAAVAGYAPMSVMPAIMPDSGVDRMRRDFCTIAISFVKAWGDVYQRKTIK
+                480 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Query_488       480 RSSNEAVRAQAAAVAGYAPMSVMPAIMPDSGVDRMRRDFCTIAISFVKAWGDVYQRKTIK
+
+sp|P45897       540 ETPCWIEVTLHRPLQILDQLLKNSSQFGSS 570
+                540 |||||||||||||||||||||||||||||| 570
+Query_488       540 ETPCWIEVTLHRPLQILDQLLKNSSQFGSS 570
+
 </code></pre>
 </div>
 </div>
 <p>Let’s say we need only the alignment with the mouse sequence, then, to print first 50 characters of each alignment with the mouse sequence along with corresponding statistics, the following code can be used.</p>
-<div id="cell-50" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> alignment <span class="kw">in</span> blast_record.alignments:</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"Mus musculus"</span> <span class="kw">in</span> alignment.title:</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(alignment.title)</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> hsp <span class="kw">in</span> alignment.hsps:</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(hsp.query[<span class="dv">0</span>:<span class="dv">50</span>])</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(hsp.match[<span class="dv">0</span>:<span class="dv">50</span>])</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(hsp.sbjct[<span class="dv">0</span>:<span class="dv">50</span>])</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(hsp.positives, hsp.score, hsp.expect)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-55" class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> hits <span class="kw">in</span> blast_record:</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> alignment <span class="kw">in</span> hits:</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">"brenneri"</span> <span class="kw">in</span> alignment.target.description:</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(alignment.target.description)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(alignment.score, alignment.annotations[<span class="st">'evalue'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>gb|KAI2586911.1| SMAD family member 4 [Homo sapiens] &gt;gb|KAI4046350.1| SMAD family member 4 [Homo sapiens] &gt;gb|PNI70022.1| SMAD4 isoform 6 [Pan troglodytes] &gt;gb|PNJ43713.1| SMAD4 isoform 9 [Pongo abelii]
-TAMDSCQQISHVLQCYQQGGEDSDFVRKAIESLVKKLKDKRIELDALITA
-T+ D+C  I H L C++QGGE   F ++AIESLVKKLK+K+ ELD+LITA
-TSNDACLSIVHSLMCHRQGGESETFAKRAIESLVKKLKEKKDELDSLITA
-274 795.0 8.00678e-96</code></pre>
+<pre><code>unnamed protein product [Caenorhabditis brenneri]
+2161.0 0.0
+hypothetical protein CAEBREN_31444 [Caenorhabditis brenneri]
+1889.0 0.0
+sma-4, partial [Caenorhabditis brenneri]
+997.0 1.39233e-129</code></pre>
 </div>
+</div>
+</section>
+<section id="genome-diagrams" class="level2" data-number="15.10">
+<h2 data-number="15.10" class="anchored" data-anchor-id="genome-diagrams"><span class="header-section-number">15.10</span> Genome Diagrams</h2>
+<p>The <code>GenomeDiagram</code> <a href="https://biopython.org/docs/dev/Tutorial/chapter_graphics.html">Link</a> module within Biopython’s <code>Bio.Graphics</code> package can be used to generate publication-quality representations of circular and linear genomes. The diagrams can be saved in different formats including PDF, PNG, and SVG. To use the <code>GenomeDiagram</code> module, the <code>reportlab</code> and <code>pycairo</code> libraries are required. These can be installed using the following command:</p>
+<p><code>pip install "reportlab[pycairo]"</code></p>
+<p>The code below shows creating a linear genome diagram for a plasmid sequence read from a GenBank file. The features of type “gene” are added to the diagram with different colors based on the strand information. The diagram is then saved in the png format. For this example, we’ll use a <a href="https://raw.githubusercontent.com/biopython/biopython/master/Tests/GenBank/NC_005816.gb">GenBank file</a> from the Biopython tutorial repository available.</p>
+<div id="cell-57" class="cell" data-execution_count="91">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>record <span class="op">=</span> SeqIO.read(<span class="st">"NC_005816.gb"</span>, <span class="st">"genbank"</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>record</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="91">
+<pre><code>SeqRecord(seq=Seq('TGTAACGAACGGTGCAATAGTGATCCACACCCAACGCCTGAAATCAGATCCAGG...CTG'), id='NC_005816.1', name='NC_005816', description='Yersinia pestis biovar Microtus str. 91001 plasmid pPCP1, complete sequence', dbxrefs=['Project:58037'])</code></pre>
+</div>
+</div>
+<div id="cell-58" class="cell" data-execution_count="119">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> feature <span class="kw">in</span> record.features:</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> feature.<span class="bu">type</span> <span class="op">==</span> <span class="st">"gene"</span>:</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(feature.location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[86:1109](+)
+[1105:1888](+)
+[2924:3119](+)
+[3485:3857](+)
+[4342:4780](+)
+[4814:5888](-)
+[6004:6421](+)
+[6663:7602](+)
+[7788:8088](-)
+[8087:8360](-)</code></pre>
+</div>
+</div>
+<p>To create a genome diagram, we’ll first initialize a <code>Diagram</code> object followed by a <code>Track</code> and a <code>FeatureSet</code> to hold the features to be added to the diagram.</p>
+<div id="cell-60" class="cell" data-execution_count="103">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio.Graphics <span class="im">import</span> GenomeDiagram</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> reportlab.lib <span class="im">import</span> colors</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> reportlab.lib.units <span class="im">import</span> cm</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>gd_diagram <span class="op">=</span> GenomeDiagram.Diagram(record.description)</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>gd_track_for_features <span class="op">=</span> gd_diagram.new_track(<span class="dv">1</span>, name<span class="op">=</span><span class="st">"Annotated Features"</span>)</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>gd_feature_set <span class="op">=</span> gd_track_for_features.new_set()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we’ll add features to the <code>gd_feature_set</code> object using the <code>add_feature</code> method. The features will be colored differently based on their position and strand information.</p>
+<div id="cell-62" class="cell" data-execution_count="124">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> feature <span class="kw">in</span> record.features:</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> feature.<span class="bu">type</span> <span class="op">==</span> <span class="st">"gene"</span>:</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(gd_feature_set) <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>                color <span class="op">=</span> colors.blue</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>                color <span class="op">=</span> colors.pink</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> feature.location.strand <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>                color <span class="op">=</span> colors.green</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>            gd_feature_set.add_feature(feature, color<span class="op">=</span>color, label<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, we’ll draw the diagram and save it in the png format. The <code>franments</code> argument in the <code>draw</code> function specifies the number of fragments of the genome to create when rendering the diagram.</p>
+<div id="cell-64" class="cell" data-execution_count="118">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>gd_diagram.draw(</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">"linear"</span>,</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    orientation<span class="op">=</span><span class="st">"landscape"</span>,</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    pagesize<span class="op">=</span><span class="st">"A4"</span>,</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    fragments<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    start<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    end<span class="op">=</span><span class="bu">len</span>(record),</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>gd_diagram.write(<span class="st">"plasmid_linear.png"</span>, <span class="st">"PNG"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="plasmid_linear.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>plasmid_linear.png</figcaption>
+</figure>
+</div>
+<p>Similarly, we can create a circular genome diagram by specifying the <code>format</code> keyword argument as <code>circular</code> within the <code>draw</code> function.</p>
+<div id="cell-67" class="cell" data-execution_count="125">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>gd_diagram.draw(</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">"circular"</span>,</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>    circular<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    pagesize<span class="op">=</span>(<span class="dv">20</span> <span class="op">*</span> cm, <span class="dv">20</span> <span class="op">*</span> cm),</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>    start<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>    end<span class="op">=</span><span class="bu">len</span>(record),</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>    circle_core<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>gd_diagram.write(<span class="st">"plasmid_circular.png"</span>, <span class="st">"PNG"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="plasmid_circular.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>plasmid_circular.png</figcaption>
+</figure>
 </div>
 
 
