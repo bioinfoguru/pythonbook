@@ -13,6 +13,8 @@ format:
     css: "slides.css"
     template-partials:
       - title-slide.html
+    mermaid:
+      version: "10.4.0"
 title-slide-attributes:
   data-background-color: "#dcf0fa"
   data-background-size: 75px
@@ -121,6 +123,7 @@ Notebooks
 ::: {.r-stack}
 
 ::: {.fragment .fade-in-then-out data-fragment-index="1"}
+<br>
 ``` {python}
 #| echo: true
 print("Hello")
@@ -129,12 +132,6 @@ print("Hello")
 ``` {python}
 #| echo: true
 len("Hello")
-```
-<br>
-``` {python}
-#| echo: true
-for fruit in ["Apple","Banana","Mango"]:
-	print(fruit)
 ```
 :::
 
@@ -159,17 +156,20 @@ int main() {
 ::: {.fragment .fade-in-then-out data-fragment-index="3" style="transform: scale(2);"}
 
 ```{mermaid}
+%%{init: {'theme': 'base','themeVariables': {
+    'fontSize': '48px'
+  }}}%%
 mindmap
 root((Python))
     Versatility
-      Obejct-oriented
+      Object-oriented
       Functional
-	  Imperative
-	Flexibility
-	  Data Science
-	  Web development
-	  Automation
-	  Apps and games
+      Imperative
+    Flexibility
+      Data Science
+      Web development
+      Automation
+      Apps and games
 ```
 
 :::
