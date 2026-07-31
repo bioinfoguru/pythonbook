@@ -14,7 +14,7 @@ format:
     template-partials:
       - title-slide.html
     mermaid:
-      version: "10.4.0"
+      version: "11.12.0"
 title-slide-attributes:
   data-background-color: "#dcf0fa"
   data-background-size: 75px
@@ -158,7 +158,7 @@ int main() {
 ```{mermaid}
 %%{init: {'theme': 'base','themeVariables': {
     'fontSize': '48px'
-  }}}%%
+  },'themeCSS': 'foreignObject p { font-weight: bold; } .section-0 path.node-bkg, .section-0 .node-bkg { fill: #c998f8 !important; } .section-1 path.node-bkg, .section-1 .node-bkg { fill: #84d7f3 !important; } .section-root circle, .section-root polygon { fill: #fff3c4 !important; } #node-6, #node-7, #node-8, #node-9 { fill: #6fc0e0 !important; }'}}%%
 mindmap
 root((Python))
     Versatility
@@ -175,9 +175,9 @@ root((Python))
 :::
 
 ::: {.fragment .fade-in-then-out data-fragment-index="4"}
-![](https://pydsc.files.wordpress.com/2017/11/pythonenvironment.png)
-<span style="font-size: 0.4em;">
-[https://pydsc.files.wordpress.com/2017/11/pythonenvironment.png](https://pydsc.files.wordpress.com/2017/11/pythonenvironment.png)
+![](https://studyopedia.com/wp-content/uploads/2023/07/Python-Libraries-Studyopedia.png)
+<span style="font-size: 0.3em;">
+[https://studyopedia.com/wp-content/uploads/2023/07/Python-Libraries-Studyopedia.png](https://studyopedia.com/wp-content/uploads/2023/07/Python-Libraries-Studyopedia.png)
 </span>
 :::
 

@@ -173,6 +173,22 @@
     margin: 0;             /* Resets default top/bottom margins */
 }
 
+/* Center text in mermaid mindmap labels (reveal overrides the label layout) */
+svg.mermaid-js foreignObject div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+}
+svg.mermaid-js foreignObject p {
+  margin: 0;
+}
+svg.mermaid-js foreignObject p + p {
+  margin-top: 0;
+}
+
 
 @keyframes animate {
 	0% {
