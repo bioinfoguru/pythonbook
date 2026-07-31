@@ -162,7 +162,7 @@ config:
   themeVariables:
     fontSize: '48px'
   themeCSS: |
-    foreignObject p { font-weight: medium; }
+    foreignObject p { font-weight: bold; }
     .section-0 path.node-bkg, .section-0 .node-bkg { fill: #c998f8 !important; }
     .section-1 path.node-bkg, .section-1 .node-bkg { fill: #84d7f3 !important; }
     .section-root circle, .section-root polygon { fill: #f5c55e !important; }
