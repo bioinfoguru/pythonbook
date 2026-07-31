@@ -156,9 +156,19 @@ int main() {
 ::: {.fragment .fade-in-then-out data-fragment-index="3" style="transform: scale(2);"}
 
 ```{mermaid}
-%%{init: {'theme': 'base','themeVariables': {
-    'fontSize': '48px'
-  },'themeCSS': 'foreignObject p { font-weight: medium; } .section-0 path.node-bkg, .section-0 .node-bkg { fill: #c998f8 !important; } .section-1 path.node-bkg, .section-1 .node-bkg { fill: #84d7f3 !important; } .section-root circle, .section-root polygon { fill: #fff3c4 !important; } #node-6, #node-7, #node-8, #node-9 { fill: #6fc0e0 !important; }'}}%%
+---
+config:
+  theme: base
+  themeVariables:
+    fontSize: '48px'
+  themeCSS: |
+    foreignObject p { font-weight: medium; }
+    .section-0 path.node-bkg, .section-0 .node-bkg { fill: #c998f8 !important; }
+    .section-1 path.node-bkg, .section-1 .node-bkg { fill: #84d7f3 !important; }
+    .section-root circle, .section-root polygon { fill: #f5c55e !important; }
+    #node-6, #node-7, #node-8, #node-9 { fill: #6fc0e0 !important; }
+    #node-2, #node-3, #node-4 { fill: #bb7bf7 !important; }
+---
 mindmap
 root((Python))
     Versatility
