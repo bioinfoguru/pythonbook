@@ -23,6 +23,7 @@ title-slide-attributes:
 include-in-header:
   - text: |
       <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="icon" type="image/png" href="python_images/logo_final_padding_square2.png">
 include-after-body: slides.js
 ---
 
@@ -91,6 +92,10 @@ Notebooks
 
 ---
 
+## <span style='font-family:Geo;color:#9c51e0;font-weight:normal;'>bioinfo.guru/kalonji</span>
+![](python_images/kalonji_screenshot.png)
+
+---
 
 ## Python advantages
 
