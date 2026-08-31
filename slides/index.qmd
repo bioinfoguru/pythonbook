@@ -23,7 +23,7 @@ title-slide-attributes:
 include-in-header:
   - text: |
       <script src="https://cdn.tailwindcss.com"></script>
-      <link rel="icon" type="image/png" href="python_images/logo_final_padding_square2.png">
+      <link rel="icon" type="image/png" href="python_images/logo_path_square.png">
 include-after-body: slides.js
 ---
 
