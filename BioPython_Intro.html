@@ -67,7 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <link href="./Functions.html" rel="prev">
-<link href="./logo_final_transparent.png" rel="icon" type="image/png">
+<link href="./logo_final_padding_square2.png" rel="icon" type="image/png">
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -1024,7 +1024,7 @@ DONE</code></pre>
 </section>
 <section id="blast-search-using-sequence-file" class="level2" data-number="15.9">
 <h2 data-number="15.9" class="anchored" data-anchor-id="blast-search-using-sequence-file"><span class="header-section-number">15.9</span> BLAST search using sequence file</h2>
-<p>To run the Blast search using a sequence file instead of gi number, we first need to create a seqeunce object and then pass it on to the <code>qblast</code> function as shown below. To run this code, save the protein sequence below in a new file example1.fasta.</p>
+<p>To run the Blast search using a sequence file instead of gi number, we first need to create a sequence object and then pass it on to the <code>qblast</code> function as shown below. To run this code, save the protein sequence below in a new file example1.fasta.</p>
 <p>%load example1.fasta</p>
 <div id="cell-53" class="cell" data-execution_count="80">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>seq_file <span class="op">=</span> SeqIO.read(<span class="st">'example1.fasta'</span>, <span class="st">'fasta'</span>)</span>
