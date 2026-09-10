@@ -92,7 +92,7 @@ Notebooks
 
 ---
 
-## <span style='font-family:Geo;color:#9c51e0;font-weight:normal;'>bioinfo.guru/kalonji</span>
+## kalonji.<span style='font-family:Geo;color:#9c51e0;font-weight:normal;'>bioinfo.guru</span>
 ![](python_images/kalonji_screenshot.png)
 
 ---
