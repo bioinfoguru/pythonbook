@@ -465,7 +465,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Pandas is a library that is useful for working with different types of datasets. A dataframe is a pandas object that has a variety of function to process, analyze, and visualize data. It arranges the data in rows and columns. There are multiple ways in which a dataframe can be created. For example, a dictionary with list as values can be converted to a dataframe such that the keys become headers and values (list) are entries in the dataframe. The orientation of the dataframe by default is <code>columns</code> ie keys are considered as column header and values are rows. This behaviour can be changed using the <code>orient</code> argument. When orientation is index, an addtional argument <code>columns</code> can be used to specify column headers.</p>
-<div id="95d930f8" class="cell" data-execution_count="3">
+<div id="95d930f8" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>input_dict <span class="op">=</span> {<span class="st">'Column1'</span>: [<span class="st">'A'</span>,<span class="st">'B'</span>,<span class="st">'C'</span>,<span class="st">'D'</span>,<span class="st">'E'</span>], <span class="op">\</span></span>
@@ -1354,7 +1354,7 @@ df1.values     [['A' 1]
 <section id="merge" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="merge">Merge</h3>
 <p>The <code>merge</code> function in pandas is used combine two dataframes on one or more columns. The <code>on</code> argument takes name(s) of column or index levels to be merged. If <code>on</code> is None (default) then all the columns are considred and in case of identical columns, an intersection is performed. When <code>on</code> is specified and the merged dataframe results in duplicate column names then <code>suffixes</code> argument can be used to indicate the original datafames.</p>
-<div id="18ae8609" class="cell" data-execution_count="29">
+<div id="18ae8609" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read a csv file having following data</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Name,Age,Country</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sohan,22,India</span></span>
@@ -1378,7 +1378,7 @@ df1.values     [['A' 1]
 <span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                      suffixes<span class="op">=</span>(<span class="st">'_df3'</span>, <span class="st">'_df4'</span>))</span>
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>display(df_merged2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f969c25d" class="cell quarto-layout-panel" data-layout-nrow="2" data-layout-ncol="2" data-execution_count="18">
+<div id="f969c25d" class="cell quarto-layout-panel" data-execution_count="18" data-layout-ncol="2" data-layout-nrow="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -1531,6 +1531,316 @@ df1.values     [['A' 1]
 </div>
 </div>
 </div>
+<p>One of the most important concept when using merge is <em>how</em> the merge is performed. The <code>how</code> keyword parameter dictates which rows to include in the output - in addition to the matching rows. With the default value <code>inner</code> for how, output will have only the rows the matched in both the dataframes. When <code>how</code> is <code>left</code> of <code>right</code> then in addition to the matching rows in both dataframe, all the rows from the left dataframe or right dataframe, respectively, are retained in the output. With <code>how = outer</code> all rows from both dataframes are inculded in the merged dataframe. Let’s understand these concepts using the two dataframes below.</p>
+<div id="58e014aa-dbc9-4dde-9945-4891406e292f" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="25">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">df_left</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>key</th>
+      <th>value1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>C</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">df_right</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>key</th>
+      <th>value2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>C</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>On merging these two dataframes using four different options for <code>how</code>, we’ll get the following output. Notice the NaN values in case of <code>left</code>, <code>right</code>, and <code>outer</code> join.</p>
+<div id="23b3d3f4-9f89-4e4d-acb2-9f28a5aa6a4d" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="42">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<style type="text/css">
+#T_a13f0 th {
+  font-size: 0.9em;
+  font-family: monospace;
+  font-weight: normal;
+}
+</style>
+<table id="T_a13f0">
+  <thead>
+    <tr>
+      <th id="T_a13f0_level0_col0" class="col_heading level0 col0">pd.merge(df_left, df_right, on="key", how="left")</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_a13f0_row0_col0" class="data row0 col0"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<style type="text/css">
+#T_78018 th {
+  font-size: 0.9em;
+  font-family: monospace;
+  font-weight: normal;
+}
+</style>
+<table id="T_78018">
+  <thead>
+    <tr>
+      <th id="T_78018_level0_col0" class="col_heading level0 col0">pd.merge(df_left, df_right, on="key", how="right")</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_78018_row0_col0" class="data row0 col0"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>key</th>
+      <th>value1</th>
+      <th>value2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>1</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B</td>
+      <td>2</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>C</td>
+      <td>3</td>
+      <td>5.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>key</th>
+      <th>value1</th>
+      <th>value2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>B</td>
+      <td>2.0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>C</td>
+      <td>3.0</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>D</td>
+      <td>NaN</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<style type="text/css">
+#T_4e94d th {
+  font-size: 0.9em;
+  font-family: monospace;
+  font-weight: normal;
+}
+</style>
+<table id="T_4e94d">
+  <thead>
+    <tr>
+      <th id="T_4e94d_level0_col0" class="col_heading level0 col0">pd.merge(df_left, df_right, on="key", how="inner")</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_4e94d_row0_col0" class="data row0 col0"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<style type="text/css">
+#T_31bd0 th {
+  font-size: 0.9em;
+  font-family: monospace;
+  font-weight: normal;
+}
+</style>
+<table id="T_31bd0">
+  <thead>
+    <tr>
+      <th id="T_31bd0_level0_col0" class="col_heading level0 col0">pd.merge(df_left, df_right, on="key", how="outer")</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_31bd0_row0_col0" class="data row0 col0"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>key</th>
+      <th>value1</th>
+      <th>value2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>B</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>C</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th></th>
+      <th>key</th>
+      <th>value1</th>
+      <th>value2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B</td>
+      <td>2.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>C</td>
+      <td>3.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>D</td>
+      <td>NaN</td>
+      <td>6.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="join" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="join">Join</h3>
@@ -1540,7 +1850,7 @@ df1.values     [['A' 1]
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Pandas_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1892,7 +2202,7 @@ Name: Marks, dtype: float64</code></pre>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Column-wise highlighting of maximum value"</span>))</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>display(df_1.style.highlight_min(axis<span class="op">=</span><span class="dv">1</span>,props<span class="op">=</span><span class="st">"font-weight:bold;background-color:pink;"</span>)<span class="op">\</span></span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Row-wise highlighting of minimum value"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="c184706e" class="cell quarto-layout-panel" data-execution_count="26" data-scrolled="true" data-layout-ncol="2">
+<div id="c184706e" class="cell quarto-layout-panel" data-scrolled="true" data-layout-ncol="2" data-execution_count="26">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <style type="text/css">
@@ -2523,10 +2833,10 @@ Name: Marks, dtype: float64</code></pre>
 <div id="547d5215" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="11">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="Pandas_files/figure-html/cell-33-output-1.png" class="img-fluid"></p>
+<p><img src="Pandas_files/figure-html/cell-36-output-1.png" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="Pandas_files/figure-html/cell-33-output-2.png" class="img-fluid"></p>
+<p><img src="Pandas_files/figure-html/cell-36-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 </div>
@@ -2820,7 +3130,7 @@ dtype: object</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-39-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Pandas_files/figure-html/cell-42-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -2832,14 +3142,14 @@ dtype: object</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-40-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Pandas_files/figure-html/cell-43-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-40-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="Pandas_files/figure-html/cell-43-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -2852,7 +3162,7 @@ dtype: object</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-41-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Pandas_files/figure-html/cell-44-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -2869,7 +3179,7 @@ dtype: object</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-42-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Pandas_files/figure-html/cell-45-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -2972,7 +3282,7 @@ For this kind of a plot, we first need to modify (or reformat) our dataframe so 
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-44-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Pandas_files/figure-html/cell-47-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -3074,7 +3384,7 @@ countplot()
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-45-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Pandas_files/figure-html/cell-48-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -3091,7 +3401,7 @@ countplot()
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-46-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Pandas_files/figure-html/cell-49-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
