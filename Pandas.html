@@ -474,7 +474,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.DataFrame.from_dict(input_dict, orient<span class="op">=</span><span class="st">'index'</span>, columns<span class="op">=</span>[<span class="st">'Val1'</span>,<span class="st">'Val2'</span>,<span class="st">'Val3'</span>,<span class="st">'Val4'</span>,<span class="st">'Val5'</span>,])</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>display(df1)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>display(df2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="e63113cb" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="3">
+<div id="e63113cb" class="cell quarto-layout-panel" data-execution_count="3" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -564,7 +564,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="13.1" class="anchored" data-anchor-id="indexing-and-selecting"><span class="header-section-number">13.1</span> Indexing and Selecting</h2>
 <p>The data in a dataframes are arranged in rows and columns both of which have labels. The get a slice of a dataframe, these labels can used with the <code>loc</code> attribute. The <code>columns</code> and <code>index</code> attributes for a dataframe return an iteratable collection of column labels and index labels. To select a subset of a dataframe using indcies for the rows and columns use <code>iloc</code>. Both <code>loc</code> and <code>iloc</code> takes a slice of row label/range and column label/range. Note that a one-dimensional slice of a dataframe returns a <code>Series</code> object i.e.&nbsp;if we select one column or one row, a <code>Series</code> object would be returned. To convert a series object to a dataframe use <code>to_frame</code> function.</p>
 <p>Multi-indexing is also possible i.e., a row or a column can have more than one label. In such cases, selections can be made by specifing labels as a tuple.</p>
-<div id="f20f2e27" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="4">
+<div id="f20f2e27" class="cell quarto-layout-panel" data-execution_count="4" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <style type="text/css">
@@ -617,7 +617,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="3979aa05" class="cell quarto-layout-panel" data-layout-nrows="2" data-layout-ncol="2" data-execution_count="4">
+<div id="3979aa05" class="cell quarto-layout-panel" data-execution_count="4" data-layout-ncol="2" data-layout-nrows="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -759,7 +759,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dataframe-information" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="dataframe-information"><span class="header-section-number">13.2</span> Dataframe information</h2>
 <p>Pandas offers set of commands to get some basic information about the content of dataframes. Below are some of these command along with their corresponding output.</p>
-<div id="9995d0d2" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="6">
+<div id="9995d0d2" class="cell quarto-layout-panel" data-execution_count="6" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -830,7 +830,7 @@ df1.values     [['A' 1]
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df4 <span class="op">=</span> pd.read_csv(<span class="st">"test.csv"</span>, index_col<span class="op">=</span><span class="st">"Country"</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>display(df3)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>display(df4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="1b19d8ab" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="8">
+<div id="1b19d8ab" class="cell quarto-layout-panel" data-execution_count="8" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -916,7 +916,7 @@ df1.values     [['A' 1]
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame(np.random.uniform(<span class="dv">1</span>,<span class="dv">2</span>,size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>)), columns<span class="op">=</span><span class="bu">list</span>(<span class="st">'ABCD'</span>))</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df_2 <span class="op">=</span> pd.DataFrame(np.random.uniform(<span class="dv">2</span>,<span class="dv">3</span>,size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>)), columns<span class="op">=</span><span class="bu">list</span>(<span class="st">'ABCD'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="fbe2af55" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="7">
+<div id="fbe2af55" class="cell quarto-layout-panel" data-execution_count="7" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -1354,7 +1354,7 @@ df1.values     [['A' 1]
 <section id="merge" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="merge">Merge</h3>
 <p>The <code>merge</code> function in pandas is used combine two dataframes on one or more columns. The <code>on</code> argument takes name(s) of column or index levels to be merged. If <code>on</code> is None (default) then all the columns are considred and in case of identical columns, an intersection is performed. When <code>on</code> is specified and the merged dataframe results in duplicate column names then <code>suffixes</code> argument can be used to indicate the original datafames.</p>
-<div id="18ae8609" class="cell" data-execution_count="3">
+<div id="18ae8609" class="cell" data-execution_count="53">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read a csv file having following data</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Name,Age,Country</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sohan,22,India</span></span>
@@ -1532,7 +1532,7 @@ df1.values     [['A' 1]
 </div>
 </div>
 <p>One of the most important concept when using merge is <em>how</em> the merge is performed. The <code>how</code> keyword parameter dictates which rows to include in the output - in addition to the matching rows. With the default value <code>inner</code> for how, output will have only the rows the matched in both the dataframes. When <code>how</code> is <code>left</code> of <code>right</code> then in addition to the matching rows in both dataframe, all the rows from the left dataframe or right dataframe, respectively, are retained in the output. With <code>how = outer</code> all rows from both dataframes are inculded in the merged dataframe. Let’s understand these concepts using the two dataframes below.</p>
-<div id="58e014aa-dbc9-4dde-9945-4891406e292f" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="25">
+<div id="58e014aa-dbc9-4dde-9945-4891406e292f" class="cell quarto-layout-panel" data-execution_count="25" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div>
@@ -1606,8 +1606,17 @@ df1.values     [['A' 1]
 </div>
 </div>
 </div>
-<p>On merging these two dataframes using four different options for <code>how</code>, we’ll get the following output. Notice the NaN values in case of <code>left</code>, <code>right</code>, and <code>outer</code> join.</p>
-<div id="23b3d3f4-9f89-4e4d-acb2-9f28a5aa6a4d" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="42">
+<p>On merging these two dataframes using four different options for <code>how</code>, we’ll get the following output. Notice the <code>NaN</code> values in case of <code>left</code>, <code>right</code>, and <code>outer</code> join. The figure below shows a schematic representation for the four join options.</p>
+<div id="9bccd0e5-3073-4f02-8e6a-993250540041" class="cell" data-execution_count="43">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="23b3d3f4-9f89-4e4d-acb2-9f28a5aa6a4d" class="cell quarto-layout-panel" data-execution_count="42" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <style type="text/css">
@@ -1844,17 +1853,7 @@ df1.values     [['A' 1]
 </section>
 <section id="join" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="join">Join</h3>
-<p>The <code>join</code> function for a dataframe oject is used to combine one or more dataframes. By default the joining is performed along the indcies and the <code>lsuffix</code> and <code>rsuffix</code> arguments can be used to modify column names. In this case, new columns from one of the dataframes are added to the other. The <code>on</code> keyword specifies the index label on which to join the dataframes.</p>
-<p>The joining of dataframe can be performed with different logics in terms of how to handle the overlapping columns. The diagram below shows the pictorial representation of four options that we have. In these Venn diagrams the darker shade shows the subset that will be selected. Here <code>left</code> refers to the dataframe on which the join function is called and <code>right</code> is the dataframe which goes as the argument for the <code>join</code> function.</p>
-<div id="c829b1e8" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+<p>The <code>join</code> function is similar to <code>merge</code> in terms of its function i.e.&nbsp;to combine two dataframes. In fact, <code>join</code> is a wrapper for the <code>merge</code> function, having some convenience features. An important distinction between the two is that <code>merge</code> is a top level function i.e.&nbsp;neither of the two dataframes “owns” the function while <code>join</code> is an instance method i.e.&nbsp;one of the dataframe calls the function. Another difference between the two functions is the default join option, <code>merge</code> uses <code>inner</code> while <code>join</code> does <code>left</code> join by default. With <code>join</code> the dataframes are combinedalong the indcies and the <code>lsuffix</code> and <code>rsuffix</code> arguments can be used to modify column names in the joined dataframe. In this case, new columns from one of the dataframes are added to the other. The <code>on</code> keyword specifies the index label on which to join the dataframes.</p>
 <div id="8111d2f8" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>display(df3.join(df4,lsuffix<span class="op">=</span><span class="st">'_df3'</span>, rsuffix<span class="op">=</span><span class="st">'_df4'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1931,8 +1930,8 @@ df1.values     [['A' 1]
 </div>
 </div>
 <p>To join <code>df4</code> to <code>df3</code> on <code>Country</code>, we need to set the index of <code>df4</code> to <code>Country</code>. Note that there are two rows with index <code>0</code> because there is one row with India in <code>df3</code> and two such rows in <code>df_4</code>. Also, in the joined dataframe there is no data for UK since there was no row in <code>df3</code> with UK in <code>Country</code> column. This behaviour can be changed by adding the <code>how</code> argument to <code>join</code> function (see below).</p>
-<div id="b011d009" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>display(df3.join(df4.set_index(<span class="st">"Country"</span>),on<span class="op">=</span><span class="st">"Country"</span>, lsuffix<span class="op">=</span><span class="st">'_df3'</span>, rsuffix<span class="op">=</span><span class="st">'_df4'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b011d009" class="cell" data-execution_count="67">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>display(df3.join(df4.set_index(<span class="st">"Country"</span>),on<span class="op">=</span><span class="st">"Country"</span>, lsuffix<span class="op">=</span><span class="st">'_df3'</span>, rsuffix<span class="op">=</span><span class="st">'_df4'</span>, how<span class="op">=</span><span class="st">"outer"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -1949,25 +1948,33 @@ df1.values     [['A' 1]
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
+      <th>0.0</th>
       <td>Sohan</td>
-      <td>22</td>
+      <td>22.0</td>
       <td>India</td>
       <td>Sohan</td>
       <td>22</td>
     </tr>
     <tr>
-      <th>0</th>
+      <th>0.0</th>
       <td>Sohan</td>
-      <td>22</td>
+      <td>22.0</td>
       <td>India</td>
       <td>Mohan</td>
       <td>25</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>NaN</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>UK</td>
+      <td>Peter</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>1.0</th>
       <td>Sam</td>
-      <td>21</td>
+      <td>21.0</td>
       <td>USA</td>
       <td>Sam</td>
       <td>21</td>
@@ -1978,8 +1985,8 @@ df1.values     [['A' 1]
 </div>
 </div>
 <p>To get the joined dataframe with <code>Country</code> as index, set indcies for both the dataframes to <code>Country</code>.</p>
-<div id="a707aa51" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>display(df3.join(df4.set_index(<span class="st">"Country"</span>),on<span class="op">=</span><span class="st">"Country"</span>, lsuffix<span class="op">=</span><span class="st">'_df3'</span>, rsuffix<span class="op">=</span><span class="st">'_df4'</span>, how<span class="op">=</span><span class="st">'outer'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="852ef58b" class="cell" data-execution_count="66">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>display(df3.set_index(<span class="st">"Country"</span>).join(df4.set_index(<span class="st">"Country"</span>), on<span class="op">=</span><span class="st">"Country"</span>, lsuffix<span class="op">=</span><span class="st">'_df3'</span>, rsuffix<span class="op">=</span><span class="st">'_df4'</span>, how<span class="op">=</span><span class="st">"outer"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -1987,83 +1994,37 @@ df1.values     [['A' 1]
   <thead>
     <tr>
       <th></th>
+      <th>Country</th>
       <th>Name_df3</th>
       <th>Age_df3</th>
-      <th>Country</th>
       <th>Name_df4</th>
       <th>Age_df4</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0.0</th>
+      <th>India</th>
+      <td>India</td>
       <td>Sohan</td>
       <td>22.0</td>
-      <td>India</td>
       <td>Sohan</td>
       <td>22</td>
     </tr>
     <tr>
-      <th>0.0</th>
+      <th>India</th>
+      <td>India</td>
       <td>Sohan</td>
       <td>22.0</td>
-      <td>India</td>
       <td>Mohan</td>
       <td>25</td>
-    </tr>
-    <tr>
-      <th>1.0</th>
-      <td>Sam</td>
-      <td>21.0</td>
-      <td>USA</td>
-      <td>Sam</td>
-      <td>21</td>
     </tr>
     <tr>
       <th>NaN</th>
-      <td>NaN</td>
-      <td>NaN</td>
       <td>UK</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>Peter</td>
       <td>20</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-</div>
-<div id="852ef58b" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>display(df3.set_index(<span class="st">"Country"</span>).join(df4.set_index(<span class="st">"Country"</span>),on<span class="op">=</span><span class="st">"Country"</span>, lsuffix<span class="op">=</span><span class="st">'_df3'</span>, rsuffix<span class="op">=</span><span class="st">'_df4'</span>, how<span class="op">=</span><span class="st">"outer"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-
-<table class="dataframe table table-sm table-striped small">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Country</th>
-      <th>Name_df3</th>
-      <th>Age_df3</th>
-      <th>Name_df4</th>
-      <th>Age_df4</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>India</th>
-      <td>India</td>
-      <td>Sohan</td>
-      <td>22.0</td>
-      <td>Sohan</td>
-      <td>22</td>
-    </tr>
-    <tr>
-      <th>India</th>
-      <td>India</td>
-      <td>Sohan</td>
-      <td>22.0</td>
-      <td>Mohan</td>
-      <td>25</td>
     </tr>
     <tr>
       <th>USA</th>
@@ -2072,14 +2033,6 @@ df1.values     [['A' 1]
       <td>21.0</td>
       <td>Sam</td>
       <td>21</td>
-    </tr>
-    <tr>
-      <th>NaN</th>
-      <td>UK</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Peter</td>
-      <td>20</td>
     </tr>
   </tbody>
 </table>
@@ -2092,11 +2045,11 @@ df1.values     [['A' 1]
 <h2 data-number="13.5" class="anchored" data-anchor-id="groupby"><span class="header-section-number">13.5</span> Groupby</h2>
 <p>We can create groups for same values in a column to apply a function to all rows having a particular value.</p>
 <div id="1ca234bd" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>students <span class="op">=</span> [[<span class="st">"Sam"</span>,<span class="st">"Peter"</span>,<span class="st">"Mohan"</span>, <span class="st">"Mike"</span>], [<span class="st">"UG"</span>,<span class="st">"PG"</span>,<span class="st">"UG"</span>,<span class="st">"PG"</span>], [<span class="dv">70</span>,<span class="dv">80</span>,<span class="dv">90</span>,<span class="dv">70</span>]]</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df_students <span class="op">=</span> pd.DataFrame(students).T</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>df_students.columns<span class="op">=</span>[<span class="st">"Name"</span>,<span class="st">"Program"</span>,<span class="st">"Marks"</span>]</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>display(df_students)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>students <span class="op">=</span> [[<span class="st">"Sam"</span>,<span class="st">"Peter"</span>,<span class="st">"Mohan"</span>, <span class="st">"Mike"</span>], [<span class="st">"UG"</span>,<span class="st">"PG"</span>,<span class="st">"UG"</span>,<span class="st">"PG"</span>], [<span class="dv">70</span>,<span class="dv">80</span>,<span class="dv">90</span>,<span class="dv">70</span>]]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df_students <span class="op">=</span> pd.DataFrame(students).T</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>df_students.columns<span class="op">=</span>[<span class="st">"Name"</span>,<span class="st">"Program"</span>,<span class="st">"Marks"</span>]</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>display(df_students)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -2140,8 +2093,8 @@ df1.values     [['A' 1]
 </div>
 </div>
 <div id="ef4be2e4" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_students.set_index(<span class="st">"Program"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>display(df_students)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_students.set_index(<span class="st">"Program"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>display(df_students)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -2185,7 +2138,7 @@ df1.values     [['A' 1]
 </div>
 </div>
 <div id="714c18b4" class="cell" data-execution_count="25">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_students.groupby(level<span class="op">=</span><span class="st">"Program"</span>)[<span class="st">"Marks"</span>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_students.groupby(level<span class="op">=</span><span class="st">"Program"</span>)[<span class="st">"Marks"</span>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>Program
 PG    75.0
@@ -2197,12 +2150,12 @@ Name: Marks, dtype: float64</code></pre>
 <section id="styling" class="level2" data-number="13.6">
 <h2 data-number="13.6" class="anchored" data-anchor-id="styling"><span class="header-section-number">13.6</span> Styling</h2>
 <p>The pandas dataframe has a <code>style</code> attribute that return a styler object which has different functions to customize dataframe display. E.g., to highlight minimun and maximum values in a dataframe, the <code>hightlight_min</code> and <code>highlight_max</code> functions for the styler object can be used. The min and max values can be selected column-wise or row-wise by setting the axis argument to 0 or 1, respectively. To highlight min or max value for the entire dataframe use <code>axis = None</code>. The <code>props</code> argument is used to set the highlight properties and takes a valid CSS (Cascading Style Sheet) property.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame(np.random.uniform(<span class="dv">1</span>,<span class="dv">2</span>,size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>)), columns<span class="op">=</span><span class="bu">list</span>(<span class="st">'ABCD'</span>))</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>display(df_1.style.highlight_max()<span class="op">\</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Column-wise highlighting of maximum value"</span>))</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>display(df_1.style.highlight_min(axis<span class="op">=</span><span class="dv">1</span>,props<span class="op">=</span><span class="st">"font-weight:bold;background-color:pink;"</span>)<span class="op">\</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Row-wise highlighting of minimum value"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="c184706e" class="cell quarto-layout-panel" data-scrolled="true" data-layout-ncol="2" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame(np.random.uniform(<span class="dv">1</span>,<span class="dv">2</span>,size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>)), columns<span class="op">=</span><span class="bu">list</span>(<span class="st">'ABCD'</span>))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>display(df_1.style.highlight_max()<span class="op">\</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Column-wise highlighting of maximum value"</span>))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>display(df_1.style.highlight_min(axis<span class="op">=</span><span class="dv">1</span>,props<span class="op">=</span><span class="st">"font-weight:bold;background-color:pink;"</span>)<span class="op">\</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Row-wise highlighting of minimum value"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c184706e" class="cell quarto-layout-panel" data-execution_count="26" data-scrolled="true" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <style type="text/css">
@@ -2320,15 +2273,15 @@ Name: Marks, dtype: float64</code></pre>
 </div>
 </div>
 <p>We can also highlight all the values in a dataframe with color gradient. The coloring can be applied to the text or background. The <code>cmap</code> argument for <code>background_gradient</code> and <code>text_gradient</code> functions can be used to customize the coloring based on a colormap.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>display(df_1.style.background_gradient()<span class="op">\</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Column-wise background gradient"</span>)<span class="op">\</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        .set_properties(<span class="op">**</span>{<span class="st">"font-weight"</span>:<span class="st">"bold"</span>, <span class="st">"padding"</span>:<span class="st">"1em"</span>})<span class="op">\</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.2f}</span><span class="st">"</span>))</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>display(df_1.style.text_gradient(axis<span class="op">=</span><span class="dv">1</span>, cmap<span class="op">=</span><span class="st">"winter"</span>)<span class="op">\</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Row-wise text gradient"</span>)<span class="op">\</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        .set_properties(<span class="op">**</span>{<span class="st">"font-weight"</span>:<span class="st">"bold"</span>, <span class="st">"padding"</span>:<span class="st">"1em"</span>})<span class="op">\</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.2f}</span><span class="st">"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="0c4362ac" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>display(df_1.style.background_gradient()<span class="op">\</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Column-wise background gradient"</span>)<span class="op">\</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        .set_properties(<span class="op">**</span>{<span class="st">"font-weight"</span>:<span class="st">"bold"</span>, <span class="st">"padding"</span>:<span class="st">"1em"</span>})<span class="op">\</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.2f}</span><span class="st">"</span>))</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>display(df_1.style.text_gradient(axis<span class="op">=</span><span class="dv">1</span>, cmap<span class="op">=</span><span class="st">"winter"</span>)<span class="op">\</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Row-wise text gradient"</span>)<span class="op">\</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>        .set_properties(<span class="op">**</span>{<span class="st">"font-weight"</span>:<span class="st">"bold"</span>, <span class="st">"padding"</span>:<span class="st">"1em"</span>})<span class="op">\</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.2f}</span><span class="st">"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="0c4362ac" class="cell quarto-layout-panel" data-execution_count="27" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <style type="text/css">
@@ -2592,16 +2545,16 @@ Name: Marks, dtype: float64</code></pre>
 - hide the indcies.<br>
 </p>
 <div id="6ef02681" class="cell" data-execution_count="28">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_bar <span class="op">=</span> pd.DataFrame(np.random.uniform(<span class="op">-</span><span class="dv">10</span>,<span class="dv">10</span>,size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>)), columns<span class="op">=</span><span class="bu">list</span>(<span class="st">'ABCD'</span>))</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> ListedColormap</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cmp</span> <span class="op">=</span> ListedColormap([<span class="st">"pink"</span>,<span class="st">"lightblue"</span>])</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>display(df_bar.style</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>        .bar(vmin<span class="op">=-</span><span class="dv">10</span>, vmax<span class="op">=</span><span class="dv">10</span>, align<span class="op">=</span><span class="dv">0</span>, cmap<span class="op">=</span><span class="bu">cmp</span>)<span class="op">\</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.2f}</span><span class="st">"</span>)<span class="op">\</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>        .set_properties(<span class="op">**</span>{<span class="st">"font-weight"</span>:<span class="st">"bold"</span>, <span class="st">"text-align"</span>:<span class="st">"center"</span>})<span class="op">\</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>        .set_table_styles([<span class="bu">dict</span>(selector<span class="op">=</span><span class="st">'th'</span>, props<span class="op">=</span>[(<span class="st">'text-align'</span>, <span class="st">'center'</span>)])])<span class="op">\</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>        .hide(axis<span class="op">=</span><span class="st">"index"</span>)<span class="op">\</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Dataframe with bar charts"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_bar <span class="op">=</span> pd.DataFrame(np.random.uniform(<span class="op">-</span><span class="dv">10</span>,<span class="dv">10</span>,size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>)), columns<span class="op">=</span><span class="bu">list</span>(<span class="st">'ABCD'</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> ListedColormap</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cmp</span> <span class="op">=</span> ListedColormap([<span class="st">"pink"</span>,<span class="st">"lightblue"</span>])</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>display(df_bar.style</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>        .bar(vmin<span class="op">=-</span><span class="dv">10</span>, vmax<span class="op">=</span><span class="dv">10</span>, align<span class="op">=</span><span class="dv">0</span>, cmap<span class="op">=</span><span class="bu">cmp</span>)<span class="op">\</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.2f}</span><span class="st">"</span>)<span class="op">\</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        .set_properties(<span class="op">**</span>{<span class="st">"font-weight"</span>:<span class="st">"bold"</span>, <span class="st">"text-align"</span>:<span class="st">"center"</span>})<span class="op">\</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>        .set_table_styles([<span class="bu">dict</span>(selector<span class="op">=</span><span class="st">'th'</span>, props<span class="op">=</span>[(<span class="st">'text-align'</span>, <span class="st">'center'</span>)])])<span class="op">\</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>        .hide(axis<span class="op">=</span><span class="st">"index"</span>)<span class="op">\</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>        .set_caption(<span class="st">"Dataframe with bar charts"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <style type="text/css">
 #T_1a109 th {
@@ -2779,13 +2732,13 @@ Name: Marks, dtype: float64</code></pre>
 <h2 data-number="13.7" class="anchored" data-anchor-id="ploting"><span class="header-section-number">13.7</span> Ploting</h2>
 <p>Dataframe has a <code>plot()</code> function to do basic visualization. The <code>kind</code> attribute for this function can be used to change the plot type.</p>
 <div id="a5a06eda" class="cell" data-execution_count="29">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df_col1 <span class="op">=</span> pd.DataFrame(np.array(<span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">6</span>))<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df_col2 <span class="op">=</span> pd.DataFrame(np.array(<span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">6</span>))<span class="op">**</span><span class="dv">3</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>df_comb <span class="op">=</span> pd.concat([df_col1,df_col2], axis<span class="op">=</span><span class="dv">1</span>, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>df_comb.columns <span class="op">=</span> [<span class="st">"Squares"</span>, <span class="st">"Cubes"</span>]</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>df_comb.index <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">6</span>)</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>display(df_comb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_col1 <span class="op">=</span> pd.DataFrame(np.array(<span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">6</span>))<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df_col2 <span class="op">=</span> pd.DataFrame(np.array(<span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">6</span>))<span class="op">**</span><span class="dv">3</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>df_comb <span class="op">=</span> pd.concat([df_col1,df_col2], axis<span class="op">=</span><span class="dv">1</span>, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>df_comb.columns <span class="op">=</span> [<span class="st">"Squares"</span>, <span class="st">"Cubes"</span>]</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>df_comb.index <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">6</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>display(df_comb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -2828,15 +2781,15 @@ Name: Marks, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="op">=</span> df_comb.plot(title<span class="op">=</span><span class="st">"Line Plot"</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>plot2 <span class="op">=</span> df_comb.plot(kind<span class="op">=</span><span class="st">"bar"</span>, title<span class="op">=</span><span class="st">"Bar Plot"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="547d5215" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="op">=</span> df_comb.plot(title<span class="op">=</span><span class="st">"Line Plot"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>plot2 <span class="op">=</span> df_comb.plot(kind<span class="op">=</span><span class="st">"bar"</span>, title<span class="op">=</span><span class="st">"Bar Plot"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="547d5215" class="cell quarto-layout-panel" data-execution_count="11" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="Pandas_files/figure-html/cell-36-output-1.png" class="img-fluid"></p>
+<p><img src="Pandas_files/figure-html/cell-35-output-1.png" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="Pandas_files/figure-html/cell-36-output-2.png" class="img-fluid"></p>
+<p><img src="Pandas_files/figure-html/cell-35-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 </div>
@@ -2844,14 +2797,14 @@ Name: Marks, dtype: float64</code></pre>
 <h3 class="unnumbered anchored" data-anchor-id="the-iris-dataset">The iris dataset</h3>
 <p>One of the popular datasets for learning data analysis is the iris dataset which has data for four iris flower features (sepal length, sepal width, petal length, and petal width). These data are there for the three species namely <em>Iris setosa</em>, <em>Iris versicolour</em>, and <em>Iris virginica</em>. Let’s import this data create a dataframe and practice data visualization.</p>
 <div id="0a5516bf" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>csv_url <span class="op">=</span> <span class="st">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># using the attribute information as the column names</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>col_names <span class="op">=</span> [<span class="st">'Sepal_Length'</span>,<span class="st">'Sepal_Width'</span>,<span class="st">'Petal_Length'</span>,<span class="st">'Petal_Width'</span>,<span class="st">'Class'</span>]</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span>  pd.read_csv(csv_url, names <span class="op">=</span> col_names)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>csv_url <span class="op">=</span> <span class="st">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># using the attribute information as the column names</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>col_names <span class="op">=</span> [<span class="st">'Sepal_Length'</span>,<span class="st">'Sepal_Width'</span>,<span class="st">'Petal_Length'</span>,<span class="st">'Petal_Width'</span>,<span class="st">'Class'</span>]</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span>  pd.read_csv(csv_url, names <span class="op">=</span> col_names)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="f9485834" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>display(iris)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(iris.dtypes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>display(iris)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(iris.dtypes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -2971,7 +2924,7 @@ dtype: object</code></pre>
 </div>
 <p>To get the summary statistics for this dataset we’ll use the <code>describe</code> function for the iris dataframe. This function calculates different statistical parameters for all the columns with numeric data. Notice that this summary would be for the entire data and so might not be of much use. A better approach would be first aggreate the data by species so that we can get summary statistics for each species.</p>
 <div id="1ce359a7" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>iris.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>iris.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
@@ -3048,8 +3001,8 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="192ca182" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>iris_grp <span class="op">=</span> iris.groupby(by<span class="op">=</span><span class="st">"Class"</span>)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>iris_grp.describe()[<span class="st">'Petal_Length'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>iris_grp <span class="op">=</span> iris.groupby(by<span class="op">=</span><span class="st">"Class"</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>iris_grp.describe()[<span class="st">'Petal_Length'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
@@ -3122,11 +3075,23 @@ dtype: object</code></pre>
 <h3 class="unnumbered anchored" data-anchor-id="seaborn-library">Seaborn library</h3>
 <p>The Seaborn library is data visualization library based on Matplotlib. This library is particularly suitable for ploting with dataframes. The libaray has been specifically designed and develop in way to focus on the data analysis rather than worrying about nuances of drawing plot.</p>
 <div id="61d9edce" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="d7e1ed89" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> sns.scatterplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Sepal_Length"</span>,y<span class="op">=</span><span class="st">"Petal_Length"</span>,hue<span class="op">=</span><span class="st">"Class"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> sns.scatterplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Sepal_Length"</span>,y<span class="op">=</span><span class="st">"Petal_Length"</span>,hue<span class="op">=</span><span class="st">"Class"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_files/figure-html/cell-41-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The seaborn library has dedicated functions to facilitate ploting informative visualizations. E.g., <code>jointplot</code> is used for rendering a scatter plot along with the corresponding data distributions. Similarly, <code>pairplot</code> can be used to render pairwise plots for all the numeric data in a dataframe.</p>
+<div id="3ef26a6c" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="op">=</span> sns.jointplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Sepal_Length"</span>,y<span class="op">=</span><span class="st">"Petal_Length"</span>,hue<span class="op">=</span><span class="st">"Class"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>plot2 <span class="op">=</span> sns.pairplot(data<span class="op">=</span>iris,hue<span class="op">=</span><span class="st">"Class"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3134,11 +3099,19 @@ dtype: object</code></pre>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_files/figure-html/cell-42-output-2.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<p>The seaborn library has dedicated functions to facilitate ploting informative visualizations. E.g., <code>jointplot</code> is used for rendering a scatter plot along with the corresponding data distributions. Similarly, <code>pairplot</code> can be used to render pairwise plots for all the numeric data in a dataframe.</p>
-<div id="3ef26a6c" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="op">=</span> sns.jointplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Sepal_Length"</span>,y<span class="op">=</span><span class="st">"Petal_Length"</span>,hue<span class="op">=</span><span class="st">"Class"</span>)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>plot2 <span class="op">=</span> sns.pairplot(data<span class="op">=</span>iris,hue<span class="op">=</span><span class="st">"Class"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>We can also visualize statistical information graphically, e.g.&nbsp;in the form of a boxplot. For instance, to see the distribution of the values for <code>Petal_Length</code> across the three iris species, we can make a boxplot as follows.</p>
+<div id="b08bb90b" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>,<span class="dv">3</span>))</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Petal_Length"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3146,19 +3119,16 @@ dtype: object</code></pre>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-43-output-2.png" class="img-fluid figure-img"></p>
-</figure>
 </div>
-</div>
-</div>
-<p>We can also visualize statistical information graphically, e.g.&nbsp;in the form of a boxplot. For instance, to see the distribution of the values for <code>Petal_Length</code> across the three iris species, we can make a boxplot as follows.</p>
-<div id="b08bb90b" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>,<span class="dv">3</span>))</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Petal_Length"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Similarly, we can have separate boxplots for all four features as a grid.</p>
+<div id="beb539f7" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Petal_Length"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">''</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Petal_Width"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">''</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Sepal_Length"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">''</span>)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Sepal_Width"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">''</span>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3167,30 +3137,13 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<p>Similarly, we can have separate boxplots for all four features as a grid.</p>
-<div id="beb539f7" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Petal_Length"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">''</span>)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Petal_Width"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">''</span>)</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Sepal_Length"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">''</span>)</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>iris,x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"Sepal_Width"</span>, hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">''</span>)</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-45-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
 <p>Now, let’s say we want to have the boxplot plots for each of the feature grouped together i.e.&nbsp;a graph that shows four sets of boxplots with groups colored according to the species name.<br>
 For this kind of a plot, we first need to modify (or reformat) our dataframe so that its in the required format. Using the <code>melt</code> function in pandas, the original iris dataframe would be modified such that the values for all four flower features appear one per row. This would allow us to perform statistical calculations (required for boxplot) on all the feature and color the plot based on the species. Notice that the original iris dataframe’s shape is 150 X 5 (which implies a total of 600 datapoints since there are 4 data columns) while the <em>melted</em> dataframe’s shape is 600 X 3.</p>
 <div id="cffdb118" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>iris_melt <span class="op">=</span> pd.melt(iris, id_vars<span class="op">=</span>[<span class="st">'Class'</span>],<span class="op">\</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                    value_vars<span class="op">=</span>[<span class="st">"Sepal_Length"</span>,<span class="st">"Sepal_Width"</span>,<span class="st">"Petal_Length"</span>,<span class="st">"Petal_Width"</span>],<span class="op">\</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                    var_name<span class="op">=</span><span class="st">'Feature'</span>)</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>iris_melt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>iris_melt <span class="op">=</span> pd.melt(iris, id_vars<span class="op">=</span>[<span class="st">'Class'</span>],<span class="op">\</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                    value_vars<span class="op">=</span>[<span class="st">"Sepal_Length"</span>,<span class="st">"Sepal_Width"</span>,<span class="st">"Petal_Length"</span>,<span class="st">"Petal_Width"</span>],<span class="op">\</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                    var_name<span class="op">=</span><span class="st">'Feature'</span>)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>iris_melt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
@@ -3277,12 +3230,12 @@ For this kind of a plot, we first need to modify (or reformat) our dataframe so 
 </div>
 </div>
 <div id="391eec8b" class="cell" data-scrolled="true" data-execution_count="35">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>plot3 <span class="op">=</span> sns.boxplot(data<span class="op">=</span>iris_melt,x<span class="op">=</span><span class="st">"Feature"</span>, y<span class="op">=</span><span class="st">"value"</span>,hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>plot3 <span class="op">=</span> sns.boxplot(data<span class="op">=</span>iris_melt,x<span class="op">=</span><span class="st">"Feature"</span>, y<span class="op">=</span><span class="st">"value"</span>,hue<span class="op">=</span><span class="st">"Class"</span>, ax<span class="op">=</span>ax)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-47-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Pandas_files/figure-html/cell-46-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -3376,32 +3329,32 @@ countplot()
 </tbody></table>
 <p>The code below creates a violin plot using the above data. The x-axis label is removed using the <code>set</code> function for the <code>FacetGrid</code> object and the font size for all the labels is increase using the <code>set_theme</code> function from sns.</p>
 <div id="67c91a70" class="cell" data-execution_count="43">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"white"</span>, font_scale<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> sns.catplot(data<span class="op">=</span>iris_melt, x<span class="op">=</span><span class="st">"Feature"</span>, y<span class="op">=</span><span class="st">"value"</span>, kind<span class="op">=</span><span class="st">"violin"</span>, </span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                 hue<span class="op">=</span><span class="st">"Class"</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>p2.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"white"</span>, font_scale<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> sns.catplot(data<span class="op">=</span>iris_melt, x<span class="op">=</span><span class="st">"Feature"</span>, y<span class="op">=</span><span class="st">"value"</span>, kind<span class="op">=</span><span class="st">"violin"</span>, </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                 hue<span class="op">=</span><span class="st">"Class"</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>p2.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-48-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Pandas_files/figure-html/cell-47-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Similarly, we can make a swarm plot for each feature and color it by species. A swarm plot is like a scatterplot such that the position of the points are to avoid overlap. The <code>catplot</code> function returns a <code>FacetGrid</code> which can be customized to render desired representation. For our data there will be four plots in the facet grid which will be arranged as one row and four columns by default. The code below, makes a feature-wise swarm plot with two columns (<code>col_warp=2</code>) in the Facetgrid. The final plot has has two enhancements — 1) the veritcal line for the y-axis is removed and 2) the tick marks removed from both the axis and major grid lines shown for y-axis.</p>
 <div id="6ee13918-100c-452f-bd55-561725f8fc0e" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"white"</span>, font_scale<span class="op">=</span><span class="fl">1.25</span>)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> sns.catplot(data<span class="op">=</span>iris_melt, x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"value"</span>, kind<span class="op">=</span><span class="st">"swarm"</span>, size<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                 col<span class="op">=</span><span class="st">"Feature"</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="fl">1.5</span>, col_wrap<span class="op">=</span><span class="dv">2</span>, hue<span class="op">=</span><span class="st">"Class"</span>, errorbar<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>p2.despine(left<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> p2.axes.flat:</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'both'</span>, length<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    ax.yaxis.grid(<span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"white"</span>, font_scale<span class="op">=</span><span class="fl">1.25</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> sns.catplot(data<span class="op">=</span>iris_melt, x<span class="op">=</span><span class="st">"Class"</span>, y<span class="op">=</span><span class="st">"value"</span>, kind<span class="op">=</span><span class="st">"swarm"</span>, size<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                 col<span class="op">=</span><span class="st">"Feature"</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="fl">1.5</span>, col_wrap<span class="op">=</span><span class="dv">2</span>, hue<span class="op">=</span><span class="st">"Class"</span>, errorbar<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>p2.despine(left<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> p2.axes.flat:</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'both'</span>, length<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    ax.yaxis.grid(<span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pandas_files/figure-html/cell-49-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Pandas_files/figure-html/cell-48-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
